@@ -4,37 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: initial commit added .idea/ to .gitignore" />
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: initial commit added .idea/ to .gitignore">
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/CompetitiveMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/ExerciseMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/JuniorMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/JuniorTeam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Leaderboard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/PassiveMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/SeniorMember.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/SeniorTeam.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Subscription.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2YIVpzsKQJ7jUlBrILk44zqrr2a" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="domain_model" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -44,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1700213271278</updated>
       <workItem from="1700213272295" duration="685000" />
+      <workItem from="1700730754981" duration="2969000" />
     </task>
     <task id="LOCAL-00001" summary="added: initial commit added .idea/ to .gitignore">
       <option name="closed" value="true" />
