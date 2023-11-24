@@ -1,27 +1,38 @@
 package domain_model;
 
+import datasource.FileHandler;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class MemberDatabase {
-    private ArrayList<Member> members = new ArrayList<>();
-    private final Team[] teams = {new JuniorTeam(), new SeniorTeam()};
 
-    public ArrayList<Member> getMembers() {
-        return members;
+    private ArrayList<Member> clubMembers;
+    FileHandler fileHandler = new FileHandler();
+    File administratorFile = new File("ListOfMembers.csv");
+
+    public MemberDatabase() {
+        this.clubMembers = new ArrayList<>();
     }
 
-    /** TODO
-     Overview
-     * Method for overview of members with all info (administrator)
-     * Method for overview of subscriptions / debt (accountant)
-     * Method for overview of teams (coach)
-     Add
-     * Method for adding new member (administrator)
-     * Method for adding new team member result (coach)
-     Save for persistence
-     * Save members to a list (administrator)
-     * Save subscriptions to a list (accountant)
-     * Save team leaderboards to a list (coach)
-     */
+    public void loadMemberDatabase(){
+        try {
+            clubMembers = fileHandler.load(administratorFile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
+    public boolean addMemberToList(String name,
+                                   String birthDate,
+                                   String email,
+                                   String discipline,
+                                   double subscription) throws FileNotFoundException {
+
+        Member newMember = new Member(name, birthDate, email, discipline, subscription);
+        clubMembers.add(newMember);
+        FileHandler.save(clubMembers, administratorFile); //TODO - why does it have to be static and what does static methods do?
+        return true;
+    }
 }

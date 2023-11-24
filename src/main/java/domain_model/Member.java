@@ -1,37 +1,39 @@
 package domain_model;
 
-public abstract class Member {
-    private String name;
-    private String email;
-    private int age;
-    private String discipline;
-    private Subscription subscription;
+public class Member {
 
-    public Member(String name, String email, int age, String discipline, Subscription subscription) {
+    private String name;
+    private String birthDate;
+    private String email;
+    private String discipline;
+    private double subscriptionValue;
+
+    public Member(String name,
+                  String birthDate,
+                  String email,
+                  String discipline,
+                  double subscriptionValue){
+
         this.name = name;
+        this.birthDate = birthDate;
         this.email = email;
-        this.age = age;
         this.discipline = discipline;
-        this.subscription = subscription;
+        this.subscriptionValue = subscriptionValue;
     }
 
-    public String getName() {
+    public String getName(){
         return name;
     }
-
-    public String getEmail() {
+    public String getBirthDate(){
+        return birthDate;
+    }
+    public String getEmail(){
         return email;
     }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getDiscipline() {
+    public String getDiscipline(){
         return discipline;
     }
-
-    public Subscription getSubscription() {
-        return subscription;
+    public double getSubscriptionValue(){
+        return subscriptionValue;
     }
 }
