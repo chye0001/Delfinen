@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class MemberDatabase {
 
+
     private ArrayList<Member> clubMembers;
     FileHandler fileHandler = new FileHandler();
     File administratorFile = new File("ListOfMembers.csv");
