@@ -10,7 +10,7 @@ public class Userinterface {
     Scanner scanner = new Scanner(System.in);
 
     public void startProgram() {
-        int choice = 0;
+        int choise = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
@@ -23,9 +23,9 @@ public class Userinterface {
             System.out.println("You must enter a number from the menu: ");
             scanner.nextLine();
         }
-        choice = scanner.nextInt();
+        choise = scanner.nextInt();
 
-        switch (choice) {
+        switch (choise) {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
@@ -53,7 +53,7 @@ public class Userinterface {
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
-                case 2 -> System.out.println(controller.showListOfMembers());
+                case 2 -> showListOfMembers(); //TODO - add showList
 //                case 3 -> editMemberInformation(); //TODO - add edit
 //                case 4 -> deleteMember(); //TODO - add delete
                 case 5 -> {
@@ -68,8 +68,26 @@ public class Userinterface {
         }
     }
 
+    public void showListOfMembers(){
+        System.out.println(controller.showListOfMembers());
+    }
+
     public void addNewMember() {
-        System.out.print("\nName: ");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nMember Type:\n").
+                append("1. Passiv\n").
+                append("2. Junior Member\n").
+                append("3. Senior Member\n").
+                append("4. Exercise Member\n").
+                append("5. Competitive Member\n").
+                append("Type: ");
+        System.out.print(sb);
+        //TODO try-catch
+        int memberType = scanner.nextInt();
+
+
+        System.out.print("Name: ");
         scanner.nextLine();
         String memberName = scanner.nextLine();
 
@@ -89,9 +107,12 @@ public class Userinterface {
             memberEmail = scanner.nextLine();
         }
 
+        String memberDiscipline = "None";
+        if (memberType == 4){
+            System.out.print("Discipline: ");
+            memberDiscipline = scanner.nextLine().toLowerCase();
+        }
 
-        System.out.print("Discipline: ");
-        String memberDiscipline = scanner.nextLine();
 
         //TODO - make automated
         System.out.print("Subscription value: ");
@@ -103,7 +124,7 @@ public class Userinterface {
 
 
         try {
-            if (controller.addMemberToList(memberName, memberBirthDate, memberEmail, memberDiscipline, memberSubscriptionValue)) {
+            if (controller.addMemberToList(memberType, memberName, memberBirthDate, memberEmail, memberDiscipline, memberSubscriptionValue)) {
                 System.out.println(memberName + " added to list of members");
             } else System.out.println("Something went wrong - Error: 401");
         } catch (Exception e) {

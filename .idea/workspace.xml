@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="showListOfMembers() done&#10;&#10;typos i userInterface">
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: conventional package structure and main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,10 +19,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Kristoffer" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
@@ -38,7 +47,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Userstory12",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "temp",
     "last_opened_file_path": "C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -47,7 +58,15 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="domain_model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Delfinen" />
@@ -55,9 +74,43 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MemberTest.createJuniorMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Delfinen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain_model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain_model" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createJuniorMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberTest.createMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Delfinen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain_model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain_model" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
+        <item itemvalue="JUnit.MemberTest.createMember" />
       </list>
     </recent_temporary>
   </component>
@@ -88,23 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700504162559</updated>
     </task>
-    <task id="LOCAL-00003" summary="getType() for Member og override nedarvede getType()">
+    <task id="LOCAL-00003" summary="added: conventional package structure and main">
       <option name="closed" value="true" />
-      <created>1700816244681</created>
+      <created>1700812776219</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1700816244681</updated>
+      <updated>1700812776219</updated>
     </task>
-    <task id="LOCAL-00004" summary="showListOfMembers() done&#10;&#10;typos i userInterface">
-      <option name="closed" value="true" />
-      <created>1700817729672</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1700817729672</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,8 +181,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added: initial commit added .idea/ to .gitignore" />
     <MESSAGE value="added: conventional package structure and main" />
-    <MESSAGE value="getType() for Member og override nedarvede getType()" />
-    <MESSAGE value="showListOfMembers() done&#10;&#10;typos i userInterface" />
-    <option name="LAST_COMMIT_MESSAGE" value="showListOfMembers() done&#10;&#10;typos i userInterface" />
+    <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed extend issues with reformatted member class and its subclasses" />
   </component>
 </project>
