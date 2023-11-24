@@ -69,6 +69,22 @@ public class Userinterface {
     }
 
     public void addNewMember() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Member Type: ").
+                append("1. Passiv").
+                append("2. Junior Member").
+                append("3. Senior Member").
+                append("4. Exercise Member").
+                append("5. Competitive Member").
+                append("Type: ");
+        System.out.println(sb);
+        int memberType = scanner.nextInt();
+        while (!scanner.hasNextInt()){
+            System.out.println("Not a valid member type. Please enter a valid type.\nMember type: ");
+            scanner.nextLine();
+        }
+
         System.out.print("\nName: ");
         scanner.nextLine();
         String memberName = scanner.nextLine();
@@ -89,9 +105,12 @@ public class Userinterface {
             memberEmail = scanner.nextLine();
         }
 
+        String memberDiscipline = "None";
+        if (memberType == 4){
+            System.out.print("Discipline: ");
+            memberDiscipline = scanner.nextLine().toLowerCase();
+        }
 
-        System.out.print("Discipline: ");
-        String memberDiscipline = scanner.nextLine();
 
         //TODO - make automated
         System.out.print("Subscription value: ");
@@ -103,7 +122,7 @@ public class Userinterface {
 
 
         try {
-            if (controller.addMemberToList(memberName, memberBirthDate, memberEmail, memberDiscipline, memberSubscriptionValue)) {
+            if (controller.addMemberToList(memberType, memberName, memberBirthDate, memberEmail, memberDiscipline, memberSubscriptionValue)) {
                 System.out.println(memberName + " added to list of members");
             } else System.out.println("Something went wrong - Error: 401");
         } catch (Exception e) {

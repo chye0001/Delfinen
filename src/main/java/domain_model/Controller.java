@@ -12,12 +12,13 @@ public class Controller {
     public Controller(){
         memberDatabase.loadMemberDatabase();
     }
-    public boolean addMemberToList(String name,
+    public boolean addMemberToList(int type,
+                                   String name,
                                    String birthDate,
                                    String email,
                                    String discipline,
                                    double subscription) throws FileNotFoundException {
 
-       return memberDatabase.addMemberToList(name, birthDate, email, discipline, subscription);
+        return memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
     }
 }
