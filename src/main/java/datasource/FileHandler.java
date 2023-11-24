@@ -33,8 +33,8 @@ public class FileHandler {
             String attributes[] = line.split(";");
 
             Member addMember;
-
-            switch (attributes[0]){
+            String memberType = attributes[0];
+            switch (memberType){
                 case "Passive" ->
                     addMember = new PassiveMember(attributes[1],
                             attributes[2],

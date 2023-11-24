@@ -6,6 +6,7 @@ public class ExerciseMember extends Member{
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
+    @Override
     public String getType() {
         return type;
     }

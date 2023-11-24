@@ -40,4 +40,7 @@ public abstract class Member {
     public Subscription getSubscription() {
         return subscription;
     }
+    public abstract String getType();
+
+
 }
