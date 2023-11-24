@@ -11,11 +11,13 @@ import java.util.Scanner;
 public class FileHandler {
 
     public static void save(ArrayList<Member> listOfMembers, File fileToSaveTo) throws FileNotFoundException {
-
+        //TODO change way that info is saved
         PrintStream printStream = new PrintStream(fileToSaveTo);
 
         for (Member member:listOfMembers) {
-            printStream.println(member.getName() + ";" +
+            printStream.println(
+                    member.getType() + ";" +
+                    member.getName() + ";" +
                     member.getBirthDate() + ";" +
                     member.getEmail() + ";" +
                     member.getDiscipline() + ";" +

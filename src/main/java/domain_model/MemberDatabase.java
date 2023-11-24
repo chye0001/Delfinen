@@ -6,7 +6,6 @@ import domain_model.Members.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class MemberDatabase {
 
@@ -62,8 +61,11 @@ public class MemberDatabase {
     public String showListOfMembers() {
         StringBuilder sb = new StringBuilder();
         for (Member member : clubMembers) {
-            if(member != null)
-                sb.append("Name: ").append(member.getName()).append(" - Membership type: ").append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).append(" - Email address: ").append(member.getEmail()).append("\n");
+            if(member != null) {
+                sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
+                        append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
+                        append(" - Email address: ").append(member.getEmail()).append("\n");
+            }
         }return sb.toString();
     }
 }
