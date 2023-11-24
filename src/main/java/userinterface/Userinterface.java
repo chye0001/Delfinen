@@ -53,12 +53,12 @@ public class Userinterface {
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
-                case 2 -> showListOfMembers(); //TODO - add showList
-                case 3 -> editMemberInformation(); //TODO - add edit
-                case 4 -> deleteMember(); //TODO - add delete
+//                case 2 -> showListOfMembers(); //TODO - add showList
+//                case 3 -> editMemberInformation(); //TODO - add edit
+//                case 4 -> deleteMember(); //TODO - add delete
                 case 5 -> {
                     System.out.println("Signing out...");
-                    startProgram();
+                    defaultScreen();
                 }
                 default -> {
                     System.out.println("you must enter a number from the menu.");
@@ -69,12 +69,9 @@ public class Userinterface {
     }
 
     public void addNewMember() {
-        System.out.print("\nCancel adding of member by pressing 0 and enter.\nName: ");
+        System.out.print("\nName: ");
         scanner.nextLine();
         String memberName = scanner.nextLine();
-        if (Integer.parseInt(memberName) == 0){
-            return;
-        }
 
 
         System.out.print("Birth date: ");
@@ -87,7 +84,7 @@ public class Userinterface {
 
         System.out.print("Email: ");
         String memberEmail = scanner.nextLine();
-        while (!memberEmail.contains("@" + ".")) { //TODO - fix error handling.
+        while (!memberEmail.contains("@") && !memberEmail.contains(".")) {
             System.out.print("Please enter a valid email address\nEmail: ");
             memberEmail = scanner.nextLine();
         }
@@ -113,7 +110,9 @@ public class Userinterface {
             e.printStackTrace();
         }
     }
-
+    public void defaultScreen(){
+        startProgram();
+    }
 
     public void accountantProgram() {
 
