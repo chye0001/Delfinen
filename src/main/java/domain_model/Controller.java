@@ -19,7 +19,7 @@ public class Controller {
                                    String discipline,
                                    double subscription) throws FileNotFoundException {
 
-       return memberDatabase.addMemberToList(type,name, birthDate, email, discipline, subscription);
+        return memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
     }
 
     public String showListOfMembers () {

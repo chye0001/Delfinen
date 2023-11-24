@@ -1,5 +1,7 @@
 package domain_model;
 
+import domain_model.Members.Member;
+
 import java.time.LocalDate;
 
 public class Result {
