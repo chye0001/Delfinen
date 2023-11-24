@@ -6,7 +6,7 @@ public class Member {
     private String birthDate;
     private String email;
     private String discipline;
-    private double subscriptionValue;
+    private Subscription subscription;
 
     public Member(String name,
                   String birthDate,
@@ -18,7 +18,7 @@ public class Member {
         this.birthDate = birthDate;
         this.email = email;
         this.discipline = discipline;
-        this.subscriptionValue = subscriptionValue;
+        this.subscription = new Subscription(subscriptionValue);
     }
 
     public String getName(){
@@ -34,6 +34,10 @@ public class Member {
         return discipline;
     }
     public double getSubscriptionValue(){
-        return subscriptionValue;
+        return subscription.getCost();
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
     }
 }

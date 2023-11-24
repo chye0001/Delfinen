@@ -15,6 +15,13 @@ public class Subscription {
         this.debt = debt;
     }
 
+    public Subscription (double cost){
+        this.paymentDate = LocalDate.now();
+        this.cost = cost;
+        this.paymentStatus = true;
+        this.debt = 0;
+    }
+
     public LocalDate getPaymentDate() {
         return paymentDate;
     }

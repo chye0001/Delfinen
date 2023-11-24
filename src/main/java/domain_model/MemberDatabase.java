@@ -32,7 +32,8 @@ public class MemberDatabase {
 
         Member newMember = new Member(name, birthDate, email, discipline, subscription);
         clubMembers.add(newMember);
-        FileHandler.save(clubMembers, administratorFile); //TODO - why does it have to be static and what does static methods do?
+        FileHandler.save(clubMembers, administratorFile);
+        //TODO - why does it have to be static and what does static methods do?
         return true;
     }
 }
