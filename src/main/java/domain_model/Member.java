@@ -1,6 +1,6 @@
 package domain_model;
 
-public class Member {
+public abstract class Member {
 
     private String name;
     private String birthDate;
