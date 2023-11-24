@@ -106,7 +106,7 @@ public class Userinterface {
         }
 
         String memberDiscipline = "None";
-        if (memberType == 4){
+        if (memberType == 5){
             System.out.print("Discipline: ");
             memberDiscipline = scanner.nextLine().toLowerCase();
         }
