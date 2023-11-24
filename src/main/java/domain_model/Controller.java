@@ -20,4 +20,8 @@ public class Controller {
 
        return memberDatabase.addMemberToList(name, birthDate, email, discipline, subscription);
     }
+
+    public String showListOfMembers () {
+        return memberDatabase.showListOfMembers();
+    }
 }

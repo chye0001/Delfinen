@@ -10,7 +10,7 @@ public class Userinterface {
     Scanner scanner = new Scanner(System.in);
 
     public void startProgram() {
-        int choise = 0;
+        int choice = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
@@ -23,9 +23,9 @@ public class Userinterface {
             System.out.println("You must enter a number from the menu: ");
             scanner.nextLine();
         }
-        choise = scanner.nextInt();
+        choice = scanner.nextInt();
 
-        switch (choise) {
+        switch (choice) {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
@@ -47,13 +47,13 @@ public class Userinterface {
                     "3. Edit member information(not valid yet)\n" +
                     "4. Delete member(not valid yet)\n" +
                     "5. Sign out\n" +
-                    "Choise: ");
+                    "Choice: ");
 
             administratorChosenOption = scanner.nextInt();
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
-//                case 2 -> showListOfMembers(); //TODO - add showList
+                case 2 -> System.out.println(controller.showListOfMembers());
 //                case 3 -> editMemberInformation(); //TODO - add edit
 //                case 4 -> deleteMember(); //TODO - add delete
                 case 5 -> {
