@@ -1,6 +1,6 @@
 package datasource;
 
-import domain_model.Member;
+import domain_model.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,11 +32,45 @@ public class FileHandler {
             String line = readFile.nextLine();
             String attributes[] = line.split(";");
 
-            Member addMember = new Member(attributes[0],
-                    attributes[1],
-                    attributes[2],
-                    attributes[3],
-                    Double.parseDouble(attributes[4].trim()));
+            Member addMember;
+
+            switch (attributes[0]){
+                case "Passive" ->
+                    addMember = new PassiveMember(attributes[1],
+                            attributes[2],
+                            attributes[3],
+                            attributes[4],
+                            Double.parseDouble(attributes[5].trim()));
+
+                case "Exercise" ->
+                    addMember = new ExerciseMember(attributes[1],
+                            attributes[2],
+                            attributes[3],
+                            attributes[4],
+                            Double.parseDouble(attributes[5].trim()));
+
+                case "Competitive" ->
+                    addMember = new CompetitiveMember(attributes[1],
+                            attributes[2],
+                            attributes[3],
+                            attributes[4],
+                            Double.parseDouble(attributes[5].trim()));
+
+                case "Junior" ->
+                    addMember = new JuniorMember(attributes[1],
+                            attributes[2],
+                            attributes[3],
+                            attributes[4],
+                            Double.parseDouble(attributes[5].trim()));
+
+                case "Senior" ->
+                    addMember = new SeniorMember(attributes[1],
+                            attributes[2],
+                            attributes[3],
+                            attributes[4],
+                            Double.parseDouble(attributes[5].trim()));
+                default -> addMember = null;
+            }
 
             if (!loadedFile.contains(addMember)){
                 loadedFile.add(addMember);
