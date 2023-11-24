@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: conventional package structure and main">
-      <change afterPath="$PROJECT_DIR$/ListOfMembers.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/domain_model/MemberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/domain_model/MemberTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,35 +18,93 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Userstory1" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2YIVpzsKQJ7jUlBrILk44zqrr2a" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kristoffer&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="domain_model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MemberTest.createJuniorMember">
+    <configuration name="MemberTest.createJuniorMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Delfinen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain_model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain_model" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createJuniorMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberTest.createMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Delfinen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="domain_model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="domain_model" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
+        <item itemvalue="JUnit.MemberTest.createMember" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700504162559</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added: conventional package structure and main">
+      <option name="closed" value="true" />
+      <created>1700812776219</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1700812776219</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,17 +172,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added: initial commit added .idea/ to .gitignore" />
     <MESSAGE value="added: conventional package structure and main" />
-    <option name="LAST_COMMIT_MESSAGE" value="added: conventional package structure and main" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/datasource/FileHandler.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed extend issues with reformatted member class and its subclasses" />
   </component>
 </project>

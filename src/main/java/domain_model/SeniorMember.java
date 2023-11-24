@@ -1,7 +1,12 @@
 package domain_model;
 
 public class SeniorMember extends Member{
-    public SeniorMember(String name, String email, int age, String discipline, Subscription subscription) {
-        super(name, email, age, discipline, subscription);
+    private String type = "Senior";
+    public SeniorMember(String name, String birthDate, String email, String discipline, double subscriptionValue) {
+        super(name, birthDate, email, discipline, subscriptionValue);
+    }
+
+    public String getType() {
+        return type;
     }
 }
