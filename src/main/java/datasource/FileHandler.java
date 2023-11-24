@@ -1,6 +1,6 @@
 package datasource;
 
-import domain_model.*;
+import domain_model.Members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

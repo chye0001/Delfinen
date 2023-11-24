@@ -1,4 +1,6 @@
-package domain_model;
+package domain_model.Members;
+
+import domain_model.Subscription;
 
 public abstract class Member {
 
@@ -40,4 +42,6 @@ public abstract class Member {
     public Subscription getSubscription() {
         return subscription;
     }
+
+    public abstract String getType();
 }

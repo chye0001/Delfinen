@@ -1,6 +1,8 @@
-package domain_model;
+package domain_model.Members;
 
-public class PassiveMember extends Member{
+import domain_model.Members.Member;
+
+public class PassiveMember extends Member {
     private String type = "Passive";
     public PassiveMember(String name, String birthDate, String email, String discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);

@@ -53,7 +53,7 @@ public class Userinterface {
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
-//                case 2 -> showListOfMembers(); //TODO - add showList
+                case 2 -> System.out.println(controller.showListOfMembers());
 //                case 3 -> editMemberInformation(); //TODO - add edit
 //                case 4 -> deleteMember(); //TODO - add delete
                 case 5 -> {

@@ -1,5 +1,7 @@
 package domain_model;
 
+import domain_model.Members.JuniorMember;
+import domain_model.Members.Member;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

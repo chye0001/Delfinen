@@ -21,4 +21,8 @@ public class Controller {
 
         return memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
     }
+
+    public String showListOfMembers () {
+        return memberDatabase.showListOfMembers();
+    }
 }
