@@ -20,7 +20,7 @@ class MemberTest {
                 () -> assertEquals(testMember.getBirthDate(),birthDate),
                 () -> assertEquals(testMember.getEmail(),email),
                 () -> assertEquals(testMember.getDiscipline(),discipline),
-                () -> assertEquals(testMember.getSubscriptionValue(),subscriptionCost)
+                () -> assertEquals(testMember.getSubscriptionCost(),subscriptionCost)
         );
     }
 

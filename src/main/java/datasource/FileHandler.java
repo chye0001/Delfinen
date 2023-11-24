@@ -19,7 +19,7 @@ public class FileHandler {
                     member.getBirthDate() + ";" +
                     member.getEmail() + ";" +
                     member.getDiscipline() + ";" +
-                    member.getSubscriptionValue());
+                    member.getSubscriptionCost());
         }
     }
 

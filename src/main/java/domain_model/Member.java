@@ -12,13 +12,13 @@ public abstract class Member {
                   String birthDate,
                   String email,
                   String discipline,
-                  double subscriptionValue){
+                  double subscriptionCost){
 
         this.name = name;
         this.birthDate = birthDate;
         this.email = email;
         this.discipline = discipline;
-        this.subscription = new Subscription(subscriptionValue);
+        this.subscription = new Subscription(subscriptionCost);
     }
 
     public String getName(){
@@ -33,7 +33,7 @@ public abstract class Member {
     public String getDiscipline(){
         return discipline;
     }
-    public double getSubscriptionValue(){
+    public double getSubscriptionCost(){
         return subscription.getCost();
     }
 
