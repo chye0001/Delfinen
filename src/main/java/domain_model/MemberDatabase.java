@@ -10,7 +10,6 @@ import java.util.ArrayList;
 public class MemberDatabase {
 
     private ArrayList<Member> clubMembers;
-    FileHandler fileHandler = new FileHandler();
     File administratorFile = new File("ListOfMembers.csv");
 
     public MemberDatabase() {
@@ -32,26 +31,25 @@ public class MemberDatabase {
                                    String discipline,
                                    double subscription) {
 
+        Member newMember;
 
-                Member newMember;
+        switch (type){
+            case 1 ->
+                    newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
 
-                switch (type){
-                    case 1 ->
-                            newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
+            case 2 ->
+                    newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
 
-                    case 2 ->
-                            newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
+            case 3 ->
+                    newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
 
-                    case 3 ->
-                            newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
+            case 4 ->
+                    newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
 
-                    case 4 ->
-                            newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
-
-                    case 5 ->
-                            newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
-                    default -> newMember = null;
-                }
+            case 5 ->
+                    newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
+            default -> newMember = null;
+        }
         clubMembers.add(newMember);
         try {
             FileHandler.save(clubMembers, administratorFile);
