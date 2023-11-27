@@ -25,4 +25,8 @@ public class Controller {
     public String showListOfMembers () {
         return memberDatabase.showListOfMembers();
     }
+
+    public String showListOfSubscriptions(){
+        return memberDatabase.showListOfSubscription();
+    }
 }

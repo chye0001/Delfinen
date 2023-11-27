@@ -10,13 +10,14 @@ import java.util.ArrayList;
 public class MemberDatabase {
 
     private ArrayList<Member> clubMembers;
+    FileHandler fileHandler = new FileHandler();
     File administratorFile = new File("ListOfMembers.csv");
 
     public MemberDatabase() {
         this.clubMembers = new ArrayList<>();
     }
 
-    public void loadMemberDatabase() {
+    public void loadMemberDatabase(){
         try {
             clubMembers = FileHandler.load(administratorFile);
         } catch (FileNotFoundException e) {
@@ -32,20 +33,25 @@ public class MemberDatabase {
                                    double subscription) {
 
 
-        Member newMember;
+                Member newMember;
 
-        switch (type) {
-            case 1 -> newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
+                switch (type){
+                    case 1 ->
+                            newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
 
-            case 2 -> newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
+                    case 2 ->
+                            newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
 
-            case 3 -> newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
+                    case 3 ->
+                            newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
 
-            case 4 -> newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
+                    case 4 ->
+                            newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
 
-            case 5 -> newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
-            default -> newMember = null;
-        }
+                    case 5 ->
+                            newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
+                    default -> newMember = null;
+                }
         clubMembers.add(newMember);
         try {
             FileHandler.save(clubMembers, administratorFile);
@@ -59,7 +65,7 @@ public class MemberDatabase {
     public String showListOfMembers() {
         StringBuilder sb = new StringBuilder();
         for (Member member : clubMembers) {
-            if (member != null) {
+            if(member != null) {
                 sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
                         append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
                         append(" - Email address: ").append(member.getEmail()).append("\n");

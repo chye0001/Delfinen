@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="initial commit">
-      <change afterPath="$PROJECT_DIR$/TestList.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/domain_model/MemberDatabaseTest.java" afterDir="false" />
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: conventional package structure and main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +33,7 @@
 }</component>
   <component name="ProjectId" id="2YIVpzsKQJ7jUlBrILk44zqrr2a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -50,8 +47,8 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "memberDataTest",
-    "last_opened_file_path": "C:/Users/Kristoffer/Documents/Stuff/KEA/IntelliJ/1st Semester/Delfinen",
+    "git-widget-placeholder": "Userstory3",
+    "last_opened_file_path": "C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -60,9 +57,6 @@
   }
 }]]></component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Kristoffer\Documents\Stuff\KEA\IntelliJ\1st Semester\Delfinen" />
-    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -70,7 +64,7 @@
       <recent name="domain_model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MemberDatabaseTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Delfinen" />
@@ -78,7 +72,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemberDatabaseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberTest.createJuniorMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Delfinen" />
       <extension name="coverage">
         <pattern>
@@ -87,29 +81,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="domain_model" />
-      <option name="MAIN_CLASS_NAME" value="domain_model.MemberDatabaseTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MemberDatabaseTest.testAddMemberToDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Delfinen" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="domain_model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="domain_model" />
-      <option name="MAIN_CLASS_NAME" value="domain_model.MemberDatabaseTest" />
-      <option name="METHOD_NAME" value="testAddMemberToDatabase" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createJuniorMember" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MemberDatabaseTest.testLoadDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MemberTest.createMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Delfinen" />
       <extension name="coverage">
         <pattern>
@@ -118,24 +97,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="domain_model" />
-      <option name="MAIN_CLASS_NAME" value="domain_model.MemberDatabaseTest" />
-      <option name="METHOD_NAME" value="testLoadDatabase" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MemberDatabaseTest.testShowListOfMembers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Delfinen" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="domain_model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="domain_model" />
-      <option name="MAIN_CLASS_NAME" value="domain_model.MemberDatabaseTest" />
-      <option name="METHOD_NAME" value="testShowListOfMembers" />
+      <option name="MAIN_CLASS_NAME" value="domain_model.MemberTest" />
+      <option name="METHOD_NAME" value="createMember" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -143,11 +106,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MemberDatabaseTest" />
-        <item itemvalue="JUnit.MemberDatabaseTest.testShowListOfMembers" />
-        <item itemvalue="JUnit.MemberDatabaseTest.testAddMemberToDatabase" />
-        <item itemvalue="JUnit.MemberDatabaseTest.testLoadDatabase" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MemberTest.createMember" />
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
       </list>
     </recent_temporary>
   </component>
@@ -186,15 +149,7 @@
       <option name="project" value="LOCAL" />
       <updated>1700812776219</updated>
     </task>
-    <task id="LOCAL-00004" summary="initial commit">
-      <option name="closed" value="true" />
-      <created>1700822048575</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1700822048575</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +182,6 @@
     <MESSAGE value="added: initial commit added .idea/ to .gitignore" />
     <MESSAGE value="added: conventional package structure and main" />
     <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
-    <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed extend issues with reformatted member class and its subclasses" />
   </component>
 </project>

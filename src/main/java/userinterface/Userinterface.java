@@ -35,7 +35,7 @@ public class Userinterface {
         int administratorChosenOption = 0;
 
         while (administratorChosenOption != 5) {
-            System.out.print("\nOptions\n" +
+            System.out.print("\nAdministrator - Options\n" +
                     "1. Add new member\n" +
                     "2. Show list of members\n" +
                     "3. Edit member information(not valid yet)\n" +
@@ -47,7 +47,7 @@ public class Userinterface {
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
-                case 2 -> showListOfMembers(); //TODO - add showList
+                case 2 -> showListOfMembers();
 //                case 3 -> editMemberInformation(); //TODO - add edit
 //                case 4 -> deleteMember(); //TODO - add delete
                 case 5 -> {
@@ -130,8 +130,34 @@ public class Userinterface {
     }
 
     public void accountantProgram() {
+        int accountantChosenOption = 0;
 
+        while (accountantChosenOption != 2) {
+            System.out.print("\nAccountant - Options\n" +
+                    "1. Show list of subscriptions\n" +
+                    "2. Sign out\n" +
+                    "Choice: ");
+
+            accountantChosenOption = scanner.nextInt();
+
+            switch (accountantChosenOption) {
+                case 1 -> showSubscriptionList();
+                case 2 -> {
+                    System.out.println("Signing out...");
+                    defaultScreen();
+                }
+                default -> {
+                    System.out.println("you must enter a number from the menu.");
+                    accountantProgram();
+                }
+            }
+        }
     }
+
+    public void showSubscriptionList(){
+        System.out.println(controller.showListOfSubscriptions());
+    }
+
 
     public void coachProgram() {
 
