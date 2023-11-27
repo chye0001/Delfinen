@@ -5,6 +5,7 @@ import domain_model.members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MemberDatabase {
@@ -22,6 +23,14 @@ public class MemberDatabase {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<Member> getClubMembers() {
+        return clubMembers;
+    }
+
+    public void setAdministratorFile(File administratorFile) {
+        this.administratorFile = administratorFile;
     }
 
     public boolean addMemberToList(int type,
@@ -72,11 +81,18 @@ public class MemberDatabase {
         return sb.toString();
     }
 
-    public void setAdministratorFile(File administratorFile) {
-        this.administratorFile = administratorFile;
-    }
+    public String showListOfSubscription(){
+        StringBuilder sb = new StringBuilder();
 
-    public ArrayList<Member> getClubMembers() {
-        return clubMembers;
+        for (Member subscription : clubMembers) {
+            String[] birthDateSplit = subscription.getBirthDate().split("/");
+            int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
+
+            sb.append("Name: ").append(subscription.getName()).append(" / ").
+                    append("Age: ").append(age).append(" / ").
+                    append("Activity type: ").append(subscription.getType()).append(" / ").
+                    append("Subscription: ").append(subscription.getSubscription()).append("\n");
+        }
+        return sb.toString();
     }
 }
