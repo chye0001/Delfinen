@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added untracked files">
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: conventional package structure and main">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,8 +107,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
         <item itemvalue="JUnit.MemberTest.createMember" />
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MemberTest.createJuniorMember" />
       </list>
     </recent_temporary>
   </component>
@@ -126,7 +124,6 @@
       <updated>1700213271278</updated>
       <workItem from="1700213272295" duration="685000" />
       <workItem from="1700480087385" duration="15463000" />
-      <workItem from="1700822604250" duration="4859000" />
     </task>
     <task id="LOCAL-00001" summary="added: initial commit added .idea/ to .gitignore">
       <option name="closed" value="true" />
@@ -152,15 +149,7 @@
       <option name="project" value="LOCAL" />
       <updated>1700812776219</updated>
     </task>
-    <task id="LOCAL-00004" summary="added untracked files">
-      <option name="closed" value="true" />
-      <created>1700821911076</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1700821911076</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,18 +182,6 @@
     <MESSAGE value="added: initial commit added .idea/ to .gitignore" />
     <MESSAGE value="added: conventional package structure and main" />
     <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
-    <MESSAGE value="added untracked files" />
-    <option name="LAST_COMMIT_MESSAGE" value="added untracked files" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="fixed extend issues with reformatted member class and its subclasses" />
   </component>
 </project>
