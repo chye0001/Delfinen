@@ -130,15 +130,15 @@ public class Userinterface {
     }
 
     public void accountantProgram() {
-        int accountantChosenOption = 0;
+        int accountantChosenOption;
 
-        while (accountantChosenOption != 2) {
+        do {
             System.out.print("\nAccountant - Options\n" +
                     "1. Show list of subscriptions\n" +
                     "2. Sign out\n" +
                     "Choice: ");
 
-            accountantChosenOption = scanner.nextInt();
+            accountantChosenOption = Input.scannerInt(scanner,1,2);
 
             switch (accountantChosenOption) {
                 case 1 -> showSubscriptionList();
@@ -146,12 +146,8 @@ public class Userinterface {
                     System.out.println("Signing out...");
                     defaultScreen();
                 }
-                default -> {
-                    System.out.println("you must enter a number from the menu.");
-                    accountantProgram();
-                }
             }
-        }
+        }while (accountantChosenOption != 2);
     }
 
     public void showSubscriptionList(){
