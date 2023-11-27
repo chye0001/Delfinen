@@ -1,6 +1,7 @@
 package domain_model;
 
 import datasource.FileHandler;
+import domain_model.members.Member;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,5 +32,13 @@ public class Controller {
     }
     public double showIncomeForecast() {
         return memberDatabase.showIncomeForecast();
+    }
+
+    public ArrayList<Member> getJuniorTeam(){
+        return memberDatabase.getJuniorTeam();
+    }
+
+    public ArrayList<Member> getSeniorTeam(){
+        return memberDatabase.getSeniorTeam();
     }
 }
