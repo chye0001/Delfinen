@@ -25,7 +25,7 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<Member> load(File fileToLoadFrom) throws FileNotFoundException{
+    public static ArrayList<Member> load(File fileToLoadFrom) throws FileNotFoundException{
 
         Scanner readFile = new Scanner(fileToLoadFrom);
         ArrayList<Member> loadedFile = new ArrayList<>();
