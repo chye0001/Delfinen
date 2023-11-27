@@ -1,7 +1,7 @@
 package domain_model;
 
 import datasource.FileHandler;
-import domain_model.Members.*;
+import domain_model.members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

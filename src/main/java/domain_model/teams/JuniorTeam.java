@@ -1,4 +1,4 @@
-package domain_model.Teams;
+package domain_model.teams;
 
 public class JuniorTeam extends Team {
 

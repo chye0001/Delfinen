@@ -1,7 +1,7 @@
-package domain_model.Teams;
+package domain_model.teams;
 
 import domain_model.Leaderboard;
-import domain_model.Members.Member;
+import domain_model.members.Member;
 
 import java.util.ArrayList;
 

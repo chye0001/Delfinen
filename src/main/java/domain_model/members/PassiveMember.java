@@ -1,6 +1,4 @@
-package domain_model.Members;
-
-import domain_model.Members.Member;
+package domain_model.members;
 
 public class PassiveMember extends Member {
     private String type = "Passive";

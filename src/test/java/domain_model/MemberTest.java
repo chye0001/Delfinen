@@ -1,6 +1,6 @@
 package domain_model;
 
-import domain_model.Members.*;
+import domain_model.members.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
