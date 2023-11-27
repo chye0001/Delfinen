@@ -19,21 +19,15 @@ public class Userinterface {
                 "Enter your credentials: ");
         System.out.print(sb);
 
-        while (!scanner.hasNextInt()) {
-            System.out.println("You must enter a number from the menu: ");
-            scanner.nextLine();
-        }
-        choise = scanner.nextInt();
+
+        choise = Input.scannerInt(scanner, 1, 4);
 
         switch (choise) {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
             case 4 -> System.out.println("Program ended");
-            default -> {
-                System.out.println("You must enter a number from the menu");
-                startProgram();
-            }
+
         }
     }
 
@@ -49,7 +43,7 @@ public class Userinterface {
                     "5. Sign out\n" +
                     "Choice: ");
 
-            administratorChosenOption = scanner.nextInt();
+            administratorChosenOption = Input.scannerInt(scanner, 1, 5);
 
             switch (administratorChosenOption) {
                 case 1 -> addNewMember();
@@ -60,15 +54,11 @@ public class Userinterface {
                     System.out.println("Signing out...");
                     defaultScreen();
                 }
-                default -> {
-                    System.out.println("you must enter a number from the menu.");
-                    administratorProgram();
-                }
             }
         }
     }
 
-    public void showListOfMembers(){
+    public void showListOfMembers() {
         System.out.println(controller.showListOfMembers());
     }
 
@@ -83,12 +73,12 @@ public class Userinterface {
                 append("5. Competitive Member\n").
                 append("Type: ");
         System.out.print(sb);
-        //TODO try-catch
-        int memberType = scanner.nextInt();
+
+        int memberType = Input.scannerInt(scanner, 1, 5);
 
 
         System.out.print("Name: ");
-        scanner.nextLine();
+
         String memberName = scanner.nextLine();
 
 
@@ -107,20 +97,23 @@ public class Userinterface {
             memberEmail = scanner.nextLine();
         }
 
-        String memberDiscipline = "None";
-        if (memberType == 5){
-            System.out.print("Discipline: ");
-            memberDiscipline = scanner.nextLine().toLowerCase();
+        String memberDiscipline = "none";
+        if (memberType == 5) {
+            System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
+
+            memberDiscipline = switch (Input.scannerInt(scanner, 1, 4)) {
+                case 1 -> "backstroke";
+                case 2 -> "breaststroke";
+                case 3 -> "butterfly";
+                case 4 -> "crawl";
+                default -> "none";
+            };
         }
 
 
         //TODO - make automated
         System.out.print("Subscription value: ");
-        while (!scanner.hasNextDouble()) {
-            System.out.print("\nYou muster enter a number.\nSubscription value: ");
-            scanner.nextLine();
-        }
-        double memberSubscriptionValue = scanner.nextDouble();
+        double memberSubscriptionValue = Input.scannerPositiveDouble(scanner);
 
 
         try {
@@ -131,7 +124,8 @@ public class Userinterface {
             e.printStackTrace();
         }
     }
-    public void defaultScreen(){
+
+    public void defaultScreen() {
         startProgram();
     }
 
