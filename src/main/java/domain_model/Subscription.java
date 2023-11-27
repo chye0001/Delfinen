@@ -40,9 +40,9 @@ public class Subscription {
 
     @Override
     public String toString() {
-        return "Subscription{" +
+        return "{" +
                 "paymentDate=" + paymentDate +
-                ", cost=" + cost +
+                ", cost=" + cost + "kr" +
                 ", paymentStatus=" + paymentStatus +
                 ", debt=" + debt +
                 '}';
