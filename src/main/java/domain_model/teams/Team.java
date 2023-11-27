@@ -17,8 +17,11 @@ public abstract class Team {
         return leaderboard;
     }
 
+    public void addMember(Member member){
+        members.add(member);
+    }
+
     /* TODO
-    public void addMember()
     public void addLeaderboardResult()
      */
 

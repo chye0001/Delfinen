@@ -1,6 +1,7 @@
 package userinterface;
 
 import domain_model.Controller;
+import domain_model.members.Member;
 
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Userinterface {
     Scanner scanner = new Scanner(System.in);
 
     public void startProgram() {
-        int choise = 0;
+        int choice = 0;
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
@@ -20,9 +21,9 @@ public class Userinterface {
         System.out.print(sb);
 
 
-        choise = Input.scannerInt(scanner, 1, 4);
+        choice = Input.scannerInt(scanner, 1, 4);
 
-        switch (choise) {
+        switch (choice) {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
@@ -102,11 +103,11 @@ public class Userinterface {
             System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
 
             memberDiscipline = switch (Input.scannerInt(scanner, 1, 4)) {
-                case 1 -> "backstroke";
-                case 2 -> "breaststroke";
-                case 3 -> "butterfly";
-                case 4 -> "crawl";
-                default -> "none";
+                case 1 -> "Backstroke";
+                case 2 -> "Breaststroke";
+                case 3 -> "Butterfly";
+                case 4 -> "Crawl";
+                default -> "None";
             };
         }
 
@@ -154,8 +155,42 @@ public class Userinterface {
         System.out.println(controller.showListOfSubscriptions());
     }
 
-
     public void coachProgram() {
+        int coachChosenOption;
 
+        do {
+            System.out.print("""
+                    Coach - Options
+                    1. Show Junior Team
+                    2. Show Senior Team
+                    3. Add New Result (unfinished)
+                    4. Sign Out
+                    Choice:""");
+
+            coachChosenOption = Input.scannerInt(scanner,1,4);
+
+            switch (coachChosenOption){
+                case 1 -> {
+                    String juniorTeam = "\nJunior Team:";
+                    for (Member member: controller.getJuniorTeam()) {
+                        juniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline();
+                    }
+                    System.out.println(juniorTeam+"\n");
+                }
+                case 2 -> {
+                    String seniorTeam = "\nSenior Team:";
+                    for (Member member: controller.getSeniorTeam()) {
+                        seniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline();
+                    }
+                    System.out.println(seniorTeam+"\n");
+                }
+                case 3 -> {}
+                case 4 -> {
+                    System.out.println("Signing out...");
+                    defaultScreen();
+                }
+            }
+        }
+        while (coachChosenOption != 4);
     }
 }
