@@ -5,13 +5,14 @@ import domain_model.Members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MemberDatabase {
 
     private ArrayList<Member> clubMembers;
-    FileHandler fileHandler = new FileHandler();
     File administratorFile = new File("ListOfMembers.csv");
+    File accountantFile = new File("listOfSubscription.csv");
 
     public MemberDatabase() {
         this.clubMembers = new ArrayList<>();
@@ -19,7 +20,7 @@ public class MemberDatabase {
 
     public void loadMemberDatabase(){
         try {
-            clubMembers = fileHandler.load(administratorFile);
+            clubMembers = FileHandler.load(administratorFile);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -54,7 +55,6 @@ public class MemberDatabase {
                 }
         clubMembers.add(newMember);
         FileHandler.save(clubMembers, administratorFile);
-        //TODO - why does it have to be static and what does static methods do?
         return true;
     }
 
@@ -67,5 +67,20 @@ public class MemberDatabase {
                         append(" - Email address: ").append(member.getEmail()).append("\n");
             }
         }return sb.toString();
+    }
+
+    public String showListOfSubscription(){
+        StringBuilder sb = new StringBuilder();
+
+        for (Member subscription : clubMembers) {
+            String[] birthDateSplit = subscription.getBirthDate().split("/");
+            int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
+
+            sb.append("Name: ").append(subscription.getName()).append(" / ").
+                    append("Age: ").append(age).append(" / ").
+                    append("Activity type: ").append(subscription.getType()).append(" / ").
+                    append("Subscription: ").append(subscription.getSubscription()).append("\n");
+        }
+        return sb.toString();
     }
 }

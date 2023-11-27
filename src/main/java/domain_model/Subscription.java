@@ -37,4 +37,14 @@ public class Subscription {
     public double getDebt() {
         return debt;
     }
+
+    @Override
+    public String toString() {
+        return "Subscription{" +
+                "paymentDate=" + paymentDate +
+                ", cost=" + cost +
+                ", paymentStatus=" + paymentStatus +
+                ", debt=" + debt +
+                '}';
+    }
 }

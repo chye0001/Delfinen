@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class FileHandler {
@@ -25,7 +26,7 @@ public class FileHandler {
         }
     }
 
-    public ArrayList<Member> load(File fileToLoadFrom) throws FileNotFoundException{
+    public static ArrayList<Member> load(File fileToLoadFrom) throws FileNotFoundException{
 
         Scanner readFile = new Scanner(fileToLoadFrom);
         ArrayList<Member> loadedFile = new ArrayList<>();
