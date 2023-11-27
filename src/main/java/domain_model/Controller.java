@@ -29,4 +29,7 @@ public class Controller {
     public String showListOfSubscriptions(){
         return memberDatabase.showListOfSubscription();
     }
+    public double showIncomeForecast() {
+        return memberDatabase.showIncomeForecast();
+    }
 }

@@ -65,7 +65,6 @@ public class MemberDatabase {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        //TODO - why does it have to be static and what does static methods do?
         return true;
     }
 
@@ -94,5 +93,12 @@ public class MemberDatabase {
                     append("Subscription: ").append(subscription.getSubscription()).append("\n");
         }
         return sb.toString();
+    }
+    public double showIncomeForecast() {
+        double totalExpectedIncome = 0;
+        for (Member income:clubMembers) {
+            totalExpectedIncome += income.getSubscriptionCost();
+        }
+        return totalExpectedIncome;
     }
 }
