@@ -1,6 +1,6 @@
 package domain_model;
 
-import domain_model.Members.Member;
+import domain_model.members.Member;
 
 import java.time.LocalDate;
 

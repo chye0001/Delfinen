@@ -1,4 +1,4 @@
-package domain_model.Members;
+package domain_model.members;
 
 import domain_model.Subscription;
 

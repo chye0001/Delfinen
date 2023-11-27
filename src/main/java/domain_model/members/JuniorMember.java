@@ -1,4 +1,4 @@
-package domain_model.Members;
+package domain_model.members;
 
 public class JuniorMember extends Member {
     private String type = "Junior";

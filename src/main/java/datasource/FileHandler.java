@@ -1,12 +1,11 @@
 package datasource;
 
-import domain_model.Members.*;
+import domain_model.members.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class FileHandler {
