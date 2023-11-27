@@ -17,7 +17,7 @@ public class Controller {
                                    String birthDate,
                                    String email,
                                    String discipline,
-                                   double subscription) throws FileNotFoundException {
+                                   double subscription) {
 
         return memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
     }
