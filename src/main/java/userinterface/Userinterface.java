@@ -32,9 +32,9 @@ public class Userinterface {
     }
 
     public void administratorProgram() {
-        int administratorChosenOption = 0;
+        int administratorChosenOption;
 
-        while (administratorChosenOption != 5) {
+        do {
             System.out.print("\nAdministrator - Options\n" +
                     "1. Add new member\n" +
                     "2. Show list of members\n" +
@@ -55,7 +55,7 @@ public class Userinterface {
                     defaultScreen();
                 }
             }
-        }
+        } while (administratorChosenOption != 5);
     }
 
     public void showListOfMembers() {
