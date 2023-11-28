@@ -138,24 +138,30 @@ public class Userinterface {
         do {
             System.out.print("\nAccountant - Options\n" +
                     "1. Show list of subscriptions\n" +
-                    "2. Sign out\n" +
+                    "2. Show income forecast\n" +
+                    "3. Sign out\n" +
                     "Choice: ");
 
-            accountantChosenOption = Input.scannerInt(scanner,1,2);
+            accountantChosenOption = Input.scannerInt(scanner, 1, 3);
 
             switch (accountantChosenOption) {
                 case 1 -> showSubscriptionList();
-                case 2 -> {
+                case 2 -> showIncomeForecast();
+                case 3 -> {
                     System.out.println("Signing out...");
                     defaultScreen();
                 }
             }
-        }while (accountantChosenOption != 2);
+        } while (accountantChosenOption != 3);
     }
 
-    public void showSubscriptionList(){
+    public void showSubscriptionList() {
         System.out.println(controller.showListOfSubscriptions());
     }
+    public void showIncomeForecast() {
+        System.out.println("\nExpected 1 year revenue: " + controller.showIncomeForecast() + "kr.");
+    }
+
 
     public void coachProgram() {
         int coachChosenOption;

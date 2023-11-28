@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="38% done">
-      <change afterPath="$PROJECT_DIR$/CompetitiveResults.csv" afterDir="false" />
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="added: 2 unittest - showListOfSubscription() and show_One_Year_Income_Forecast()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ListOfMembers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ListOfMembers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Leaderboard.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Result.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/teams/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/teams/Team.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,10 +25,24 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="UnitTestAccountant" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;chye0001&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="e0c50105-4459-4d1f-9de1-88c1338df745" />
+        <option name="url" value="https://github.com/chye0001/Delfinen.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -49,26 +56,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "UserStory11",
-    "last_opened_file_path": "C:/Users/Kristoffer/Documents/Stuff/KEA/IntelliJ/1st Semester/Delfinen",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Kristoffer\Documents\Stuff\KEA\IntelliJ\1st Semester\Delfinen" />
-    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -167,7 +171,7 @@
       <updated>1700213271278</updated>
       <workItem from="1700213272295" duration="685000" />
       <workItem from="1700480087385" duration="15463000" />
-      <workItem from="1701160926740" duration="5214000" />
+      <workItem from="1701162450234" duration="2994000" />
     </task>
     <task id="LOCAL-00001" summary="added: initial commit added .idea/ to .gitignore">
       <option name="closed" value="true" />
@@ -209,23 +213,7 @@
       <option name="project" value="LOCAL" />
       <updated>1701090349192</updated>
     </task>
-    <task id="LOCAL-00006" summary="minor formatting">
-      <option name="closed" value="true" />
-      <created>1701090545824</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1701090545824</updated>
-    </task>
-    <task id="LOCAL-00007" summary="38% done">
-      <option name="closed" value="true" />
-      <created>1701096905974</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1701096905974</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,7 +248,21 @@
     <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="minor formatting" />
-    <MESSAGE value="38% done" />
-    <option name="LAST_COMMIT_MESSAGE" value="38% done" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor formatting" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java</url>
+          <line>122</line>
+          <properties class="domain_model.MemberDatabase" method="calculateAgeFromBirthDate">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
