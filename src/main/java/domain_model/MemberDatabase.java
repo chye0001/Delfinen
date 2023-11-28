@@ -129,7 +129,7 @@ public class MemberDatabase {
     }
 
     public int calculateAgeFromBirthDate(int count) {
-
+        //TODO: make member class handle age, with getAge method.
         String[] birthDateSplit = clubMembers.get(count).getBirthDate().split("/");
 
         int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]) - 1;
