@@ -12,6 +12,7 @@ public class Userinterface {
     Scanner scanner = new Scanner(System.in);
 
     public void startProgram() {
+        //extract method.
         int choice;
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
@@ -65,12 +66,12 @@ public class Userinterface {
     }
 
     public void addNewMember() {
-
+        //TODO: extract method
         StringBuilder sb = new StringBuilder();
         sb.append("\nMember Type:\n").
                 append("1. Passiv\n").
-                append("2. Junior Member\n").
-                append("3. Senior Member\n").
+                append("2. Junior Member\n"). //TODO: maybe redundant
+                append("3. Senior Member\n"). //maybe redundant
                 append("4. Exercise Member\n").
                 append("5. Competitive Member\n").
                 append("Type: ");
@@ -99,7 +100,7 @@ public class Userinterface {
             memberEmail = scanner.nextLine();
         }
 
-        String memberDiscipline = "none";
+        String memberDiscipline = "None";
         if (memberType == 5) {
             System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
 
