@@ -219,7 +219,7 @@ public class Userinterface {
                     System.out.print("Enter member email: ");
                     String email = scanner.next();
                     System.out.print("Enter time in seconds: ");
-                    double time = scanner.nextDouble();
+                    double time = Input.scannerPositiveDouble(scanner);
                     controller.addResultToTeam(email,time);
                 }
                 case 4 -> {
