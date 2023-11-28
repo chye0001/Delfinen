@@ -128,6 +128,29 @@ public class MemberDatabase {
         return sb.toString();
     }
 
+    public int calculateAgeFromBirthDate(int count) {
+
+        String[] birthDateSplit = clubMembers.get(count).getBirthDate().split("/");
+
+        int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]) - 1;
+
+        if (LocalDate.now().getDayOfMonth() >= Integer.parseInt(birthDateSplit[0]) && LocalDate.now().getMonthValue() >= Integer.parseInt(birthDateSplit[1])) {
+            age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
+            return age;
+
+        } else
+            return age;
+    }
+
+    public double showIncomeForecast() {
+        double totalExpectedIncome = 0;
+        for (Member income : clubMembers) {
+            totalExpectedIncome += income.getSubscriptionCost();
+        }
+        return totalExpectedIncome;
+    }
+
+
     public Team getJuniorTeam(){
         return juniorTeam;
     }
