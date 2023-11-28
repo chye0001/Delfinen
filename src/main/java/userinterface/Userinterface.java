@@ -1,6 +1,7 @@
 package userinterface;
 
 import domain_model.Controller;
+import domain_model.Result;
 import domain_model.members.Member;
 
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class Userinterface {
     Scanner scanner = new Scanner(System.in);
 
     public void startProgram() {
-        int choice = 0;
+        int choice;
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
@@ -27,7 +28,7 @@ public class Userinterface {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
-            case 4 -> System.out.println("Program ended");
+            case 4 -> System.out.println("Shutting down...");
 
         }
     }
@@ -116,9 +117,10 @@ public class Userinterface {
         System.out.print("Subscription value: ");
         double memberSubscriptionValue = Input.scannerPositiveDouble(scanner);
 
-
+        //TODO - Fix this portion, because I dont think it makes sense (Kristoffer)
         try {
-            if (controller.addMemberToList(memberType, memberName, memberBirthDate, memberEmail, memberDiscipline, memberSubscriptionValue)) {
+            if (controller.addMemberToList(memberType, memberName, memberBirthDate,
+                    memberEmail, memberDiscipline, memberSubscriptionValue)) {
                 System.out.println(memberName + " added to list of members");
             } else System.out.println("Something went wrong - Error: 401");
         } catch (Exception e) {
@@ -160,31 +162,60 @@ public class Userinterface {
 
         do {
             System.out.print("""
+                    
                     Coach - Options
                     1. Show Junior Team
                     2. Show Senior Team
-                    3. Add New Result (unfinished)
+                    3. Add New Result
                     4. Sign Out
                     Choice:""");
 
             coachChosenOption = Input.scannerInt(scanner,1,4);
 
             switch (coachChosenOption){
+
                 case 1 -> {
-                    String juniorTeam = "\nJunior Team:";
-                    for (Member member: controller.getJuniorTeam()) {
-                        juniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline();
+                    String juniorTeam = "\nJunior Team:\n--------------------";
+
+                    for (Member member: controller.getJuniorTeam().getMembers()) {
+                        juniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline()+
+                                "\nLeaderboard Results:";
+
+                        for (Result result : controller.getJuniorTeam().getLeaderboard()) {
+                            if(result.getMemberEmail().equals(member.getEmail())){
+                                juniorTeam += "\n- "+result.getTime()+"s - "+result.getDate();
+                            }
+                        }
+                        juniorTeam += "\n--------------------";
                     }
-                    System.out.println(juniorTeam+"\n");
+
+                    System.out.println(juniorTeam);
                 }
                 case 2 -> {
-                    String seniorTeam = "\nSenior Team:";
-                    for (Member member: controller.getSeniorTeam()) {
-                        seniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline();
+                    String seniorTeam = "\nSenior Team:\n--------------------";
+
+                    for (Member member: controller.getSeniorTeam().getMembers()) {
+                        seniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline()+
+                                      "\nLeaderboard Results:";
+
+                        for (Result result : controller.getSeniorTeam().getLeaderboard()) {
+                            if(result.getMemberEmail().equals(member.getEmail())){
+                                seniorTeam += "\n- "+result.getTime()+"s - "+result.getDate();
+                            }
+                        }
+                        seniorTeam += "\n--------------------";
                     }
-                    System.out.println(seniorTeam+"\n");
+
+                    System.out.println(seniorTeam);
                 }
-                case 3 -> {}
+                case 3 -> {
+                    System.out.println("Adding new result:");
+                    System.out.print("Enter member email: ");
+                    String email = scanner.next();
+                    System.out.print("Enter time in seconds: ");
+                    double time = scanner.nextDouble();
+                    controller.addResultToTeam(email,time);
+                }
                 case 4 -> {
                     System.out.println("Signing out...");
                     defaultScreen();

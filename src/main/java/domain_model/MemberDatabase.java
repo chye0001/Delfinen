@@ -14,19 +14,22 @@ import java.util.ArrayList;
 public class MemberDatabase {
 
     private ArrayList<Member> clubMembers;
-    private Team juniorTeam;
-    private Team seniorTeam;
     File administratorFile = new File("ListOfMembers.csv");
 
+    private Team juniorTeam;
+    private Team seniorTeam;
+    File competitiveResultsFile = new File("CompetitiveResults.csv");
+
     public MemberDatabase() {
-        this.clubMembers = new ArrayList<>();
-        this.juniorTeam = new JuniorTeam();
-        this.seniorTeam = new SeniorTeam();
+        clubMembers = new ArrayList<>();
+
+        juniorTeam = new JuniorTeam();
+        seniorTeam = new SeniorTeam();
     }
 
     public void loadMemberDatabase(){
         try {
-            clubMembers = FileHandler.load(administratorFile);
+            clubMembers = FileHandler.clubMembersLoad(administratorFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -35,7 +38,7 @@ public class MemberDatabase {
             //TODO make member type ENUM
             if (clubMembers.get(i).getType().equals("Competitive")){
                 int birthYear = Integer.parseInt(clubMembers.get(i).getBirthDate().split("/")[2]);
-                if (LocalDate.now().getYear()-birthYear < 18){
+                if (LocalDate.now().getYear()-birthYear < 18){ //TODO make this comparison less primitive
                     juniorTeam.addMember(clubMembers.get(i));
                 }else{
                     seniorTeam.addMember(clubMembers.get(i));
@@ -48,7 +51,7 @@ public class MemberDatabase {
         return clubMembers;
     }
 
-    public void setAdministratorFile(File administratorFile) {
+    public void setAdministratorFile(File administratorFile) { //for testing purposes only
         this.administratorFile = administratorFile;
     }
 
@@ -80,7 +83,7 @@ public class MemberDatabase {
         }
         clubMembers.add(newMember);
         try {
-            FileHandler.save(clubMembers, administratorFile);
+            FileHandler.clubMembersSave(clubMembers, administratorFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -95,7 +98,7 @@ public class MemberDatabase {
                 seniorTeam.addMember(newMember);
             }
         }
-        return true;
+        return true; //why is this used? It will literally only be true.
     }
 
     public String showListOfMembers() {
@@ -125,11 +128,76 @@ public class MemberDatabase {
         return sb.toString();
     }
 
-    public ArrayList<Member> getJuniorTeam(){
-        return juniorTeam.getMembers();
+    public Team getJuniorTeam(){
+        return juniorTeam;
     }
 
-    public ArrayList<Member> getSeniorTeam(){
-        return seniorTeam.getMembers();
+    public Team getSeniorTeam(){
+        return seniorTeam;
     }
+
+    public void loadCompetitiveResults(){
+        ArrayList<Result> loadedResults = new ArrayList<>();
+        try {
+            loadedResults = FileHandler.competitiveResultsLoad(competitiveResultsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < loadedResults.size(); i++) {
+            //starts off by finding a member that has the same email as the result
+            Member member = null;
+            for (Member clubMember : clubMembers) {
+                if (loadedResults.get(i).getMemberEmail().equals(clubMember.getEmail())) {
+                    member = clubMember;
+                }
+            }
+            if (member != null){
+                //takes birthdate of member with matching email and uses it to figure out which of the two teams
+                //that the result should be added to
+                //TODO make age comparison better, since it is currently just based on year comparison
+                int birthYear = Integer.parseInt(member.getBirthDate().split("/")[2]);
+                if (LocalDate.now().getYear()-birthYear < 18){
+                    juniorTeam.addResultToLeaderboard(loadedResults.get(i));
+                }else{
+                    seniorTeam.addResultToLeaderboard(loadedResults.get(i));
+                }
+            }
+        }
+    }
+
+    public void addResultToTeam(String email, double time){
+        //the LocalDate is set to the moment the entry is made
+        Result newResult = new Result(email,time,LocalDate.now());
+
+        //save to .csv file
+        ArrayList<Result> combinedResultList = new ArrayList<>();
+        //adds both teams' results first
+        combinedResultList.addAll(juniorTeam.getLeaderboard());
+        combinedResultList.addAll(seniorTeam.getLeaderboard());
+        //then the new result is added
+        combinedResultList.add(newResult);
+        try {
+            FileHandler.competitiveResultsSave(combinedResultList, competitiveResultsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Member member = null;
+        for (Member clubMember : clubMembers) {
+            if (newResult.getMemberEmail().equals(clubMember.getEmail())) {
+                member = clubMember;
+            }
+        }
+        if (member != null){
+            //TODO make age comparison better, since it is currently just based on year comparison
+            int birthYear = Integer.parseInt(member.getBirthDate().split("/")[2]);
+            if (LocalDate.now().getYear()-birthYear < 18){
+                juniorTeam.addResultToLeaderboard(newResult);
+            }else{
+                seniorTeam.addResultToLeaderboard(newResult);
+            }
+        }
+    }
+
 }

@@ -1,22 +1,20 @@
 package domain_model;
 
-import domain_model.members.Member;
-
 import java.time.LocalDate;
 
 public class Result {
-    private Member member;
+    private String memberEmail;
     private double time;
     private LocalDate date;
 
-    public Result(Member member, double time, LocalDate date) {
-        this.member = member;
+    public Result(String memberEmail, double time, LocalDate date) {
+        this.memberEmail = memberEmail;
         this.time = time;
         this.date = date;
     }
 
-    public Member getMember() {
-        return member;
+    public String getMemberEmail() {
+        return memberEmail;
     }
 
     public double getTime() {

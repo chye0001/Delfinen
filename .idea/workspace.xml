@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="minor formatting" />
+    <list default="true" id="f8682599-db06-4444-90f5-03095dd9ba63" name="Changes" comment="38% done">
+      <change afterPath="$PROJECT_DIR$/CompetitiveResults.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ListOfMembers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ListOfMembers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datasource/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Leaderboard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/MemberDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/domain_model/teams/Team.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain_model/teams/Team.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/userinterface/Userinterface.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="memberDataTest" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,8 +56,8 @@
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/chris/OneDrive - Københavns Erhvervsakademi/Desktop/School/1. Semester 2023/JavaProjecter/Superhero2.0",
+    "git-widget-placeholder": "UserStory11",
+    "last_opened_file_path": "C:/Users/Kristoffer/Documents/Stuff/KEA/IntelliJ/1st Semester/Delfinen",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -55,6 +66,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Kristoffer\Documents\Stuff\KEA\IntelliJ\1st Semester\Delfinen" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -153,6 +167,7 @@
       <updated>1700213271278</updated>
       <workItem from="1700213272295" duration="685000" />
       <workItem from="1700480087385" duration="15463000" />
+      <workItem from="1701160926740" duration="5214000" />
     </task>
     <task id="LOCAL-00001" summary="added: initial commit added .idea/ to .gitignore">
       <option name="closed" value="true" />
@@ -194,7 +209,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701090349192</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="minor formatting">
+      <option name="closed" value="true" />
+      <created>1701090545824</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701090545824</updated>
+    </task>
+    <task id="LOCAL-00007" summary="38% done">
+      <option name="closed" value="true" />
+      <created>1701096905974</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701096905974</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +260,7 @@
     <MESSAGE value="fixed extend issues with reformatted member class and its subclasses" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="minor formatting" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor formatting" />
+    <MESSAGE value="38% done" />
+    <option name="LAST_COMMIT_MESSAGE" value="38% done" />
   </component>
 </project>

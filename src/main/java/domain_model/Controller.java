@@ -2,6 +2,7 @@ package domain_model;
 
 import datasource.FileHandler;
 import domain_model.members.Member;
+import domain_model.teams.Team;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +13,7 @@ public class Controller {
     MemberDatabase memberDatabase = new MemberDatabase();
     public Controller(){
         memberDatabase.loadMemberDatabase();
+        memberDatabase.loadCompetitiveResults();
     }
     public boolean addMemberToList(int type,
                                    String name,
@@ -23,6 +25,10 @@ public class Controller {
         return memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
     }
 
+    public void addResultToTeam(String email, double time){
+        memberDatabase.addResultToTeam(email,time);
+    }
+
     public String showListOfMembers () {
         return memberDatabase.showListOfMembers();
     }
@@ -31,11 +37,11 @@ public class Controller {
         return memberDatabase.showListOfSubscription();
     }
 
-    public ArrayList<Member> getJuniorTeam(){
+    public Team getJuniorTeam(){
         return memberDatabase.getJuniorTeam();
     }
 
-    public ArrayList<Member> getSeniorTeam(){
+    public Team getSeniorTeam(){
         return memberDatabase.getSeniorTeam();
     }
 }

@@ -1,19 +1,19 @@
 package domain_model.teams;
 
-import domain_model.Leaderboard;
+import domain_model.Result;
 import domain_model.members.Member;
 
 import java.util.ArrayList;
 
 public abstract class Team {
     private ArrayList<Member> members = new ArrayList<>();
-    private Leaderboard leaderboard = new Leaderboard();
+    private ArrayList<Result> leaderboard = new ArrayList<>();
 
     public ArrayList<Member> getMembers() {
         return members;
     }
 
-    public Leaderboard getLeaderboard() {
+    public ArrayList<Result> getLeaderboard() {
         return leaderboard;
     }
 
@@ -21,8 +21,7 @@ public abstract class Team {
         members.add(member);
     }
 
-    /* TODO
-    public void addLeaderboardResult()
-     */
-
+    public void addResultToLeaderboard(Result result){
+        leaderboard.add(result);
+    }
 }
