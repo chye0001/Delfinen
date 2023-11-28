@@ -24,7 +24,7 @@ public class MemberDatabase {
         this.seniorTeam = new SeniorTeam();
     }
 
-    public void loadMemberDatabase(){
+    public void loadMemberDatabase() {
         try {
             clubMembers = FileHandler.load(administratorFile);
         } catch (FileNotFoundException e) {
@@ -33,11 +33,11 @@ public class MemberDatabase {
 
         for (int i = 0; i < clubMembers.size(); i++) {
             //TODO make member type ENUM
-            if (clubMembers.get(i).getType().equals("Competitive")){
+            if (clubMembers.get(i).getType().equals("Competitive")) {
                 int birthYear = Integer.parseInt(clubMembers.get(i).getBirthDate().split("/")[2]);
-                if (LocalDate.now().getYear()-birthYear < 18){
+                if (LocalDate.now().getYear() - birthYear < 18) {
                     juniorTeam.addMember(clubMembers.get(i));
-                }else{
+                } else {
                     seniorTeam.addMember(clubMembers.get(i));
                 }
             }
@@ -61,21 +61,16 @@ public class MemberDatabase {
 
         Member newMember;
 
-        switch (type){
-            case 1 ->
-                    newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
+        switch (type) {
+            case 1 -> newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
 
-            case 2 ->
-                    newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
+            case 2 -> newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
 
-            case 3 ->
-                    newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
+            case 3 -> newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
 
-            case 4 ->
-                    newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
+            case 4 -> newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
 
-            case 5 ->
-                    newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
+            case 5 -> newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
             default -> newMember = null;
         }
         clubMembers.add(newMember);
@@ -87,11 +82,11 @@ public class MemberDatabase {
 
         //adds to competitive teams based on age
         //TODO make day-month-year comparison and perhaps reformat the way that birthdate is saved
-        if (newMember.getType().equals("Competitive")){ //TODO make ENUM
+        if (newMember.getType().equals("Competitive")) { //TODO make ENUM
             int birthYear = Integer.parseInt(birthDate.split("/")[2]);
-            if (LocalDate.now().getYear()-birthYear < 18){
+            if (LocalDate.now().getYear() - birthYear < 18) {
                 juniorTeam.addMember(newMember);
-            }else{
+            } else {
                 seniorTeam.addMember(newMember);
             }
         }
@@ -101,7 +96,7 @@ public class MemberDatabase {
     public String showListOfMembers() {
         StringBuilder sb = new StringBuilder();
         for (Member member : clubMembers) {
-            if(member != null) {
+            if (member != null) {
                 sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
                         append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
                         append(" - Email address: ").append(member.getEmail()).append("\n");
@@ -110,33 +105,48 @@ public class MemberDatabase {
         return sb.toString();
     }
 
-    public String showListOfSubscription(){
+    public String showListOfSubscription() {
         StringBuilder sb = new StringBuilder();
+        int count = 0;
 
         for (Member subscription : clubMembers) {
-            String[] birthDateSplit = subscription.getBirthDate().split("/");
-            int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
 
             sb.append("Name: ").append(subscription.getName()).append(" / ").
-                    append("Age: ").append(age).append(" / ").
+                    append("Age: ").append(calculateAgeFromBirthDate(count)).append(" / ").
                     append("Activity type: ").append(subscription.getType()).append(" / ").
                     append("Subscription: ").append(subscription.getSubscription()).append("\n");
+
+            count++;
         }
         return sb.toString();
     }
+    public int calculateAgeFromBirthDate(int count) {
+
+            String[] birthDateSplit = clubMembers.get(count).getBirthDate().split("/");
+
+            int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]) - 1;
+
+            if (LocalDate.now().getDayOfMonth() >= Integer.parseInt(birthDateSplit[0]) && LocalDate.now().getMonthValue() >= Integer.parseInt(birthDateSplit[1])) {
+                age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
+                return age;
+
+            } else
+                return age;
+    }
+
     public double showIncomeForecast() {
         double totalExpectedIncome = 0;
-        for (Member income:clubMembers) {
+        for (Member income : clubMembers) {
             totalExpectedIncome += income.getSubscriptionCost();
         }
         return totalExpectedIncome;
     }
 
-    public ArrayList<Member> getJuniorTeam(){
+    public ArrayList<Member> getJuniorTeam() {
         return juniorTeam.getMembers();
     }
 
-    public ArrayList<Member> getSeniorTeam(){
+    public ArrayList<Member> getSeniorTeam() {
         return seniorTeam.getMembers();
     }
 }
