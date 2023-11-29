@@ -1,6 +1,7 @@
 package datasource;
 
 import domain_model.Result;
+import domain_model.MemberType;
 import domain_model.members.*;
 
 import java.io.File;
@@ -38,23 +39,23 @@ public class FileHandler {
             String[] attributes = line.split(";");
 
             Member addMember;
-            String memberType = attributes[0];
+            MemberType memberType = MemberType.valueOf(attributes[0]);
             switch (memberType){
-                case "Passive" ->
+                case PASSIV ->
                     addMember = new PassiveMember(attributes[1],
                             LocalDate.parse(attributes[2]),
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
 
-                case "Exercise" ->
+                case EXERCISE ->
                     addMember = new ExerciseMember(attributes[1],
                             LocalDate.parse(attributes[2]),
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
 
-                case "Competitive" ->
+                case COMPETITIVE ->
                     addMember = new CompetitiveMember(attributes[1],
                             LocalDate.parse(attributes[2]),
                             attributes[3],

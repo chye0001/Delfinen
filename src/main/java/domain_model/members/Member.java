@@ -1,5 +1,6 @@
 package domain_model.members;
 
+import domain_model.MemberType;
 import domain_model.Subscription;
 
 import java.time.LocalDate;
@@ -46,7 +47,7 @@ public abstract class Member {
         return subscription;
     }
 
-    public abstract String getType();
+    public abstract MemberType getType();
 
     public int getAge() {
         return Period.between(birthDate,LocalDate.now()).getYears();

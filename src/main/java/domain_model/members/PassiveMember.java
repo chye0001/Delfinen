@@ -1,15 +1,17 @@
 package domain_model.members;
 
+import domain_model.MemberType;
+
 import java.time.LocalDate;
 
 public class PassiveMember extends Member {
-    private String type = "Passive";
+    private MemberType type = MemberType.PASSIV;
     public PassiveMember(String name, LocalDate birthDate, String email, String discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
     @Override
-    public String getType() {
+    public MemberType getType() {
         return type;
     }
 }
