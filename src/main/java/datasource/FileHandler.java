@@ -42,21 +42,21 @@ public class FileHandler {
             switch (memberType){
                 case "Passive" ->
                     addMember = new PassiveMember(attributes[1],
-                            attributes[2],
+                            LocalDate.parse(attributes[2]),
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
 
                 case "Exercise" ->
                     addMember = new ExerciseMember(attributes[1],
-                            attributes[2],
+                            LocalDate.parse(attributes[2]),
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
 
                 case "Competitive" ->
                     addMember = new CompetitiveMember(attributes[1],
-                            attributes[2],
+                            LocalDate.parse(attributes[2]),
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));

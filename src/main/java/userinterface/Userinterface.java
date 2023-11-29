@@ -85,7 +85,6 @@ public class Userinterface {
 
         int memberType = Input.scannerInt(scanner, 1, 5);
 
-
         System.out.print("Name: ");
 
         String memberName = scanner.nextLine();
@@ -114,7 +113,7 @@ public class Userinterface {
         try {
             controller.addMemberToList(memberType,
                     memberName,
-                    memberBirthDate,
+                    LocalDate.parse(memberBirthDate),
                     memberEmail,
                     memberDiscipline,
                     memberSubscriptionValue);
