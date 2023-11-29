@@ -10,9 +10,9 @@ public class Subscription {
 
     public Subscription (LocalDate paymentDate, double cost, boolean paymentStatus, double debt){
         this.paymentDate = paymentDate;
-        this.cost = cost;
         this.paymentStatus = paymentStatus;
         this.debt = debt;
+        this.cost = cost;
     }
 
     public Subscription (double cost){
