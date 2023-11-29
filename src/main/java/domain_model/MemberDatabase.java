@@ -34,8 +34,8 @@ public class MemberDatabase {
         for (int i = 0; i < clubMembers.size(); i++) {
             //TODO make member type ENUM
             if (clubMembers.get(i).getType().equals("Competitive")){
-                int birthYear = Integer.parseInt(clubMembers.get(i).getBirthDate().split("/")[2]);
-                if (LocalDate.now().getYear()-birthYear < 18){ //TODO make this comparison less primitive
+                int age = clubMembers.get(i).getAge();
+                if (age < 18){
                     juniorTeam.addMember(clubMembers.get(i));
                 }else{
                     seniorTeam.addMember(clubMembers.get(i));
@@ -54,7 +54,7 @@ public class MemberDatabase {
 
     public boolean addMemberToList(int type,
                                    String name,
-                                   String birthDate,
+                                   LocalDate birthDate,
                                    String email,
                                    String discipline,
                                    double subscription) {
@@ -82,8 +82,8 @@ public class MemberDatabase {
         //adds to competitive teams based on age
         //TODO make day-month-year comparison and perhaps reformat the way that birthdate is saved
         if (newMember.getType().equals("Competitive")){ //TODO make ENUM
-            int birthYear = Integer.parseInt(birthDate.split("/")[2]);
-            if (LocalDate.now().getYear()-birthYear < 18){
+            int age = newMember.getAge();
+            if (age < 18){
                 juniorTeam.addMember(newMember);
             }else{
                 seniorTeam.addMember(newMember);
@@ -107,31 +107,17 @@ public class MemberDatabase {
     public String showListOfSubscription(){
         StringBuilder sb = new StringBuilder();
 
-        for (Member subscription : clubMembers) {
-            String[] birthDateSplit = subscription.getBirthDate().split("/");
-            int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
+        for (Member member : clubMembers) {
+            int age = member.getAge();
 
-            sb.append("Name: ").append(subscription.getName()).append(" / ").
+            sb.append("Name: ").append(member.getName()).append(" / ").
                     append("Age: ").append(age).append(" / ").
-                    append("Activity type: ").append(subscription.getType()).append(" / ").
-                    append("Subscription: ").append(subscription.getSubscription()).append("\n");
+                    append("Activity type: ").append(member.getType()).append(" / ").
+                    append("Subscription: ").append(member.getSubscription()).append("\n");
         }
         return sb.toString();
     }
 
-    public int calculateAgeFromBirthDate(int count) {
-        //TODO: make member class handle age, with getAge method.
-        String[] birthDateSplit = clubMembers.get(count).getBirthDate().split("/");
-
-        int age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]) - 1;
-
-        if (LocalDate.now().getDayOfMonth() >= Integer.parseInt(birthDateSplit[0]) && LocalDate.now().getMonthValue() >= Integer.parseInt(birthDateSplit[1])) {
-            age = LocalDate.now().getYear() - Integer.parseInt(birthDateSplit[2]);
-            return age;
-
-        } else
-            return age;
-    }
 
     public double showIncomeForecast() {
         double totalExpectedIncome = 0;
@@ -170,8 +156,8 @@ public class MemberDatabase {
                 //takes birthdate of member with matching email and uses it to figure out which of the two teams
                 //that the result should be added to
                 //TODO make age comparison better, since it is currently just based on year comparison
-                int birthYear = Integer.parseInt(member.getBirthDate().split("/")[2]);
-                if (LocalDate.now().getYear()-birthYear < 18){
+                int age = member.getAge();
+                if (age < 18){
                     juniorTeam.addResultToLeaderboard(loadedResults.get(i));
                 }else{
                     seniorTeam.addResultToLeaderboard(loadedResults.get(i));
@@ -205,8 +191,8 @@ public class MemberDatabase {
         }
         if (member != null){
             //TODO make age comparison better, since it is currently just based on year comparison
-            int birthYear = Integer.parseInt(member.getBirthDate().split("/")[2]);
-            if (LocalDate.now().getYear()-birthYear < 18){
+            int age = member.getAge();
+            if (age < 18){
                 juniorTeam.addResultToLeaderboard(newResult);
             }else{
                 seniorTeam.addResultToLeaderboard(newResult);
