@@ -52,7 +52,7 @@ public class MemberDatabase {
         this.administratorFile = administratorFile;
     }
 
-    public boolean addMemberToList(MemberType type,
+    public void addMemberToList(MemberType type,
                                    String name,
                                    LocalDate birthDate,
                                    String email,
@@ -89,7 +89,6 @@ public class MemberDatabase {
                 seniorTeam.addMember(newMember);
             }
         }
-        return true; //why is this used? It will literally only be true.
     }
 
     public String showListOfMembers() {
