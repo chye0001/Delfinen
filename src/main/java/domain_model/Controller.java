@@ -1,13 +1,5 @@
 package domain_model;
 
-import datasource.FileHandler;
-import domain_model.members.Member;
-import domain_model.teams.Team;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
 public class Controller {
 
     MemberDatabase memberDatabase = new MemberDatabase();

@@ -2,9 +2,6 @@ package domain_model;
 
 import datasource.FileHandler;
 import domain_model.members.*;
-import domain_model.teams.JuniorTeam;
-import domain_model.teams.SeniorTeam;
-import domain_model.teams.Team;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,8 +20,8 @@ public class MemberDatabase {
     public MemberDatabase() {
         clubMembers = new ArrayList<>();
 
-        juniorTeam = new JuniorTeam();
-        seniorTeam = new SeniorTeam();
+        juniorTeam = new Team();
+        seniorTeam = new Team();
     }
 
     public void loadMemberDatabase(){
@@ -72,12 +69,6 @@ public class MemberDatabase {
                     newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
 
             case 3 ->
-                    newMember = new SeniorMember(name, birthDate, email, discipline, subscription);
-
-            case 4 ->
-                    newMember = new JuniorMember(name, birthDate, email, discipline, subscription);
-
-            case 5 ->
                     newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
             default -> newMember = null;
         }

@@ -70,10 +70,8 @@ public class Userinterface {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMember Type:\n").
                 append("1. Passiv\n").
-                append("2. Junior Member\n"). //TODO: maybe redundant
-                append("3. Senior Member\n"). //maybe redundant
-                append("4. Exercise Member\n").
-                append("5. Competitive Member\n").
+                append("2. Exercise Member\n").
+                append("3. Competitive Member\n").
                 append("Type: ");
         System.out.print(sb);
 

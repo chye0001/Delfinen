@@ -1,11 +1,11 @@
-package domain_model.teams;
+package domain_model;
 
 import domain_model.Result;
 import domain_model.members.Member;
 
 import java.util.ArrayList;
 
-public abstract class Team {
+public class Team {
     private ArrayList<Member> members = new ArrayList<>();
     private ArrayList<Result> leaderboard = new ArrayList<>();
 
