@@ -2,16 +2,19 @@ package domain_model.members;
 
 import domain_model.Subscription;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public abstract class Member {
 
     private String name;
-    private String birthDate;
+    private LocalDate birthDate;
     private String email;
     private String discipline;
     private Subscription subscription;
 
     public Member(String name,
-                  String birthDate,
+                  LocalDate birthDate,
                   String email,
                   String discipline,
                   double subscriptionCost){
@@ -26,7 +29,7 @@ public abstract class Member {
     public String getName(){
         return name;
     }
-    public String getBirthDate(){
+    public LocalDate getBirthDate(){
         return birthDate;
     }
     public String getEmail(){
@@ -44,4 +47,8 @@ public abstract class Member {
     }
 
     public abstract String getType();
+
+    public int getAge() {
+        return Period.between(birthDate,LocalDate.now()).getYears();
+    }
 }
