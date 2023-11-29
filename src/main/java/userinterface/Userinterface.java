@@ -12,9 +12,13 @@ public class Userinterface {
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
 
+
     public void startProgram() {
-        //extract method.
-        int choice;
+        buildMenuForStartProgram();
+        menuOptionsForStartProgram();
+    }
+
+    public void buildMenuForStartProgram() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
@@ -22,8 +26,10 @@ public class Userinterface {
                 "4. Close program\n" +
                 "Enter your credentials: ");
         System.out.print(sb);
+    }
 
-
+    public void menuOptionsForStartProgram() {
+        int choice;
         choice = Input.scannerInt(scanner, 1, 4);
 
         switch (choice) {
@@ -35,31 +41,39 @@ public class Userinterface {
         }
     }
 
+
     public void administratorProgram() {
         int administratorChosenOption;
 
         do {
-            System.out.print("\nAdministrator - Options\n" +
-                    "1. Add new member\n" +
-                    "2. Show list of members\n" +
-                    "3. Edit member information(not valid yet)\n" +
-                    "4. Delete member(not valid yet)\n" +
-                    "5. Sign out\n" +
-                    "Choice: ");
+            buildMenuForAdministratorProgram();
+            administratorChosenOption = menuOptionsForAdministratorProgram();
 
-            administratorChosenOption = Input.scannerInt(scanner, 1, 5);
+        } while (administratorChosenOption != 5);
+    }
 
-            switch (administratorChosenOption) {
-                case 1 -> addNewMember();
-                case 2 -> showListOfMembers();
+    public void buildMenuForAdministratorProgram() {
+        System.out.print("\nAdministrator - Options\n" +
+                "1. Add new member\n" +
+                "2. Show list of members\n" +
+                "3. Edit member information(not valid yet)\n" +
+                "4. Delete member(not valid yet)\n" +
+                "5. Sign out\n" +
+                "Choice: ");
+    }
+
+    public int menuOptionsForAdministratorProgram() {
+        int administratorChosenOption;
+        administratorChosenOption = Input.scannerInt(scanner, 1, 5);
+
+        switch (administratorChosenOption) {
+            case 1 -> addNewMember();
+            case 2 -> showListOfMembers();
 //                case 3 -> editMemberInformation(); //TODO - add edit
 //                case 4 -> deleteMember(); //TODO - add delete
-                case 5 -> {
-                    System.out.println("Signing out...");
-                    defaultScreen();
-                }
-            }
-        } while (administratorChosenOption != 5);
+            case 5 -> signOut();
+        }
+        return administratorChosenOption;
     }
 
     public void showListOfMembers() {
@@ -67,17 +81,9 @@ public class Userinterface {
     }
 
     public void addNewMember() {
-        //TODO: extract method
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nMember Type:\n").
-                append("1. Passiv\n").
-                append("2. Exercise Member\n").
-                append("3. Competitive Member\n").
-                append("Type: ");
-        System.out.print(sb);
+        buildMenuForAddMember();
 
         int memberType = Input.scannerInt(scanner, 1, 5);
-
 
         System.out.print("Name: ");
 
@@ -86,30 +92,17 @@ public class Userinterface {
 
         System.out.print("Birth date in YYYY-MM-DD: ");
         String memberBirthDate = scanner.nextLine();
-        while (!memberBirthDate.contains("-")) {
-            System.out.print("\nPlease enter birthdate using the following format: YYYY-MM-DD\nBirth date: ");
-            memberBirthDate = scanner.nextLine();
-        }
-
+        memberBirthDate = errorHandlingBirthDateFormat(memberBirthDate);
 
         System.out.print("Email: ");
         String memberEmail = scanner.nextLine();
-        while (!memberEmail.contains("@") && !memberEmail.contains(".")) {
-            System.out.print("Please enter a valid email address\nEmail: ");
-            memberEmail = scanner.nextLine();
-        }
+        memberEmail = errorHandlingEmailFormat(memberEmail);
 
         String memberDiscipline = "None";
         if (memberType == 5) {
             System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
 
-            memberDiscipline = switch (Input.scannerInt(scanner, 1, 4)) {
-                case 1 -> "Backstroke";
-                case 2 -> "Breaststroke";
-                case 3 -> "Butterfly";
-                case 4 -> "Crawl";
-                default -> "None";
-            };
+            memberDiscipline = buildMenuMemberDisciplin();
         }
 
 
@@ -117,15 +110,56 @@ public class Userinterface {
         System.out.print("Subscription value: ");
         double memberSubscriptionValue = Input.scannerPositiveDouble(scanner);
 
-        //TODO - Fix this portion, because I dont think it makes sense (Kristoffer)
         try {
-            if (controller.addMemberToList(memberType, memberName, LocalDate.parse(memberBirthDate),
-                    memberEmail, memberDiscipline, memberSubscriptionValue)) {
-                System.out.println(memberName + " added to list of members");
-            } else System.out.println("Something went wrong - Error: 401");
+            controller.addMemberToList(memberType,
+                    memberName,
+                    LocalDate.parse(memberBirthDate),
+                    memberEmail,
+                    memberDiscipline,
+                    memberSubscriptionValue);
+
+            System.out.println(memberName + " added to list of members");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void buildMenuForAddMember() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nMember Type:\n").
+                append("1. Passiv\n").
+                append("2. Junior Member\n").
+                append("3. Senior Member\n").
+                append("4. Exercise Member\n").
+                append("5. Competitive Member\n").
+                append("Type: ");
+        System.out.print(sb);
+    }
+
+    public String errorHandlingBirthDateFormat(String memberBirthDate) {
+        while (!memberBirthDate.contains("/")) {
+            System.out.print("\nPlease enter birthdate using the following format: day/month/year\nBirth date: ");
+            memberBirthDate = scanner.nextLine();
+        }
+        return memberBirthDate;
+    }
+
+    public String errorHandlingEmailFormat(String memberEmail) {
+        while (!memberEmail.contains("@") && !memberEmail.contains(".")) {
+            System.out.print("Please enter a valid email address\nEmail: ");
+            memberEmail = scanner.nextLine();
+        }
+        return memberEmail;
+    }
+
+    public String buildMenuMemberDisciplin() {
+        return switch (Input.scannerInt(scanner, 1, 4)) {
+            case 1 -> "Backstroke";
+            case 2 -> "Breaststroke";
+            case 3 -> "Butterfly";
+            case 4 -> "Crawl";
+            default -> "None";
+        };
     }
 
     public void defaultScreen() {
@@ -136,28 +170,36 @@ public class Userinterface {
         int accountantChosenOption;
 
         do {
-            System.out.print("\nAccountant - Options\n" +
-                    "1. Show list of subscriptions\n" +
-                    "2. Show income forecast\n" +
-                    "3. Sign out\n" +
-                    "Choice: ");
+            buildMenuForAccountantProgram();
+            accountantChosenOption = menuOptionsForAccountantProgram();
 
-            accountantChosenOption = Input.scannerInt(scanner, 1, 3);
-
-            switch (accountantChosenOption) {
-                case 1 -> showSubscriptionList();
-                case 2 -> showIncomeForecast();
-                case 3 -> {
-                    System.out.println("Signing out...");
-                    defaultScreen();
-                }
-            }
         } while (accountantChosenOption != 3);
+    }
+
+    public void buildMenuForAccountantProgram() {
+        System.out.print("\nAccountant - Options\n" +
+                "1. Show list of subscriptions\n" +
+                "2. Show income forecast\n" +
+                "3. Sign out\n" +
+                "Choice: ");
+    }
+
+    public int menuOptionsForAccountantProgram() {
+        int accountantChosenOption;
+        accountantChosenOption = Input.scannerInt(scanner, 1, 3);
+
+        switch (accountantChosenOption) {
+            case 1 -> showSubscriptionList();
+            case 2 -> showIncomeForecast();
+            case 3 -> signOut();
+        }
+        return accountantChosenOption;
     }
 
     public void showSubscriptionList() {
         System.out.println(controller.showListOfSubscriptions());
     }
+
     public void showIncomeForecast() {
         System.out.println("\nExpected 1 year revenue: " + controller.showIncomeForecast() + "kr.");
     }
@@ -167,67 +209,91 @@ public class Userinterface {
         int coachChosenOption;
 
         do {
-            System.out.print("""
-                    
-                    Coach - Options
-                    1. Show Junior Team
-                    2. Show Senior Team
-                    3. Add New Result
-                    4. Sign Out
-                    Choice:""");
-
-            coachChosenOption = Input.scannerInt(scanner,1,4);
-
-            switch (coachChosenOption){
-
-                case 1 -> {
-                    String juniorTeam = "\nJunior Team:\n--------------------";
-
-                    for (Member member: controller.getJuniorTeam().getMembers()) {
-                        juniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline()+
-                                "\nLeaderboard Results:";
-
-                        for (Result result : controller.getJuniorTeam().getLeaderboard()) {
-                            if(result.getMemberEmail().equals(member.getEmail())){
-                                juniorTeam += "\n- "+result.getTime()+"s - "+result.getDate();
-                            }
-                        }
-                        juniorTeam += "\n--------------------";
-                    }
-
-                    System.out.println(juniorTeam);
-                }
-                case 2 -> {
-                    String seniorTeam = "\nSenior Team:\n--------------------";
-
-                    for (Member member: controller.getSeniorTeam().getMembers()) {
-                        seniorTeam += "\n"+member.getName()+" - "+member.getEmail()+" - "+member.getDiscipline()+
-                                      "\nLeaderboard Results:";
-
-                        for (Result result : controller.getSeniorTeam().getLeaderboard()) {
-                            if(result.getMemberEmail().equals(member.getEmail())){
-                                seniorTeam += "\n- "+result.getTime()+"s - "+result.getDate();
-                            }
-                        }
-                        seniorTeam += "\n--------------------";
-                    }
-
-                    System.out.println(seniorTeam);
-                }
-                case 3 -> {
-                    System.out.println("Adding new result:");
-                    System.out.print("Enter member email: ");
-                    String email = scanner.next();
-                    System.out.print("Enter time in seconds: ");
-                    double time = Input.scannerPositiveDouble(scanner);
-                    controller.addResultToTeam(email,time);
-                }
-                case 4 -> {
-                    System.out.println("Signing out...");
-                    defaultScreen();
-                }
-            }
+            buildMenuForCoachProgram();
+            coachChosenOption = menuOptionsForCoachProgram();
         }
         while (coachChosenOption != 4);
+    }
+
+    public void buildMenuForCoachProgram() {
+        System.out.print("""
+                                    
+                Coach - Options
+                1. Show Junior Team
+                2. Show Senior Team
+                3. Add New Result
+                4. Sign Out
+                Choice:""");
+    }
+    public int menuOptionsForCoachProgram() {
+        int coachChosenOption;
+        coachChosenOption = Input.scannerInt(scanner, 1, 4);
+
+        switch (coachChosenOption) {
+            case 1 -> showJuniorTeam();
+            case 2 -> showSeniorTeam();
+            case 3 -> addNewResult();
+            case 4 -> signOut();
+        }
+
+        return coachChosenOption;
+    }
+
+    public void showJuniorTeam() {
+        buildJuniorTeamList();
+    }
+    public void buildJuniorTeamList() {
+        String juniorTeam = "\nJunior Team:\n--------------------";
+
+        for (Member member : controller.getJuniorTeam().getMembers()) {
+            juniorTeam += "\n" + member.getName() + " - " + member.getEmail() + " - " + member.getDiscipline() +
+                    "\nLeaderboard Results:";
+
+            for (Result result : controller.getJuniorTeam().getLeaderboard()) {
+                if (result.getMemberEmail().equals(member.getEmail())) {
+                    juniorTeam += "\n- " + result.getTime() + "s - " + result.getDate();
+                }
+            }
+            juniorTeam += "\n--------------------";
+        }
+
+        System.out.println(juniorTeam);
+    }
+
+    public void showSeniorTeam() {
+        buildSeniorTeamList();
+    }
+    public void buildSeniorTeamList() {
+        String seniorTeam = "\nSenior Team:\n--------------------";
+
+        for (Member member : controller.getSeniorTeam().getMembers()) {
+            seniorTeam += "\n" + member.getName() + " - " + member.getEmail() + " - " + member.getDiscipline() +
+                    "\nLeaderboard Results:";
+
+            for (Result result : controller.getSeniorTeam().getLeaderboard()) {
+                if (result.getMemberEmail().equals(member.getEmail())) {
+                    seniorTeam += "\n- " + result.getTime() + "s - " + result.getDate();
+                }
+            }
+            seniorTeam += "\n--------------------";
+        }
+
+        System.out.println(seniorTeam);
+    }
+
+    public void addNewResult() {
+        System.out.print("\nAdding new result:\nEnter member email: ");
+        String email = scanner.nextLine();
+        errorHandlingEmailFormat(email);
+
+        System.out.print("\nEnter time in seconds: ");
+        double time = Input.scannerDouble(scanner);
+
+        controller.addResultToTeam(email, time);
+    }
+
+    public void signOut() {
+        System.out.println("Signing out...");
+        defaultScreen();
     }
 }

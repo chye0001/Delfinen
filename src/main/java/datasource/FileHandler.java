@@ -60,6 +60,7 @@ public class FileHandler {
                             attributes[3],
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
+
                 default -> addMember = null;
             }
 
