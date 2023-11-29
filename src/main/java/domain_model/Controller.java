@@ -1,5 +1,7 @@
 package domain_model;
 
+import java.time.LocalDate;
+
 public class Controller {
 
     MemberDatabase memberDatabase = new MemberDatabase();
@@ -9,7 +11,7 @@ public class Controller {
     }
     public boolean addMemberToList(int type,
                                    String name,
-                                   String birthDate,
+                                   LocalDate birthDate,
                                    String email,
                                    String discipline,
                                    double subscription) {
