@@ -1,9 +1,9 @@
-Exercise;John Smith;10/08/1994;email@email.dk;Crawl;400.0
-Passive;Lars Doe;12/12/1912;lars@email.dk;Backstroke;1200.0
-Senior;Chris Ye;25/05/2001;chrisYeYoung2001@kea.dk;Crawl;600.0
-Passive;klara;23/02/1290;klara@jesus.dk;None;666.0
-Competitive;Mary Joe;02/11/2002;majoe@yahoo.com;Butterfly;999.0
-Competitive;Barry Joe;08/01/2008;bajoe@yahoo.com;Crawl;999.0
-Competitive;Kris;10/08/1994;dev@wicked.org;Breaststroke;0.0
-Junior;john;25/04/2001;22@22.com;None;23.0
-Competitive;Mads;27/12/2001;21@21.dk;Backstroke;22.0
+Exercise;John Smith;1994-10-08;email@email.dk;Crawl;400.0
+Passive;Lars Doe;1912-12-12;lars@email.dk;Backstroke;1200.0
+Passive;Chris Ye;2001-05-25;chrisYeYoung2001@kea.dk;Crawl;600.0
+Passive;klara;1990-10-10;klara@jesus.dk;None;666.0
+Competitive;Mary Joe;2002-02-11;majoe@yahoo.com;Butterfly;999.0
+Competitive;Barry Joe;2007-02-11;bajoe@yahoo.com;Crawl;999.0
+Competitive;Kris;1994-08-10;dev@wicked.org;Breaststroke;0.0
+Exercise;john;2001-04-21;22@22.com;None;23.0
+Competitive;Mads;2001-04-27;21@21.dk;Backstroke;22.0
