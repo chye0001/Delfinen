@@ -61,19 +61,6 @@ public class FileHandler {
                             attributes[4],
                             Double.parseDouble(attributes[5].trim()));
 
-                case "Junior" ->
-                    addMember = new JuniorMember(attributes[1],
-                            attributes[2],
-                            attributes[3],
-                            attributes[4],
-                            Double.parseDouble(attributes[5].trim()));
-
-                case "Senior" ->
-                    addMember = new SeniorMember(attributes[1],
-                            attributes[2],
-                            attributes[3],
-                            attributes[4],
-                            Double.parseDouble(attributes[5].trim()));
                 default -> addMember = null;
             }
 
