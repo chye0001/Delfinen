@@ -9,7 +9,7 @@ public class Controller {
         memberDatabase.loadMemberDatabase();
         memberDatabase.loadCompetitiveResults();
     }
-    public boolean addMemberToList(int type,
+    public boolean addMemberToList(MemberType type,
                                    String name,
                                    LocalDate birthDate,
                                    String email,

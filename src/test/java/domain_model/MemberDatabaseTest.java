@@ -22,7 +22,7 @@ class MemberDatabaseTest {
     public void testLoadDatabase(){
         memberDatabase.loadMemberDatabase();
 
-        String type = memberDatabase.getClubMembers().get(0).getType();
+        MemberType type = memberDatabase.getClubMembers().get(0).getType();
         String name = memberDatabase.getClubMembers().get(0).getName();
         LocalDate birthDate = memberDatabase.getClubMembers().get(0).getBirthDate();
         String email = memberDatabase.getClubMembers().get(0).getEmail();
@@ -31,9 +31,9 @@ class MemberDatabaseTest {
 
         assertAll(
     () -> assertEquals(1,memberDatabase.getClubMembers().size()),
-                () -> assertEquals("Exercise",type),
+                () -> assertEquals(MemberType.EXERCISE,type),
                 () -> assertEquals("Jane Test",name),
-                () -> assertEquals("03/09/1999",birthDate),
+                () -> assertEquals(LocalDate.parse("1999-09-03"),birthDate),
                 () -> assertEquals("test@email.dk",email),
                 () -> assertEquals("Crawl",discipline),
                 () -> assertEquals(299.99,subscriptionCost)
@@ -42,16 +42,16 @@ class MemberDatabaseTest {
 
     @Test
     public void testAddMemberToDatabase(){
-        int typeCode = 2; //equals "Exercise"
+        MemberType type = MemberType.EXERCISE;
         String name = "Jane Test";
         LocalDate birthDate = LocalDate.parse("1999-09-03");
         String email = "test@email.dk";
         String discipline = "Crawl";
         double subscriptionCost = 299.99;
 
-        memberDatabase.addMemberToList(typeCode,name,birthDate,email,discipline,subscriptionCost);
+        memberDatabase.addMemberToList(type,name,birthDate,email,discipline,subscriptionCost);
 
-        String actualType = memberDatabase.getClubMembers().get(0).getType();
+        MemberType actualType = memberDatabase.getClubMembers().get(0).getType();
         String actualName = memberDatabase.getClubMembers().get(0).getName();
         LocalDate actualBirthDate = memberDatabase.getClubMembers().get(0).getBirthDate();
         String actualEmail = memberDatabase.getClubMembers().get(0).getEmail();
@@ -60,9 +60,9 @@ class MemberDatabaseTest {
 
         assertAll(
                 () -> assertEquals(1,memberDatabase.getClubMembers().size()),
-                () -> assertEquals("Exercise",actualType),
+                () -> assertEquals(MemberType.EXERCISE,actualType),
                 () -> assertEquals("Jane Test",actualName),
-                () -> assertEquals("03/09/1999",actualBirthDate),
+                () -> assertEquals(LocalDate.parse("1999-09-03"),actualBirthDate),
                 () -> assertEquals("test@email.dk",actualEmail),
                 () -> assertEquals("Crawl",actualDiscipline),
                 () -> assertEquals(299.99,actualSubscriptionCost)
@@ -71,18 +71,18 @@ class MemberDatabaseTest {
 
     @Test
     public void testShowListOfMembers(){
-        int typeCode = 2; //equals "Exercise"
+        MemberType type = MemberType.EXERCISE;
         String name = "Jane Test";
         LocalDate birthDate = LocalDate.parse("1999-09-03");
         String email = "test@email.dk";
         String discipline = "Crawl";
         double subscriptionCost = 299.99;
 
-        memberDatabase.addMemberToList(typeCode,name,birthDate,email,discipline,subscriptionCost);
+        memberDatabase.addMemberToList(type,name,birthDate,email,discipline,subscriptionCost);
 
         String expectedString =
-        "Name: Jane Test - Membership type: Exercise - " +
-        "Date of birth: 03/09/1999 - Email address: test@email.dk\n";
+        "Name: Jane Test - Membership type: EXERCISE - " +
+        "Date of birth: 1999-09-03 - Email address: test@email.dk\n";
 
         assertEquals(expectedString,memberDatabase.showListOfMembers());
     }
