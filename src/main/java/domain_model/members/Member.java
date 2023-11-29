@@ -39,7 +39,7 @@ public abstract class Member {
         return discipline;
     }
     public double getSubscriptionCost(){
-        return subscription.getCost();
+        return subscription.getPrice();
     }
 
     public Subscription getSubscription() {

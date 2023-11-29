@@ -1,38 +1,41 @@
 package domain_model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Subscription {
-    private LocalDate paymentDate;
-    private double cost;
-    private boolean paymentStatus;
+    private LocalDate lastPayment;
+    private LocalDate nextPayment;
+    private double price;
     private double debt;
 
-    public Subscription (LocalDate paymentDate, double cost, boolean paymentStatus, double debt){
-        this.paymentDate = paymentDate;
-        this.paymentStatus = paymentStatus;
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
+        this.lastPayment = lastPayment;
+        this.nextPayment = nextPayment;
         this.debt = debt;
-        this.cost = cost;
+        this.price = price;
     }
 
-    public Subscription (double cost){
-        this.paymentDate = LocalDate.now();
-        this.cost = cost;
-        this.paymentStatus = true;
+    public Subscription (double price){
+        this.lastPayment = LocalDate.now();
+        this.nextPayment = lastPayment.plusYears(1);
+        this.price = price;
         this.debt = 0;
     }
 
-    public LocalDate getPaymentDate() {
-        return paymentDate;
+    private boolean isPaid () {
+        return (Period.between(lastPayment,LocalDate.now()).getYears() < 1);
     }
 
-    public double getCost() {
-        return cost;
+    public LocalDate getLastPayment() {
+        return lastPayment;
     }
 
-    public boolean isPaymentStatus() {
-        return paymentStatus;
+    public double getPrice() {
+        return price;
     }
+
+
 
     public double getDebt() {
         return debt;
@@ -40,11 +43,11 @@ public class Subscription {
 
     @Override
     public String toString() {
-        return "{" +
-                "paymentDate=" + paymentDate +
-                ", cost=" + cost + "kr" +
-                ", paymentStatus=" + paymentStatus +
-                ", debt=" + debt +
-                '}';
+        return "Subscription: " +
+                ", Price: " + price +
+                ", Last payment date: " + lastPayment +
+                ", Next payment date: " + nextPayment +
+                ", Payment status: " + (isPaid() ? "Paid" : "Not paid") +
+                ", Debt: " + debt;
     }
 }
