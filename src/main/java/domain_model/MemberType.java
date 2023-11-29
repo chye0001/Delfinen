@@ -2,7 +2,7 @@ package domain_model;
 
 public enum MemberType {
     NONE,
-    PASSIV,
+    PASSIVE,
     EXERCISE,
     COMPETITIVE
 }

@@ -39,9 +39,9 @@ public class FileHandler {
             String[] attributes = line.split(";");
 
             Member addMember;
-            MemberType memberType = MemberType.valueOf(attributes[0]);
+            MemberType memberType = MemberType.valueOf(attributes[0].toUpperCase());
             switch (memberType){
-                case PASSIV ->
+                case PASSIVE ->
                     addMember = new PassiveMember(attributes[1],
                             LocalDate.parse(attributes[2]),
                             attributes[3],

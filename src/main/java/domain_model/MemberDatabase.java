@@ -62,7 +62,7 @@ public class MemberDatabase {
         Member newMember;
 
         switch (type){
-            case PASSIV ->
+            case PASSIVE ->
                     newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
 
             case EXERCISE ->

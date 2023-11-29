@@ -88,7 +88,7 @@ public class Userinterface {
         int menuChoiceMemberType = Input.scannerInt(scanner, 1, 3);
 
         if (menuChoiceMemberType == 1) {
-            memberType = MemberType.PASSIV;
+            memberType = MemberType.PASSIVE;
         }
         if (menuChoiceMemberType == 2) {
             memberType = MemberType.EXERCISE;

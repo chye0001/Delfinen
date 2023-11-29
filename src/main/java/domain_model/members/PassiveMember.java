@@ -5,7 +5,7 @@ import domain_model.MemberType;
 import java.time.LocalDate;
 
 public class PassiveMember extends Member {
-    private MemberType type = MemberType.PASSIV;
+    private MemberType type = MemberType.PASSIVE;
     public PassiveMember(String name, LocalDate birthDate, String email, String discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
