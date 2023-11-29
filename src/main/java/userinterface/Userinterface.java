@@ -4,6 +4,7 @@ import domain_model.Controller;
 import domain_model.Result;
 import domain_model.members.Member;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Userinterface {
@@ -83,10 +84,10 @@ public class Userinterface {
         String memberName = scanner.nextLine();
 
 
-        System.out.print("Birth date: ");
+        System.out.print("Birth date in YYYY-MM-DD: ");
         String memberBirthDate = scanner.nextLine();
-        while (!memberBirthDate.contains("/")) {
-            System.out.print("\nPlease enter birthdate using the following format: day/month/year\nBirth date: ");
+        while (!memberBirthDate.contains("-")) {
+            System.out.print("\nPlease enter birthdate using the following format: YYYY-MM-DD\nBirth date: ");
             memberBirthDate = scanner.nextLine();
         }
 
@@ -118,7 +119,7 @@ public class Userinterface {
 
         //TODO - Fix this portion, because I dont think it makes sense (Kristoffer)
         try {
-            if (controller.addMemberToList(memberType, memberName, memberBirthDate,
+            if (controller.addMemberToList(memberType, memberName, LocalDate.parse(memberBirthDate),
                     memberEmail, memberDiscipline, memberSubscriptionValue)) {
                 System.out.println(memberName + " added to list of members");
             } else System.out.println("Something went wrong - Error: 401");
