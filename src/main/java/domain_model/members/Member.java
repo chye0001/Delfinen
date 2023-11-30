@@ -1,10 +1,11 @@
 package domain_model.members;
 
-import domain_model.MemberType;
+import domain_model.Result;
 import domain_model.Subscription;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 
 public abstract class Member {
 
@@ -13,6 +14,8 @@ public abstract class Member {
     private String email;
     private String discipline;
     private Subscription subscription;
+    private Result result;
+    private ArrayList<Result> competitiveResults;
 
     public Member(String name, LocalDate birthDate, String email, String discipline, Subscription subscription) {
         this.name = name;
@@ -20,6 +23,7 @@ public abstract class Member {
         this.email = email;
         this.discipline = discipline;
         this.subscription = subscription;
+        competitiveResults = new ArrayList<>();
     }
 
     public Member(String name,
@@ -59,6 +63,25 @@ public abstract class Member {
         return discipline;
     }
 
+    public double getSubscriptionCost(){
+        return subscription.getPrice();
+    }
+
+    public Subscription getSubscription() {
+        return subscription;
+    }
+
+    public abstract MemberType getType();
+
+    public int getAge() {
+        return Period.between(birthDate,LocalDate.now()).getYears();
+    }
+
+    public Result getResult(){
+        return result;
+    }
+
+
     //used for setting the subscription cost within the constructor of the sub-classes
     public void setSubscriptionByTypeAndAge() {
         if (getType() == MemberType.PASSIVE){
@@ -74,19 +97,5 @@ public abstract class Member {
                 this.subscription = new Subscription(pensionerCost);
             }
         }
-    }
-
-    public double getSubscriptionCost(){
-        return subscription.getPrice();
-    }
-
-    public Subscription getSubscription() {
-        return subscription;
-    }
-
-    public abstract MemberType getType();
-
-    public int getAge() {
-        return Period.between(birthDate,LocalDate.now()).getYears();
     }
 }

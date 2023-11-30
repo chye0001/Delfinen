@@ -2,8 +2,6 @@ package domain_model.members;
 
 import domain_model.Subscription;
 
-import domain_model.MemberType;
-
 import java.time.LocalDate;
 
 public class ExerciseMember extends Member {

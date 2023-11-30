@@ -1,4 +1,4 @@
-package domain_model;
+package domain_model.members;
 
 public enum MemberType {
     NONE(0),

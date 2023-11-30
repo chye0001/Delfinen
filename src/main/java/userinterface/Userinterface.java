@@ -1,8 +1,9 @@
 package userinterface;
 
 import domain_model.Controller;
+import domain_model.Discipline;
 import domain_model.Result;
-import domain_model.MemberType;
+import domain_model.members.MemberType;
 import domain_model.members.Member;
 
 import java.time.LocalDate;
@@ -231,13 +232,14 @@ public class Userinterface {
     }
     public int menuOptionsForCoachProgram() {
         int coachChosenOption;
-        coachChosenOption = Input.scannerInt(scanner, 1, 4);
+        coachChosenOption = Input.scannerInt(scanner, 1, 5);
 
         switch (coachChosenOption) {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
             case 3 -> addNewResult();
-            case 4 -> signOut();
+            case 4 -> showLeaderBoard();
+            case 5 -> signOut();
         }
 
         return coachChosenOption;
@@ -294,6 +296,30 @@ public class Userinterface {
         double time = Input.scannerDouble(scanner);
 
         controller.addResultToTeam(email, time);
+    }
+
+    public void showLeaderBoard() {
+        buildMenuForShowLeaderBoard();
+
+        int leaderBoardChoise = Input.scannerInt(scanner, 1, 4);
+        Discipline discipline = null;
+
+        switch (leaderBoardChoise) {
+            case 1 -> discipline = Discipline.BUTTERFLY;
+            case 2 -> discipline = Discipline.CRAWL;
+            case 3 -> discipline = Discipline.BACK_CRAWL;
+            case 4 -> discipline = Discipline.BREASTSTROKE;
+        }
+
+
+        System.out.println(controller.showLeaderBoard(discipline));
+    }
+    public void buildMenuForShowLeaderBoard() {
+        System.out.print("\n1. Butterfly\n" +
+                "2. Crawl\n" +
+                "3. Back Crawl" +
+                "4. Breaststroke\n" +
+                "Discipline: ");
     }
 
     public void signOut() {

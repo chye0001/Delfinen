@@ -1,5 +1,7 @@
 package domain_model;
 
+import domain_model.members.MemberType;
+
 import java.time.LocalDate;
 
 public class Controller {
@@ -42,5 +44,9 @@ public class Controller {
 
     public Team getSeniorTeam() {
         return memberDatabase.getSeniorTeam();
+    }
+
+    public String showLeaderBoard(Discipline discipline) {
+        return memberDatabase.showLeaderBoard(discipline);
     }
 }

@@ -198,4 +198,28 @@ public class MemberDatabase {
         }
     }
 
+    public String showLeaderBoard(Discipline discipline) {
+        StringBuilder sb = new StringBuilder();
+
+        switch (discipline) {
+            case BREASTSTROKE -> {
+                for (Member competitiveSwimmer : clubMembers) {
+
+                    if (competitiveSwimmer.getType() == MemberType.COMPETITIVE){
+                        int resultInMinutes = competitiveSwimmer.getResult().getTime() % 60; // converts from sec to min
+                        int resultInSeconds = Math.floor(competitiveSwimmer.getResult().getTime()); // rounds seconds to whole seconds.
+                        int resultInMilliseconds  = competitiveSwimmer.getResult().getTime() - Math.floor(competitiveSwimmer.getResult().getTime()); // calculates milliseconds
+
+                        sb.append(competitiveSwimmer.getName()).append(": ").append(resultInMinutes).append(resultInSeconds).append(resultInMilliseconds).
+                                append(" - ").append(competitiveSwimmer.getResult().getDate());
+
+                    } else if () {
+
+                    }
+
+                }
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -1,7 +1,7 @@
 package datasource;
 
 import domain_model.Result;
-import domain_model.MemberType;
+import domain_model.members.MemberType;
 import domain_model.members.*;
 
 import java.io.File;

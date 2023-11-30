@@ -1,5 +1,6 @@
 package domain_model;
 
+import domain_model.members.MemberType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
