@@ -17,6 +17,11 @@ public class CompetitiveMember extends Member {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
+    public CompetitiveMember(String name, LocalDate birthDate, String email, String discipline) {
+        super(name, birthDate, email, discipline);
+        setSubscriptionByTypeAndAge();
+    }
+
     @Override
     public MemberType getType() {
         return type;

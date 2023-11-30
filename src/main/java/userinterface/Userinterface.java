@@ -117,18 +117,12 @@ public class Userinterface {
             memberDiscipline = menuOptionsForMemberDisciplin();
         }
 
-
-        //TODO - make automated
-        System.out.print("Subscription value: ");
-        double memberSubscriptionValue = Input.scannerPositiveDouble(scanner);
-
         try {
             controller.addMemberToList(memberType,
                     memberName,
                     LocalDate.parse(memberBirthDate),
                     memberEmail,
-                    memberDiscipline,
-                    memberSubscriptionValue);
+                    memberDiscipline);
 
             System.out.println(memberName + " added to list of members");
         } catch (Exception e) {

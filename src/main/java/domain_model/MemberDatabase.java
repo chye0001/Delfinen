@@ -56,20 +56,19 @@ public class MemberDatabase {
                                    String name,
                                    LocalDate birthDate,
                                    String email,
-                                   String discipline,
-                                   double subscription) {
+                                   String discipline) {
 
         Member newMember;
 
         switch (type){
             case PASSIVE ->
-                    newMember = new PassiveMember(name, birthDate, email, discipline, subscription);
+                    newMember = new PassiveMember(name, birthDate, email, discipline);
 
             case EXERCISE ->
-                    newMember = new ExerciseMember(name, birthDate, email, discipline, subscription);
+                    newMember = new ExerciseMember(name, birthDate, email, discipline);
 
             case COMPETITIVE ->
-                    newMember = new CompetitiveMember(name, birthDate, email, discipline, subscription);
+                    newMember = new CompetitiveMember(name, birthDate, email, discipline);
             default -> newMember = null;
         }
         clubMembers.add(newMember);
