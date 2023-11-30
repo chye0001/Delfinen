@@ -2,6 +2,7 @@ package userinterface;
 
 import domain_model.Controller;
 import domain_model.Result;
+import domain_model.MemberType;
 import domain_model.members.Member;
 
 import java.time.LocalDate;
@@ -83,7 +84,18 @@ public class Userinterface {
     public void addNewMember() {
         buildMenuForAddMember();
 
-        int memberType = Input.scannerInt(scanner, 1, 5);
+        MemberType memberType = MemberType.NONE;
+        int menuChoiceMemberType = Input.scannerInt(scanner, 1, 3);
+
+        if (menuChoiceMemberType == 1) {
+            memberType = MemberType.PASSIVE;
+        }
+        if (menuChoiceMemberType == 2) {
+            memberType = MemberType.EXERCISE;
+        }
+        if (menuChoiceMemberType == 3) {
+            memberType = MemberType.COMPETITIVE;
+        }
 
         System.out.print("Name: ");
 
@@ -99,10 +111,10 @@ public class Userinterface {
         memberEmail = errorHandlingEmailFormat(memberEmail);
 
         String memberDiscipline = "None";
-        if (memberType == 5) {
+        if (menuChoiceMemberType == 3) {
             System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
 
-            memberDiscipline = buildMenuMemberDisciplin();
+            memberDiscipline = menuOptionsForMemberDisciplin();
         }
 
 
@@ -128,17 +140,15 @@ public class Userinterface {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMember Type:\n").
                 append("1. Passiv\n").
-                append("2. Junior Member\n").
-                append("3. Senior Member\n").
-                append("4. Exercise Member\n").
-                append("5. Competitive Member\n").
+                append("2. Exercise Member\n").
+                append("3. Competitive Member\n").
                 append("Type: ");
         System.out.print(sb);
     }
 
     public String errorHandlingBirthDateFormat(String memberBirthDate) {
-        while (!memberBirthDate.contains("/")) {
-            System.out.print("\nPlease enter birthdate using the following format: day/month/year\nBirth date: ");
+        while (!memberBirthDate.contains("-")) {
+            System.out.print("\nPlease enter birthdate using the following format: YYYY-MM-DD\nBirth date: ");
             memberBirthDate = scanner.nextLine();
         }
         return memberBirthDate;
@@ -152,7 +162,7 @@ public class Userinterface {
         return memberEmail;
     }
 
-    public String buildMenuMemberDisciplin() {
+    public String menuOptionsForMemberDisciplin() {
         return switch (Input.scannerInt(scanner, 1, 4)) {
             case 1 -> "Backstroke";
             case 2 -> "Breaststroke";
