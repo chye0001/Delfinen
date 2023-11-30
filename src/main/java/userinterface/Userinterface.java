@@ -110,8 +110,8 @@ public class Userinterface {
 
 
         System.out.print("Email: ");
-        String memberEmail = scanner.nextLine();
-        memberEmail = errorHandlingEmailFormat(memberEmail);
+        String memberEmail = Input.scannerEmail(scanner);
+
 
         String memberDiscipline = "None";
         if (menuChoiceMemberType == 3) {
@@ -145,13 +145,7 @@ public class Userinterface {
 
 
 
-    public String errorHandlingEmailFormat(String memberEmail) {
-        while (!memberEmail.contains("@") && !memberEmail.contains(".")) {
-            System.out.print("Please enter a valid email address\nEmail: ");
-            memberEmail = scanner.nextLine();
-        }
-        return memberEmail;
-    }
+
 
     public String menuOptionsForMemberDisciplin() {
         return switch (Input.scannerInt(scanner, 1, 4)) {
@@ -284,8 +278,8 @@ public class Userinterface {
 
     public void addNewResult() {
         System.out.print("\nAdding new result:\nEnter member email: ");
-        String email = scanner.nextLine();
-        errorHandlingEmailFormat(email);
+        String email = Input.scannerEmail(scanner);
+
 
         System.out.print("\nEnter time in seconds: ");
         double time = Input.scannerDouble(scanner);
