@@ -6,13 +6,13 @@ public enum MemberType {
     EXERCISE(1000),
     COMPETITIVE(1000);
 
-    private final int cost;
+    private final double cost;
 
     MemberType(int cost) {
         this.cost = cost;
     }
 
-    public int getCost(){
+    public double getCost(){
         return cost;
     }
 }
