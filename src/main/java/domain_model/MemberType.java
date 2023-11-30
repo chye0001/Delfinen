@@ -5,4 +5,5 @@ public enum MemberType {
     PASSIVE,
     EXERCISE,
     COMPETITIVE
+
 }
