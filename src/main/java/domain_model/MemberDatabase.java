@@ -12,6 +12,8 @@ public class MemberDatabase {
 
     private ArrayList<Member> clubMembers;
     File administratorFile = new File("ListOfMembers.csv");
+    File subscriptionFile = new File("Subscriptions.csv");
+    File resultsFile = new File("CompetitiveResults.csv");
 
     private Team juniorTeam;
     private Team seniorTeam;
@@ -26,7 +28,7 @@ public class MemberDatabase {
 
     public void loadMemberDatabase(){
         try {
-            clubMembers = FileHandler.clubMembersLoad(administratorFile);
+            clubMembers = FileHandler.clubMembersLoad(administratorFile,subscriptionFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -74,7 +76,7 @@ public class MemberDatabase {
         }
         clubMembers.add(newMember);
         try {
-            FileHandler.clubMembersSave(clubMembers, administratorFile);
+            FileHandler.saveAll(clubMembers, administratorFile,subscriptionFile,resultsFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
