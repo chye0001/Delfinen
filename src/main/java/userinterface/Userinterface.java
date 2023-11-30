@@ -103,8 +103,7 @@ public class Userinterface {
 
 
         System.out.print("Birth date in DD-MM-YYYY: ");
-        String inputDate = scanner.nextLine();
-        inputDate = errorHandlingBirthDateFormat(inputDate);
+        String inputDate = Input.scannerDate(scanner);
         //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
         String[] splitInputDate = inputDate.split("-");
         String memberBirthDate = splitInputDate[2]+"-"+splitInputDate[1]+"-"+splitInputDate[0];
@@ -144,13 +143,7 @@ public class Userinterface {
         System.out.print(sb);
     }
 
-    public String errorHandlingBirthDateFormat(String memberBirthDate) {
-        while (!memberBirthDate.contains("-")) {
-            System.out.print("\nPlease enter birthdate using the following format: DD-MM-YYYY\nBirth date: ");
-            memberBirthDate = scanner.nextLine();
-        }
-        return memberBirthDate;
-    }
+
 
     public String errorHandlingEmailFormat(String memberEmail) {
         while (!memberEmail.contains("@") && !memberEmail.contains(".")) {
