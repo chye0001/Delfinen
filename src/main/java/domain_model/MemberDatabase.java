@@ -108,10 +108,10 @@ public class MemberDatabase {
         for (Member member : clubMembers) {
             int age = member.getAge();
 
-            sb.append("Name: ").append(member.getName()).append(" / ").
-                    append("Age: ").append(age).append(" / ").
-                    append("Activity type: ").append(member.getType()).append(" / ").
-                    append("Subscription: ").append(member.getSubscription()).append("\n");
+            sb.append("Name: ").append(member.getName()).append(" - ").
+                    append("Age: ").append(age).append(" - ").
+                    append("Activity type: ").append(member.getType()).append(" - ").
+                    append(member.getSubscription()).append("\n");
         }
         return sb.toString();
     }
