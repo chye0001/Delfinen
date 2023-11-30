@@ -9,11 +9,11 @@ public class Subscription {
     private double price;
     private double debt;
 
-    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double debt, double price){
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
         this.lastPayment = lastPayment;
         this.nextPayment = nextPayment;
-        this.debt = debt;
         this.price = price;
+        this.debt = debt;
     }
 
     public Subscription (double price){
@@ -33,6 +33,9 @@ public class Subscription {
         return lastPayment;
     }
 
+    public LocalDate getNextPayment() {
+        return nextPayment;
+    }
     public double getPrice() {
         return price;
     }
