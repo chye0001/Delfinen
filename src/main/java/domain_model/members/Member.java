@@ -57,6 +57,19 @@ public abstract class Member {
 
     public abstract MemberType getType();
 
+    public String getLastPaymentDate() {
+        return subscription.getLastPayment().toString();
+    }
+
+    public String getNextPaymentDate() {
+        return subscription.getNextPayment().toString();
+    }
+
+    public double getSubscriptDebt() {
+        return subscription.getDebt();
+    }
+
+
     public int getAge() {
         return Period.between(birthDate,LocalDate.now()).getYears();
     }
