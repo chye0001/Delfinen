@@ -33,7 +33,7 @@ public class MemberDatabase {
 
         for (int i = 0; i < clubMembers.size(); i++) {
             //TODO make member type ENUM
-            if (clubMembers.get(i).getType() == MemberType.EXERCISE){
+            if (clubMembers.get(i).getType() == MemberType.COMPETITIVE){
                 int age = clubMembers.get(i).getAge();
                 if (age < 18){
                     juniorTeam.addMember(clubMembers.get(i));
@@ -79,8 +79,7 @@ public class MemberDatabase {
         }
 
         //adds to competitive teams based on age
-        //TODO make day-month-year comparison and perhaps reformat the way that birthdate is saved
-        if (newMember.getType() == MemberType.COMPETITIVE){ //TODO make ENUM
+        if (newMember.getType() == MemberType.COMPETITIVE){
             int age = newMember.getAge();
             if (age < 18){
                 juniorTeam.addMember(newMember);
