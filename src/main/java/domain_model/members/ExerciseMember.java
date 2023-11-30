@@ -1,9 +1,15 @@
 package domain_model.members;
 
+import domain_model.Subscription;
+
 import java.time.LocalDate;
 
 public class ExerciseMember extends Member {
     private String type = "Exercise";
+
+    public ExerciseMember(String name, LocalDate birthDate, String email, String discipline, Subscription subscription) {
+        super(name, birthDate, email, discipline, subscription);
+    }
     public ExerciseMember(String name, LocalDate birthDate, String email, String discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);
     }

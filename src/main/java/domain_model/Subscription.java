@@ -9,7 +9,7 @@ public class Subscription {
     private double price;
     private double debt;
 
-    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double debt, double price){
         this.lastPayment = lastPayment;
         this.nextPayment = nextPayment;
         this.debt = debt;
@@ -22,6 +22,8 @@ public class Subscription {
         this.price = price;
         this.debt = 0;
     }
+
+
 
     private boolean isPaid () {
         return (Period.between(lastPayment,LocalDate.now()).getYears() < 1);

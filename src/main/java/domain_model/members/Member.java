@@ -13,6 +13,14 @@ public abstract class Member {
     private String discipline;
     private Subscription subscription;
 
+    public Member(String name, LocalDate birthDate, String email, String discipline, Subscription subscription) {
+        this.name = name;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.discipline = discipline;
+        this.subscription = subscription;
+    }
+
     public Member(String name,
                   LocalDate birthDate,
                   String email,
