@@ -1,10 +1,14 @@
-EXERCISE;John Smith;1994-08-10;email@email.dk;Crawl
-PASSIVE;Lars Doe;1912-12-12;lars@email.dk;Backstroke
-COMPETITIVE;Chris Ye;2001-05-25;chrisYeYoung2001@kea.dk;Crawl
-PASSIVE;klara;1290-02-23;klara@jesus.dk;None
-COMPETITIVE;Mary Joe;2002-11-02;majoe@yahoo.com;Butterfly
-COMPETITIVE;Barry Joe;2008-01-08;bajoe@yahoo.com;Crawl
-COMPETITIVE;Kris;1994-08-10;dev@wicked.org;Breaststroke
-PASSIVE;john;2001-04-25;22@22.com;None
-COMPETITIVE;Mads;2001-12-27;21@21.dk;Backstroke
-EXERCISE;Lars;1994-07-07;tolana@gmail.com;None
+EXERCISE;John Smith;1994-08-10;email@email.dk;Crawl;1600.0
+PASSIVE;Lars Doe;1912-12-12;lars@email.dk;Backstroke;500.0
+COMPETITIVE;Chris Ye;2001-05-25;chrisYeYoung2001@kea.dk;Crawl;1600.0
+PASSIVE;Klara;1290-02-23;klara@jesus.dk;None;500.0
+COMPETITIVE;Mary Joe;2002-11-02;majoe@yahoo.com;Butterfly;1600.0
+COMPETITIVE;Barry Joe;2008-01-08;bajoe@yahoo.com;Crawl;1000.0
+COMPETITIVE;Kris;1994-08-10;dev@wicked.org;Breaststroke;1600.0
+PASSIVE;John;2001-04-25;22@22.com;None;500.0
+COMPETITIVE;Mads;2001-12-27;21@21.dk;Backstroke;1600.0
+COMPETITIVE;Mary Joe;2007-09-29;majoe@yahoo.dk;Butterfly;1000.0
+PASSIVE;John Smythe;1994-09-02;rando@email.dk;None;500.0
+EXERCISE;El Lucador;1922-08-22;lucador@veryspanish.sp;None;1200.0
+COMPETITIVE;Bo Jam;1982-03-27;bojam@male.hot;Crawl;1600.0
+COMPETITIVE;Christoffer Med C;1997-05-13;cmedc@staverdaarligt.dk;Backstroke;1600.0

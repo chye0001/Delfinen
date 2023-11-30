@@ -17,6 +17,11 @@ public class PassiveMember extends Member {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
+    public PassiveMember(String name, LocalDate birthDate, String email, String discipline) {
+        super(name, birthDate, email, discipline);
+        setSubscriptionByTypeAndAge();
+    }
+
     @Override
     public MemberType getType() {
         return type;

@@ -102,9 +102,13 @@ public class Userinterface {
         String memberName = scanner.nextLine();
 
 
-        System.out.print("Birth date in YYYY-MM-DD: ");
-        String memberBirthDate = scanner.nextLine();
-        memberBirthDate = errorHandlingBirthDateFormat(memberBirthDate);
+        System.out.print("Birth date in DD-MM-YYYY: ");
+        String inputDate = scanner.nextLine();
+        inputDate = errorHandlingBirthDateFormat(inputDate);
+        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
+        String[] splitInputDate = inputDate.split("-");
+        String memberBirthDate = splitInputDate[2]+"-"+splitInputDate[1]+"-"+splitInputDate[0];
+
 
         System.out.print("Email: ");
         String memberEmail = scanner.nextLine();
@@ -117,18 +121,12 @@ public class Userinterface {
             memberDiscipline = menuOptionsForMemberDisciplin();
         }
 
-
-        //TODO - make automated
-        System.out.print("Subscription value: ");
-        double memberSubscriptionValue = Input.scannerPositiveDouble(scanner);
-
         try {
             controller.addMemberToList(memberType,
                     memberName,
                     LocalDate.parse(memberBirthDate),
                     memberEmail,
-                    memberDiscipline,
-                    memberSubscriptionValue);
+                    memberDiscipline);
 
             System.out.println(memberName + " added to list of members");
         } catch (Exception e) {
@@ -148,7 +146,7 @@ public class Userinterface {
 
     public String errorHandlingBirthDateFormat(String memberBirthDate) {
         while (!memberBirthDate.contains("-")) {
-            System.out.print("\nPlease enter birthdate using the following format: YYYY-MM-DD\nBirth date: ");
+            System.out.print("\nPlease enter birthdate using the following format: DD-MM-YYYY\nBirth date: ");
             memberBirthDate = scanner.nextLine();
         }
         return memberBirthDate;

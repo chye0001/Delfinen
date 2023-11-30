@@ -48,8 +48,7 @@ public class Subscription {
 
     @Override
     public String toString() {
-        return "Subscription: " +
-                ", Price: " + price +
+        return  "Price: " + price +
                 ", Last payment date: " + lastPayment +
                 ", Next payment date: " + nextPayment +
                 ", Payment status: " + (isPaid() ? "Paid" : "Not paid") +

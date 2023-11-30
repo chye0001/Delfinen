@@ -15,10 +15,9 @@ public class Controller {
                                 String name,
                                 LocalDate birthDate,
                                 String email,
-                                String discipline,
-                                double subscription) {
+                                String discipline) {
 
-        memberDatabase.addMemberToList(type, name, birthDate, email, discipline, subscription);
+        memberDatabase.addMemberToList(type, name, birthDate, email, discipline);
     }
 
     public void addResultToTeam(String email, double time) {
