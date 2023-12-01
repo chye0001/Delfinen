@@ -82,6 +82,21 @@ public class Userinterface {
     }
 
     public void addNewMember() {
+        System.out.print("\nName: ");
+
+        String memberName = scanner.nextLine();
+
+        //TODO more robust date validation
+        System.out.print("Birth date in DD-MM-YYYY: ");
+        String inputDate = Input.scannerDate(scanner);
+        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
+        String memberBirthDate = flipDateFormat(inputDate);
+
+
+        System.out.print("Email: ");
+        String memberEmail = Input.scannerEmail(scanner);
+
+
         buildMenuForAddMember();
 
         MemberType memberType = MemberType.NONE;
@@ -97,35 +112,20 @@ public class Userinterface {
             memberType = MemberType.COMPETITIVE;
         }
 
-        System.out.print("Name: ");
-
-        String memberName = scanner.nextLine();
-
-
-        System.out.print("Birth date in DD-MM-YYYY: ");
-        String inputDate = Input.scannerDate(scanner);
-        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
-        String[] splitInputDate = inputDate.split("-");
-        String memberBirthDate = splitInputDate[2]+"-"+splitInputDate[1]+"-"+splitInputDate[0];
-
-
-        System.out.print("Email: ");
-        String memberEmail = Input.scannerEmail(scanner);
-
-
+        /*
         String memberDiscipline = "None";
         if (menuChoiceMemberType == 3) {
             System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
 
             memberDiscipline = menuOptionsForMemberDisciplin();
         }
+        */
 
         try {
             controller.addMemberToList(memberType,
                     memberName,
                     LocalDate.parse(memberBirthDate),
-                    memberEmail,
-                    memberDiscipline);
+                    memberEmail);
 
             System.out.println(memberName + " added to list of members");
         } catch (Exception e) {
@@ -241,12 +241,12 @@ public class Userinterface {
         String juniorTeam = "\nJunior Team:\n--------------------";
 
         for (Member member : controller.getJuniorTeam().getMembers()) {
-            juniorTeam += "\n" + member.getName() + " - " + member.getEmail() + " - " + member.getDiscipline() +
+            juniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
                     "\nLeaderboard Results:";
 
             for (Result result : controller.getJuniorTeam().getLeaderboard()) {
                 if (result.getMemberEmail().equals(member.getEmail())) {
-                    juniorTeam += "\n- " + result.getTime() + "s - " + result.getDate();
+                    juniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
                 }
             }
             juniorTeam += "\n--------------------";
@@ -262,12 +262,12 @@ public class Userinterface {
         String seniorTeam = "\nSenior Team:\n--------------------";
 
         for (Member member : controller.getSeniorTeam().getMembers()) {
-            seniorTeam += "\n" + member.getName() + " - " + member.getEmail() + " - " + member.getDiscipline() +
+            seniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
                     "\nLeaderboard Results:";
 
             for (Result result : controller.getSeniorTeam().getLeaderboard()) {
                 if (result.getMemberEmail().equals(member.getEmail())) {
-                    seniorTeam += "\n- " + result.getTime() + "s - " + result.getDate();
+                    seniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
                 }
             }
             seniorTeam += "\n--------------------";
@@ -280,15 +280,37 @@ public class Userinterface {
         System.out.print("\nAdding new result:\nEnter member email: ");
         String email = Input.scannerEmail(scanner);
 
+        System.out.print("\nChoose discipline: ");
+        System.out.print("""
+                
+                1. Backstroke
+                2. Breaststroke
+                3. Butterfly
+                4. Crawl
+                """);
+        int disciplineChoice = Input.scannerInt(scanner,1,4);
+        String discipline = "";
+        switch (disciplineChoice){
+            case 1 -> discipline = "Backstroke";
+            case 2 -> discipline = "Breaststroke";
+            case 3 -> discipline = "Butterfly";
+            case 4 -> discipline = "Crawl";
+        }
 
         System.out.print("\nEnter time in seconds: ");
         double time = Input.scannerDouble(scanner);
 
-        controller.addResultToTeam(email, time);
+        controller.addResultToTeam(email,time,discipline);
     }
 
     public void signOut() {
         System.out.println("Signing out...");
         defaultScreen();
+    }
+
+    public static String flipDateFormat(String date){
+        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
+        String[] splitInputDate = date.split("-");
+        return splitInputDate[2]+"-"+splitInputDate[1]+"-"+splitInputDate[0];
     }
 }

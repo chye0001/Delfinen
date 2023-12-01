@@ -124,6 +124,7 @@ public class Input {
 
     public static String scannerEmail (Scanner scanner) { // Regex stjålet fra nettet
         while (true) {
+            //TODO make the regex validate an email proper with the format: text @ text . text
             String input = scanner.nextLine().toLowerCase().trim();
             if (input.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"))
                 return input;
@@ -132,6 +133,4 @@ public class Input {
             }
         }
     }
-
-
 }

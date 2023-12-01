@@ -57,20 +57,19 @@ public class MemberDatabase {
     public void addMemberToList(MemberType type,
                                    String name,
                                    LocalDate birthDate,
-                                   String email,
-                                   String discipline) {
+                                   String email) {
 
         Member newMember;
 
         switch (type){
             case PASSIVE ->
-                    newMember = new PassiveMember(name, birthDate, email, discipline);
+                    newMember = new PassiveMember(name, birthDate, email);
 
             case EXERCISE ->
-                    newMember = new ExerciseMember(name, birthDate, email, discipline);
+                    newMember = new ExerciseMember(name, birthDate, email);
 
             case COMPETITIVE ->
-                    newMember = new CompetitiveMember(name, birthDate, email, discipline);
+                    newMember = new CompetitiveMember(name, birthDate, email);
             default -> newMember = null;
         }
         clubMembers.add(newMember);
@@ -165,9 +164,9 @@ public class MemberDatabase {
         }
     }
 
-    public void addResultToTeam(String email, double time){
+    public void addResultToTeam(String email, double time, String discipline){
         //the LocalDate is set to the moment the entry is made
-        Result newResult = new Result(email,time,LocalDate.now());
+        Result newResult = new Result(email,time,discipline,LocalDate.now());
 
         //save to .csv file
         ArrayList<Result> combinedResultList = new ArrayList<>();

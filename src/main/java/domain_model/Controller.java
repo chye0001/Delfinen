@@ -14,14 +14,13 @@ public class Controller {
     public void addMemberToList(MemberType type,
                                 String name,
                                 LocalDate birthDate,
-                                String email,
-                                String discipline) {
+                                String email) {
 
-        memberDatabase.addMemberToList(type, name, birthDate, email, discipline);
+        memberDatabase.addMemberToList(type, name, birthDate, email);
     }
 
-    public void addResultToTeam(String email, double time) {
-        memberDatabase.addResultToTeam(email, time);
+    public void addResultToTeam(String email, double time, String discipline) {
+        memberDatabase.addResultToTeam(email,time,discipline);
     }
 
     public String showListOfMembers() {
