@@ -10,10 +10,7 @@ import java.util.ArrayList;
 
 public class CompetitiveMember extends Member {
     private MemberType type = MemberType.COMPETITIVE;
-    private ArrayList<Result> backstrokeResults = new ArrayList<>();
-    private ArrayList<Result> breaststrokeResults = new ArrayList<>();
-    private ArrayList<Result> butterflyResults = new ArrayList<>();
-    private ArrayList<Result> crawlResults = new ArrayList<>();
+    private ArrayList<Result> results = new ArrayList<>();
 
     public CompetitiveMember(String name, LocalDate birthDate, String email) {
         super(name, birthDate, email);
@@ -28,9 +25,12 @@ public class CompetitiveMember extends Member {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
-    public CompetitiveMember(String name, LocalDate birthDate, String email, String discipline) {
-        super(name, birthDate, email, discipline);
-        setSubscriptionByTypeAndAge();
+    public void addResult(Result result){
+        results.add(result);
+    }
+
+    public ArrayList<Result> getResults(){
+        return results;
     }
 
     @Override
