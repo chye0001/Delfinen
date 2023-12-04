@@ -23,8 +23,8 @@ public class Controller {
         memberDatabase.addResultToTeam(email,time,discipline);
     }
 
-    public String showListOfMembers() {
-        return memberDatabase.showListOfMembers();
+    public String showListOfMembers(boolean withNumbers) {
+        return memberDatabase.showListOfMembers(withNumbers);
     }
 
     public String showListOfSubscriptions() {
@@ -41,5 +41,17 @@ public class Controller {
 
     public Team getSeniorTeam() {
         return memberDatabase.getSeniorTeam();
+    }
+
+    public int getSizeOfMemberDatabase () {
+        return memberDatabase.getSizeOfClubMembers();
+    }
+
+    public String getMemberName(int memberIndex) {
+        return memberDatabase.getMemberName(memberIndex);
+    }
+
+    public void deleteMember(int memberIndex) {
+        memberDatabase.deleteMember(memberIndex);
     }
 }

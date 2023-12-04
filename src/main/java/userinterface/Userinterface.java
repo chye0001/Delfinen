@@ -19,69 +19,69 @@ public class Userinterface {
         menuOptionsForStartProgram();
     }
 
-    public void buildMenuForStartProgram() {
+    private void buildMenuForStartProgram() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nUser\n").append("1. Administrator\n" +
                 "2. Accountant\n" +
                 "3. Coach\n" +
-                "4. Close program\n" +
+                "0. Close program\n" +
                 "Enter your credentials: ");
         System.out.print(sb);
     }
 
-    public void menuOptionsForStartProgram() {
-        int choice;
-        choice = Input.scannerInt(scanner, 1, 4);
+    private void menuOptionsForStartProgram() {
+
+        int choice = Input.scannerInt(scanner, 0, 3);
 
         switch (choice) {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
-            case 4 -> System.out.println("Shutting down...");
+            case 0 -> shutDown();
 
         }
     }
 
 
-    public void administratorProgram() {
+    private void administratorProgram() {
         int administratorChosenOption;
 
         do {
             buildMenuForAdministratorProgram();
             administratorChosenOption = menuOptionsForAdministratorProgram();
 
-        } while (administratorChosenOption != 5);
+        } while (administratorChosenOption != 0);
     }
 
-    public void buildMenuForAdministratorProgram() {
+    private void buildMenuForAdministratorProgram() {
         System.out.print("\nAdministrator - Options\n" +
                 "1. Add new member\n" +
                 "2. Show list of members\n" +
                 "3. Edit member information(not valid yet)\n" +
                 "4. Delete member(not valid yet)\n" +
-                "5. Sign out\n" +
+                "0. Sign out\n" +
                 "Choice: ");
     }
 
-    public int menuOptionsForAdministratorProgram() {
+    private int menuOptionsForAdministratorProgram() {
         int administratorChosenOption;
-        administratorChosenOption = Input.scannerInt(scanner, 1, 5);
+        administratorChosenOption = Input.scannerInt(scanner, 0, 4);
 
         switch (administratorChosenOption) {
             case 1 -> addNewMember();
-            case 2 -> showListOfMembers();
+            case 2 -> showListOfMembers(false);
 //                case 3 -> editMemberInformation(); //TODO - add edit
-//                case 4 -> deleteMember(); //TODO - add delete
-            case 5 -> signOut();
+            case 4 -> deleteMember();
+            case 0 -> signOut();
         }
         return administratorChosenOption;
     }
 
-    public void showListOfMembers() {
-        System.out.println(controller.showListOfMembers());
+    private void showListOfMembers(boolean withNumbers) {
+        System.out.println(controller.showListOfMembers(withNumbers));
     }
 
-    public void addNewMember() {
+    private void addNewMember() {
         System.out.print("\nName: ");
 
         String memberName = scanner.nextLine();
@@ -133,7 +133,22 @@ public class Userinterface {
         }
     }
 
-    public void buildMenuForAddMember() {
+    private void deleteMember() {
+        System.out.println("Choose member to delete:");
+        System.out.println("0. Cancel");
+        showListOfMembers(true);
+        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
+        if (input == 0) {
+            System.out.println("Exiting...");
+            administratorProgram();
+        } else {
+            System.out.println(memberNameFromIndex(input - 1) + " deleted");
+            deleteMemberByIndex(input - 1);
+        }
+
+    }
+
+    private void buildMenuForAddMember() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMember Type:\n").
                 append("1. Passiv\n").
@@ -144,10 +159,7 @@ public class Userinterface {
     }
 
 
-
-
-
-    public String menuOptionsForMemberDisciplin() {
+    private String menuOptionsForMemberDisciplin() {
         return switch (Input.scannerInt(scanner, 1, 4)) {
             case 1 -> "Backstroke";
             case 2 -> "Breaststroke";
@@ -157,87 +169,89 @@ public class Userinterface {
         };
     }
 
-    public void defaultScreen() {
+    private void defaultScreen() {
         startProgram();
     }
 
-    public void accountantProgram() {
+    private void accountantProgram() {
         int accountantChosenOption;
 
         do {
             buildMenuForAccountantProgram();
             accountantChosenOption = menuOptionsForAccountantProgram();
 
-        } while (accountantChosenOption != 3);
+        } while (accountantChosenOption != 0);
     }
 
-    public void buildMenuForAccountantProgram() {
+    private void buildMenuForAccountantProgram() {
         System.out.print("\nAccountant - Options\n" +
                 "1. Show list of subscriptions\n" +
                 "2. Show income forecast\n" +
-                "3. Sign out\n" +
+                "0. Sign out\n" +
                 "Choice: ");
     }
 
-    public int menuOptionsForAccountantProgram() {
+    private int menuOptionsForAccountantProgram() {
         int accountantChosenOption;
-        accountantChosenOption = Input.scannerInt(scanner, 1, 3);
+        accountantChosenOption = Input.scannerInt(scanner, 0, 2);
 
         switch (accountantChosenOption) {
             case 1 -> showSubscriptionList();
             case 2 -> showIncomeForecast();
-            case 3 -> signOut();
+            case 0 -> signOut();
         }
         return accountantChosenOption;
     }
 
-    public void showSubscriptionList() {
+    private void showSubscriptionList() {
         System.out.println(controller.showListOfSubscriptions());
     }
 
-    public void showIncomeForecast() {
+    private void showIncomeForecast() {
         System.out.println("\nExpected 1 year revenue: " + controller.showIncomeForecast() + "kr.");
     }
 
 
-    public void coachProgram() {
+    private void coachProgram() {
         int coachChosenOption;
 
         do {
             buildMenuForCoachProgram();
             coachChosenOption = menuOptionsForCoachProgram();
         }
-        while (coachChosenOption != 4);
+        while (coachChosenOption != 0);
     }
 
-    public void buildMenuForCoachProgram() {
+    private void buildMenuForCoachProgram() {
         System.out.print("""
                                     
                 Coach - Options
                 1. Show Junior Team
                 2. Show Senior Team
                 3. Add New Result
-                4. Sign Out
+                0. Sign Out
                 Choice:""");
     }
-    public int menuOptionsForCoachProgram() {
+
+    private int menuOptionsForCoachProgram() {
         int coachChosenOption;
-        coachChosenOption = Input.scannerInt(scanner, 1, 4);
+        coachChosenOption = Input.scannerInt(scanner, 0, 3);
 
         switch (coachChosenOption) {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
             case 3 -> addNewResult();
-            case 4 -> signOut();
+            case 0 -> signOut();
         }
 
         return coachChosenOption;
     }
 
-    public void showJuniorTeam() {
+    private void showJuniorTeam() {
         buildJuniorTeamList();
     }
-    public void buildJuniorTeamList() {
+
+    private void buildJuniorTeamList() {
         String juniorTeam = "\nJunior Team:\n--------------------";
 
         for (Member member : controller.getJuniorTeam().getMembers()) {
@@ -255,10 +269,11 @@ public class Userinterface {
         System.out.println(juniorTeam);
     }
 
-    public void showSeniorTeam() {
+    private void showSeniorTeam() {
         buildSeniorTeamList();
     }
-    public void buildSeniorTeamList() {
+
+    private void buildSeniorTeamList() {
         String seniorTeam = "\nSenior Team:\n--------------------";
 
         for (Member member : controller.getSeniorTeam().getMembers()) {
@@ -276,21 +291,21 @@ public class Userinterface {
         System.out.println(seniorTeam);
     }
 
-    public void addNewResult() {
+    private void addNewResult() {
         System.out.print("\nAdding new result:\nEnter member email: ");
         String email = Input.scannerEmail(scanner);
 
         System.out.print("\nChoose discipline: ");
         System.out.print("""
-                
+                                
                 1. Backstroke
                 2. Breaststroke
                 3. Butterfly
                 4. Crawl
                 """);
-        int disciplineChoice = Input.scannerInt(scanner,1,4);
+        int disciplineChoice = Input.scannerInt(scanner, 1, 4);
         String discipline = "";
-        switch (disciplineChoice){
+        switch (disciplineChoice) {
             case 1 -> discipline = "Backstroke";
             case 2 -> discipline = "Breaststroke";
             case 3 -> discipline = "Butterfly";
@@ -300,17 +315,34 @@ public class Userinterface {
         System.out.print("\nEnter time in seconds: ");
         double time = Input.scannerDouble(scanner);
 
-        controller.addResultToTeam(email,time,discipline);
+        controller.addResultToTeam(email, time, discipline);
     }
 
-    public void signOut() {
+
+
+    private static String flipDateFormat(String date) {
+        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
+        String[] splitInputDate = date.split("-");
+        return splitInputDate[2] + "-" + splitInputDate[1] + "-" + splitInputDate[0];
+    }
+
+    private int sizeOfMemberDatabase() {
+        return controller.getSizeOfMemberDatabase();
+    }
+
+    private String memberNameFromIndex(int memberIndex) {
+        return controller.getMemberName(memberIndex);
+    }
+
+    private void deleteMemberByIndex(int memberIndex) {
+        controller.deleteMember(memberIndex);
+    }
+    private void signOut() {
         System.out.println("Signing out...");
         defaultScreen();
     }
 
-    public static String flipDateFormat(String date){
-        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
-        String[] splitInputDate = date.split("-");
-        return splitInputDate[2]+"-"+splitInputDate[1]+"-"+splitInputDate[0];
+    private void shutDown() {
+        System.out.println("Shutting down...");
     }
 }

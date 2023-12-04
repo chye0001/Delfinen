@@ -70,7 +70,7 @@ class MemberDatabaseTest {
     }
 
     @Test
-    public void testShowListOfMembers(){
+    public void testShowListOfMembers(){ //TODO rettes
         MemberType type = MemberType.EXERCISE;
         String name = "Jane Test";
         LocalDate birthDate = LocalDate.parse("1999-09-03");
@@ -84,7 +84,7 @@ class MemberDatabaseTest {
         "Name: Jane Test - Membership type: EXERCISE - " +
         "Date of birth: 1999-09-03 - Email address: test@email.dk\n";
 
-        assertEquals(expectedString,memberDatabase.showListOfMembers());
+        assertEquals(expectedString,memberDatabase.showListOfMembers(false));
     }
 
 

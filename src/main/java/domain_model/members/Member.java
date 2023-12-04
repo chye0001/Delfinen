@@ -51,18 +51,7 @@ public abstract class Member {
         this.discipline = discipline;
     }
 
-    public String getName(){
-        return name;
-    }
-    public LocalDate getBirthDate(){
-        return birthDate;
-    }
-    public String getEmail(){
-        return email;
-    }
-    public String getDiscipline(){
-        return discipline;
-    }
+
 
     //used for setting the subscription cost within the constructor of the sub-classes
     public void setSubscriptionByTypeAndAge() {
@@ -88,7 +77,18 @@ public abstract class Member {
     public Subscription getSubscription() {
         return subscription;
     }
-
+    public String getName(){
+        return name;
+    }
+    public LocalDate getBirthDate(){
+        return birthDate;
+    }
+    public String getEmail(){
+        return email;
+    }
+    public String getDiscipline(){
+        return discipline;
+    }
     public abstract MemberType getType();
 
     public String getLastPaymentDate() {
@@ -107,4 +107,6 @@ public abstract class Member {
     public int getAge() {
         return Period.between(birthDate,LocalDate.now()).getYears();
     }
+
+
 }

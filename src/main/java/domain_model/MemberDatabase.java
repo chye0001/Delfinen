@@ -26,20 +26,20 @@ public class MemberDatabase {
         seniorTeam = new Team();
     }
 
-    public void loadMemberDatabase(){
+    public void loadMemberDatabase() {
         try {
-            clubMembers = FileHandler.clubMembersLoad(administratorFile,subscriptionFile);
+            clubMembers = FileHandler.clubMembersLoad(administratorFile, subscriptionFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         for (int i = 0; i < clubMembers.size(); i++) {
             //TODO make member type ENUM
-            if (clubMembers.get(i).getType() == MemberType.COMPETITIVE){
+            if (clubMembers.get(i).getType() == MemberType.COMPETITIVE) {
                 int age = clubMembers.get(i).getAge();
-                if (age < 18){
+                if (age < 18) {
                     juniorTeam.addMember(clubMembers.get(i));
-                }else{
+                } else {
                     seniorTeam.addMember(clubMembers.get(i));
                 }
             }
@@ -55,54 +55,60 @@ public class MemberDatabase {
     }
 
     public void addMemberToList(MemberType type,
-                                   String name,
-                                   LocalDate birthDate,
-                                   String email) {
+                                String name,
+                                LocalDate birthDate,
+                                String email) {
 
         Member newMember;
 
-        switch (type){
-            case PASSIVE ->
-                    newMember = new PassiveMember(name, birthDate, email);
+        switch (type) {
+            case PASSIVE -> newMember = new PassiveMember(name, birthDate, email);
 
-            case EXERCISE ->
-                    newMember = new ExerciseMember(name, birthDate, email);
+            case EXERCISE -> newMember = new ExerciseMember(name, birthDate, email);
 
-            case COMPETITIVE ->
-                    newMember = new CompetitiveMember(name, birthDate, email);
+            case COMPETITIVE -> newMember = new CompetitiveMember(name, birthDate, email);
             default -> newMember = null;
         }
         clubMembers.add(newMember);
         try {
-            FileHandler.saveAll(clubMembers, administratorFile,subscriptionFile,resultsFile);
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         //adds to competitive teams based on age
-        if (newMember.getType() == MemberType.COMPETITIVE){
+        if (newMember.getType() == MemberType.COMPETITIVE) {
             int age = newMember.getAge();
-            if (age < 18){
+            if (age < 18) {
                 juniorTeam.addMember(newMember);
-            }else{
+            } else {
                 seniorTeam.addMember(newMember);
             }
         }
     }
 
-    public String showListOfMembers() {
+    public String showListOfMembers(boolean withNumbers) {
         StringBuilder sb = new StringBuilder();
+        int count = 1;
         for (Member member : clubMembers) {
-            if(member != null) {
-                sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
-                        append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                        append(" - Email address: ").append(member.getEmail()).append("\n");
-            }
+            if (member != null) {
+
+                if (withNumbers) {
+                    sb.append(count).append(". Name: ").append(member.getName()).append(" - Membership type: ").
+                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
+                            append(" - Email address: ").append(member.getEmail()).append("\n");
+                    count++;
+                } else {
+                    sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
+                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
+                            append(" - Email address: ").append(member.getEmail()).append("\n");
+                }
+            } else sb.append("Empty");
         }
         return sb.toString();
     }
 
-    public String showListOfSubscription(){
+    public String showListOfSubscription() {
         StringBuilder sb = new StringBuilder();
 
         for (Member member : clubMembers) {
@@ -126,15 +132,15 @@ public class MemberDatabase {
     }
 
 
-    public Team getJuniorTeam(){
+    public Team getJuniorTeam() {
         return juniorTeam;
     }
 
-    public Team getSeniorTeam(){
+    public Team getSeniorTeam() {
         return seniorTeam;
     }
 
-    public void loadCompetitiveResults(){
+    public void loadCompetitiveResults() {
         ArrayList<Result> loadedResults = new ArrayList<>();
         try {
             loadedResults = FileHandler.competitiveResultsLoad(competitiveResultsFile);
@@ -150,23 +156,23 @@ public class MemberDatabase {
                     member = clubMember;
                 }
             }
-            if (member != null){
+            if (member != null) {
                 //takes birthdate of member with matching email and uses it to figure out which of the two teams
                 //that the result should be added to
                 //TODO make age comparison better, since it is currently just based on year comparison
                 int age = member.getAge();
-                if (age < 18){
+                if (age < 18) {
                     juniorTeam.addResultToLeaderboard(loadedResults.get(i));
-                }else{
+                } else {
                     seniorTeam.addResultToLeaderboard(loadedResults.get(i));
                 }
             }
         }
     }
 
-    public void addResultToTeam(String email, double time, String discipline){
+    public void addResultToTeam(String email, double time, String discipline) {
         //the LocalDate is set to the moment the entry is made
-        Result newResult = new Result(email,time,discipline,LocalDate.now());
+        Result newResult = new Result(email, time, discipline, LocalDate.now());
 
         //save to .csv file
         ArrayList<Result> combinedResultList = new ArrayList<>();
@@ -187,15 +193,26 @@ public class MemberDatabase {
                 member = clubMember;
             }
         }
-        if (member != null){
+        if (member != null) {
             //TODO make age comparison better, since it is currently just based on year comparison
             int age = member.getAge();
-            if (age < 18){
+            if (age < 18) {
                 juniorTeam.addResultToLeaderboard(newResult);
-            }else{
+            } else {
                 seniorTeam.addResultToLeaderboard(newResult);
             }
         }
     }
 
+    public int getSizeOfClubMembers() {
+        return clubMembers.size();
+    }
+
+    public String getMemberName(int memberIndex) {
+        return clubMembers.get(memberIndex).getName();
+    }
+
+    public void deleteMember(int memberIndex) {
+        clubMembers.remove(memberIndex);
+    }
 }
