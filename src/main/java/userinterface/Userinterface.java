@@ -1,6 +1,7 @@
 package userinterface;
 
 import domain_model.Controller;
+import domain_model.DisciplineType;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.members.CompetitiveMember;
@@ -255,6 +256,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
         tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
         tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
+        tableMenu.addRow(new Row().addCell("4").addCell("Show leaderboard"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
         System.out.print("> ");
@@ -262,12 +264,13 @@ public class Userinterface {
 
     private int menuOptionsForCoachProgram() {
         int coachChosenOption;
-        coachChosenOption = Input.scannerInt(scanner, 0, 3);
+        coachChosenOption = Input.scannerInt(scanner, 0, 4);
 
         switch (coachChosenOption) {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
             case 3 -> addNewResult();
+            case 4 -> showLeaderBoard();
             case 0 -> signOut();
         }
 
@@ -307,18 +310,56 @@ public class Userinterface {
                 4. Crawl
                 """);
         int disciplineChoice = Input.scannerInt(scanner, 1, 4);
-        String discipline = "";
+        DisciplineType discipline = null;
         switch (disciplineChoice) {
-            case 1 -> discipline = "Backstroke";
-            case 2 -> discipline = "Breaststroke";
-            case 3 -> discipline = "Butterfly";
-            case 4 -> discipline = "Crawl";
+            case 1 -> discipline = DisciplineType.BACKSTROKE;
+            case 2 -> discipline = DisciplineType.BREASTSTROKE;
+            case 3 -> discipline = DisciplineType.BUTTERFLY;
+            case 4 -> discipline = DisciplineType.CRAWL;
         }
 
         System.out.print("\nEnter time in seconds: ");
         double time = Input.scannerDouble(scanner);
 
         controller.addResultToTeam(email, time, discipline);
+    }
+
+    private void showLeaderBoard() {
+        buildMenuForShowLeaderBoardTeam();
+        int chosenTeam = choiseFromMenuForShowLeaderBoardTeam();
+        buildMenuForShowLeaderBoardDisciplin();
+        DisciplineType disciplinType = choiseFromMenuForShowLeaderBoardDisciplin();
+
+        System.out.println(controller.showLeaderBoard(chosenTeam, disciplinType));
+    }
+    private void buildMenuForShowLeaderBoardTeam() {
+        System.out.print("\nChoice team to view:\n" +
+                "1. Junior team\n" +
+                "2. Senior team\n" +
+                "Choise: ");
+    }
+    private int choiseFromMenuForShowLeaderBoardTeam() {
+        return Input.scannerInt(scanner, 1, 2);
+    }
+    private void buildMenuForShowLeaderBoardDisciplin() {
+        System.out.print("\nDisciplines:\n" +
+                "1. Crawl\n" +
+                "2. Butterfly\n" +
+                "3. Backstroke\n" +
+                "4. Breaststroke\n" +
+                "Choise: ");
+    }
+    private DisciplineType choiseFromMenuForShowLeaderBoardDisciplin() {
+        int choise = Input.scannerInt(scanner, 1, 4);
+        DisciplineType disciplinType = null;
+        switch (choise) {
+            case 1 -> disciplinType = DisciplineType.CRAWL;
+            case 2 -> disciplinType = DisciplineType.BUTTERFLY;
+            case 3 -> disciplinType = DisciplineType.BACKSTROKE;
+            case 4 -> disciplinType = DisciplineType.BREASTSTROKE;
+        }
+
+        return disciplinType;
     }
 
 
