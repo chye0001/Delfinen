@@ -88,7 +88,17 @@ public class Userinterface {
     }
 
     private void showListOfMembers(boolean withNumbers) {
-        System.out.println(controller.showListOfMembers(withNumbers));
+        //System.out.println(controller.showListOfMembers(withNumbers));
+        //# , name, type, birthdate, email
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "#",
+                "Name",
+                "Type",
+                "Birthdate",
+                "Email"
+        ));
+        Table memberTable = new Table("Members",columns,true);
+        ArrayList<Member> members = controller.get
     }
 
     private void addNewMember() {
@@ -283,21 +293,9 @@ public class Userinterface {
     }
 
     private void buildSeniorTeamList() {
-        String seniorTeam = "\nSenior Team:\n--------------------";
-
-        for (Member member : controller.getSeniorTeam().getMembers()) {
-            seniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
-                    "\nLeaderboard Results:";
-
-            for (Result result : controller.getSeniorTeam().getLeaderboard()) {
-                if (result.getMemberEmail().equals(member.getEmail())) {
-                    seniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
-                }
-            }
-            seniorTeam += "\n--------------------";
-        }
-
-        System.out.println(seniorTeam);
+        ArrayList<Member> seniorTeam = controller.getSeniorTeam().getMembers();
+        Table compTable = createCompMemberTable("Junior Team", seniorTeam);
+        System.out.println(compTable);
     }
 
     private void addNewResult() {
