@@ -1,6 +1,6 @@
 package userinterface.table;
 
-import ui.Color;
+import userinterface.Color;
 
 import java.util.ArrayList;
 
