@@ -60,13 +60,15 @@ public class Userinterface {
     }
 
     private void buildMenuForAdministratorProgram() {
-        System.out.print("\nAdministrator - Options\n" +
-                "1. Add new member\n" +
-                "2. Show list of members\n" +
-                "3. Edit member information(not valid yet)\n" +
-                "4. Delete member(not valid yet)\n" +
-                "0. Sign out\n" +
-                "Choice: ");
+        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
+        Table tableMenu = new Table("Adminstrator",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Add new member"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show list of members"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Edit member information"));
+        tableMenu.addRow(new Row().addCell("4").addCell("Delete member"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
     }
 
     private int menuOptionsForAdministratorProgram() {
