@@ -228,7 +228,7 @@ public class MemberDatabase {
         if (chosenTeam == 1) {
             return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
 
-            //2 == Senior Team
+        //2 == Senior Team
         } else
             return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
     }

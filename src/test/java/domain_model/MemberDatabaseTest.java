@@ -26,7 +26,7 @@ class MemberDatabaseTest {
         String name = memberDatabase.getClubMembers().get(0).getName();
         LocalDate birthDate = memberDatabase.getClubMembers().get(0).getBirthDate();
         String email = memberDatabase.getClubMembers().get(0).getEmail();
-        String discipline = memberDatabase.getClubMembers().get(0).getDiscipline();
+        DisciplineType discipline = memberDatabase.getClubMembers().get(0).getDiscipline();
         double subscriptionCost = memberDatabase.getClubMembers().get(0).getSubscriptionCost();
 
         assertAll(
@@ -55,7 +55,7 @@ class MemberDatabaseTest {
         String actualName = memberDatabase.getClubMembers().get(0).getName();
         LocalDate actualBirthDate = memberDatabase.getClubMembers().get(0).getBirthDate();
         String actualEmail = memberDatabase.getClubMembers().get(0).getEmail();
-        String actualDiscipline = memberDatabase.getClubMembers().get(0).getDiscipline();
+        DisciplineType actualDiscipline = memberDatabase.getClubMembers().get(0).getDiscipline();
         double actualSubscriptionCost = memberDatabase.getClubMembers().get(0).getSubscriptionCost();
 
         assertAll(

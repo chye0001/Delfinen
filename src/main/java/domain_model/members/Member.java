@@ -1,5 +1,6 @@
 package domain_model.members;
 
+import domain_model.DisciplineType;
 import domain_model.MemberType;
 import domain_model.Subscription;
 
@@ -11,7 +12,7 @@ public abstract class Member {
     private String name;
     private LocalDate birthDate;
     private String email;
-    private String discipline;
+    private DisciplineType discipline;
     private Subscription subscription;
 
     public Member(String name, LocalDate birthDate, String email) {
@@ -30,7 +31,7 @@ public abstract class Member {
     public Member(String name,
                   LocalDate birthDate,
                   String email,
-                  String discipline,
+                  DisciplineType discipline,
                   double subscriptionCost){
 
         this.name = name;
@@ -43,7 +44,7 @@ public abstract class Member {
     public Member(String name,
                   LocalDate birthDate,
                   String email,
-                  String discipline){
+                  DisciplineType discipline){
 
         this.name = name;
         this.birthDate = birthDate;
@@ -86,7 +87,7 @@ public abstract class Member {
     public String getEmail(){
         return email;
     }
-    public String getDiscipline(){
+    public DisciplineType getDiscipline(){
         return discipline;
     }
     public abstract MemberType getType();
