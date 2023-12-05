@@ -234,14 +234,22 @@ public class Userinterface {
     }
 
     private void buildMenuForCoachProgram() {
-        System.out.print("""
-                                    
-                Coach - Options
-                1. Show Junior Team
-                2. Show Senior Team
-                3. Add New Result
-                0. Sign Out
-                Choice:""");
+//        System.out.print("""
+//
+//                Coach - Options
+//                1. Show Junior Team
+//                2. Show Senior Team
+//                3. Add New Result
+//                0. Sign Out
+//                Choice:""");
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
+        Table tableMenu = new Table("Coach",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
     }
 
     private int menuOptionsForCoachProgram() {
