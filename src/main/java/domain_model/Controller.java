@@ -61,4 +61,8 @@ public class Controller {
     public void deleteMember(int memberIndex) {
         memberDatabase.deleteMember(memberIndex);
     }
+
+    public String showLeaderBoard(int chosenTeam, DisciplineType disciplinType) {
+        return memberDatabase.showLeaderBoard(chosenTeam, disciplinType);
+    }
 }

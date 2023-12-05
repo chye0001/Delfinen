@@ -218,4 +218,15 @@ public class MemberDatabase {
             e.printStackTrace();
         }
     }
+
+    public String showLeaderBoard(int chosenTeam, DisciplineType disciplinType) {
+
+        //1 == Junior Team
+        if (chosenTeam == 1) {
+            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+
+            //2 == Senior Team
+        } else
+            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+    }
 }
