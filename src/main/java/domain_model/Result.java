@@ -5,10 +5,10 @@ import java.time.LocalDate;
 public class Result {
     private String memberEmail;
     private double time;
-    private String discipline;
+    private DisciplineType discipline;
     private LocalDate date;
 
-    public Result(String memberEmail, double time, String discipline, LocalDate date) {
+    public Result(String memberEmail, double time, DisciplineType discipline, LocalDate date) {
         this.memberEmail = memberEmail;
         this.time = time;
         this.discipline = discipline;
@@ -27,7 +27,7 @@ public class Result {
         return "";
     }
 
-    public String getDiscipline() {
+    public DisciplineType getDiscipline() {
         return discipline;
     }
 
