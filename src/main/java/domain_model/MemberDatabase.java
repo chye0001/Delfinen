@@ -214,5 +214,10 @@ public class MemberDatabase {
 
     public void deleteMember(int memberIndex) {
         clubMembers.remove(memberIndex);
+        try {
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
