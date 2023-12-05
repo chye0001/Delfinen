@@ -170,40 +170,25 @@ public class MemberDatabase {
         }
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
-        //the LocalDate is set to the moment the entry is made
-        Result newResult = new Result(email, time, discipline, LocalDate.now());
+    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
+        ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
+        CompetitiveMember compMember = compMembers.get(memberIndex);
+        compMember.addResult(
+                new Result(compMember.getEmail(), time, discipline, date),
+                discipline);
 
-        //save to .csv file
-        ArrayList<Result> combinedResultList = new ArrayList<>();
-        //adds both teams' results first
-        combinedResultList.addAll(juniorTeam.getLeaderboard());
-        combinedResultList.addAll(seniorTeam.getLeaderboard());
-        //then the new result is added
-        combinedResultList.add(newResult);
-        try {
-            FileHandler.competitiveResultsSave(combinedResultList, competitiveResultsFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Member member = null;
-        for (Member clubMember : clubMembers) {
-            if (newResult.getMemberEmail().equals(clubMember.getEmail())) {
-                member = clubMember;
-            }
-        }
-        if (member != null) {
-            //TODO make age comparison better, since it is currently just based on year comparison
-            int age = member.getAge();
-            if (age < 18) {
-                juniorTeam.addResultToLeaderboard(newResult);
-            } else {
-                seniorTeam.addResultToLeaderboard(newResult);
-            }
-        }
     }
 
+
+    private ArrayList<CompetitiveMember> getCompetitiveMembers() {
+        ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
+        for (Member member: clubMembers) {
+            if (member instanceof CompetitiveMember compMember) {
+                compMembers.add(compMember);
+            }
+        }
+        return compMembers;
+    }
     public int getSizeOfClubMembers() {
         return clubMembers.size();
     }
