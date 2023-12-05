@@ -192,11 +192,14 @@ public class Userinterface {
     }
 
     private void buildMenuForAccountantProgram() {
-        System.out.print("\nAccountant - Options\n" +
-                "1. Show list of subscriptions\n" +
-                "2. Show income forecast\n" +
-                "0. Sign out\n" +
-                "Choice: ");
+        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
+        Table tableMenu = new Table("Accountant",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
+
     }
 
     private int menuOptionsForAccountantProgram() {
