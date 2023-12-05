@@ -3,10 +3,12 @@ package userinterface;
 import domain_model.Controller;
 import domain_model.Result;
 import domain_model.MemberType;
+import domain_model.members.CompetitiveMember;
 import domain_model.members.Member;
 import userinterface.table.Row;
 import userinterface.table.Table;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -271,21 +273,9 @@ public class Userinterface {
     }
 
     private void buildJuniorTeamList() {
-        String juniorTeam = "\nJunior Team:\n--------------------";
-
-        for (Member member : controller.getJuniorTeam().getMembers()) {
-            juniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
-                    "\nLeaderboard Results:";
-
-            for (Result result : controller.getJuniorTeam().getLeaderboard()) {
-                if (result.getMemberEmail().equals(member.getEmail())) {
-                    juniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
-                }
-            }
-            juniorTeam += "\n--------------------";
-        }
-
-        System.out.println(juniorTeam);
+        ArrayList<Member> juniorTeam = controller.getJuniorTeam().getMembers();
+        Table compTable = createCompMemberTable("Junior Team", juniorTeam);
+        System.out.println(compTable);
     }
 
     private void showSeniorTeam() {
@@ -338,7 +328,34 @@ public class Userinterface {
     }
 
 
-
+    private Table createCompMemberTable(String header,ArrayList<Member> members) {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Email",
+                "Backstroke",
+                "Breaststroke",
+                "Butterfly",
+                "Crawl"
+        ));
+        Table compTable = new Table(header,columns,true);
+        for(Member member : members) {
+            CompetitiveMember compMember = (CompetitiveMember) member;
+            String name = member.getName();
+            String email = member.getEmail();
+            String breast = "01:19.434"; // TODO: Format time.
+            String back = "01:19.434"; // Format time, and get best time for dicipline
+            String fly = "01:19.434"; // Format time, and get best time for dicipline
+            String crawl = "01:19.434"; // Format time, and get best time for dicipline
+            compTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(email)
+                    .addCell(breast)
+                    .addCell(back)
+                    .addCell(fly)
+                    .addCell(crawl));
+        }
+        return compTable;
+    }
     private static String flipDateFormat(String date) {
         //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
         String[] splitInputDate = date.split("-");
