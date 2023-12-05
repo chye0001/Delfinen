@@ -46,10 +46,8 @@ class MemberDatabaseTest {
         String name = "Jane Test";
         LocalDate birthDate = LocalDate.parse("1999-09-03");
         String email = "test@email.dk";
-        String discipline = "Crawl";
-        double subscriptionCost = 299.99;
 
-        memberDatabase.addMemberToList(type,name,birthDate,email,discipline,subscriptionCost);
+        memberDatabase.addMemberToList(type,name,birthDate,email);
 
         MemberType actualType = memberDatabase.getClubMembers().get(0).getType();
         String actualName = memberDatabase.getClubMembers().get(0).getName();
@@ -75,10 +73,8 @@ class MemberDatabaseTest {
         String name = "Jane Test";
         LocalDate birthDate = LocalDate.parse("1999-09-03");
         String email = "test@email.dk";
-        String discipline = "Crawl";
-        double subscriptionCost = 299.99;
 
-        memberDatabase.addMemberToList(type,name,birthDate,email,discipline,subscriptionCost);
+        memberDatabase.addMemberToList(type,name,birthDate,email);
 
         String expectedString =
         "Name: Jane Test - Membership type: EXERCISE - " +
