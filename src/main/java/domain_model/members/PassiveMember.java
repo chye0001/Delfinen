@@ -1,5 +1,6 @@
 package domain_model.members;
 
+import domain_model.DisciplineType;
 import domain_model.Subscription;
 
 import domain_model.MemberType;
@@ -18,11 +19,11 @@ public class PassiveMember extends Member {
         super(name, birthDate, email, subscription);
     }
 
-    public PassiveMember(String name, LocalDate birthDate, String email, String discipline, double subscriptionValue) {
+    public PassiveMember(String name, LocalDate birthDate, String email, DisciplineType discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
-    public PassiveMember(String name, LocalDate birthDate, String email, String discipline) {
+    public PassiveMember(String name, LocalDate birthDate, String email, DisciplineType discipline) {
         super(name, birthDate, email, discipline);
         setSubscriptionByTypeAndAge();
     }

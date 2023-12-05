@@ -223,13 +223,118 @@ public class MemberDatabase {
     }
 
     public String showLeaderBoard(int chosenTeam, DisciplineType disciplinType) {
-
-        //1 == Junior Team
-        if (chosenTeam == 1) {
+        if (chosenTeam == 1) {       //1 == Junior Team
             return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
 
-        //2 == Senior Team
+        } else                       //2 == Senior Team
+            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+    }
+
+    public String capsLeaderBoardForTopFiveAndBuildsIt(int chosenTeam, DisciplineType disciplinType) {
+        switch (chosenTeam) {
+            case 1 -> {return buildsLeaderBoardForJuniorTeam(disciplinType);}
+            case 2 -> {return buildsLeaderBoardForSeniorTeam(disciplinType);}
+        }
+        return null;
+    }
+
+    public String buildsLeaderBoardForJuniorTeam(DisciplineType disciplinType) {
+        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        int count = 1;
+
+        for (Result result : juniorTeam.getLeaderboard()) {
+            for (Member competitiveMember : clubMembers) {
+
+                if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
+                    if (result.getDiscipline() == disciplinType) {
+                        leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
+
+                    } else
+                        return "\nThe leaderboard is empty for " + disciplinType;
+
+                    count++;
+
+                    if (count > 5) {
+                        return leaderBoardTop5;
+                    }
+                }
+            }
+        }
+        if (juniorTeam.getLeaderboard().isEmpty()) {
+            return "\nNo results have been added to the leaderboard for competitive junior swimmers";
+        }
+
+        return leaderBoardTop5;
+    }
+
+    public String buildsLeaderBoardForSeniorTeam(DisciplineType disciplinType){
+        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        int count = 1;
+
+        for (Result result : seniorTeam.getLeaderboard()) {
+            for (Member competitiveMember : clubMembers) {
+
+                if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
+                    if (result.getDiscipline() == disciplinType) {
+                        leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
+
+                    } else
+                        return "\nThe leaderboard is empty for " + disciplinType;
+
+                    count++;
+
+                    if (count > 5) {
+                        return leaderBoardTop5;
+                    }
+                }
+            }
+        }
+        if (seniorTeam.getLeaderboard().isEmpty()) {
+            return "\nNo results have been added to the leaderboard for competitive senior swimmers";
+        }
+
+        return leaderBoardTop5;
+    }
+
+    public String buildLeaderBoard(int count, Member competitiveMember, Result result) {
+
+        int convertsDecimalToWholeNumber = 100;
+        double competitiveResultInMillisecondsIsolated = (result.getTime() - (int) result.getTime()) * convertsDecimalToWholeNumber;
+        int competitiveResultInSecondsIsolated = (int) result.getTime() % 60;
+        int competitiveResultInMinutesIsolated = (int) result.getTime() / 60;
+
+       return isSecondsIsolatedLessThanTenSeconds(competitiveResultInMillisecondsIsolated,
+                competitiveResultInSecondsIsolated,
+                competitiveResultInMinutesIsolated,
+                count,
+                competitiveMember,
+                result);
+
+    }
+
+    private String isSecondsIsolatedLessThanTenSeconds(double milliseconds, int seconds, int minutes, int count, Member competitiveMember, Result result) {
+        StringBuilder sb = new StringBuilder();
+
+        if (seconds < 10) {
+            sb.append(count + ": " + competitiveMember.getName() + ": " +
+                    minutes + ":0" + seconds);
+            sb.append(isResultsInMillisecondsIsolatedLessThanTen(milliseconds));
+            sb.append(" - " + result.getDate() + "\n");
+
+        } else {
+            sb.append(count + ": " + competitiveMember.getName() + ": " +
+                    minutes + ":" + seconds);
+            sb.append(isResultsInMillisecondsIsolatedLessThanTen(milliseconds));
+            sb.append(" - " + result.getDate() + "\n");
+        }
+
+        return sb.toString();
+    }
+
+    public String isResultsInMillisecondsIsolatedLessThanTen(double competitiveResultInMilliseconds) {
+        if (competitiveResultInMilliseconds < 10) {
+            return (".0" + (int) competitiveResultInMilliseconds);
         } else
-            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+            return "." + (int) competitiveResultInMilliseconds;
     }
 }

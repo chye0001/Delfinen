@@ -139,6 +139,7 @@ public class FileHandler {
             printStream.println(
                     result.getMemberEmail()+";"+
                             result.getTime()+";"+
+                            result.getDiscipline()+";"+
                             result.getDate()+";"
             );
         }
@@ -152,10 +153,10 @@ public class FileHandler {
             String[] attributes = fileReader.nextLine().split(";");
 
             Result loadedResult = new Result(
-                    attributes[0],
-                    Double.parseDouble(attributes[1]),
-                    DisciplineType.valueOf(attributes[2].toUpperCase()),
-                    LocalDate.parse(attributes[3])
+                    attributes[0], //email
+                    Double.parseDouble(attributes[1]), //time/result
+                    DisciplineType.valueOf(attributes[2].toUpperCase()), //discipline
+                    LocalDate.parse(attributes[3]) //date
             );
 
             if(!loadedList.contains(loadedResult)){

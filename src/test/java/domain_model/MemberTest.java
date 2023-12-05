@@ -15,7 +15,7 @@ class MemberTest {
         String name = "Arny Test";
         LocalDate birthDate = LocalDate.parse("2023-11-24");
         String email = "test@test.test";
-        String discipline = "Test";
+        DisciplineType discipline = DisciplineType.BREASTSTROKE;
         double subscriptionCost = 400.0;
         Member testMember = new ExerciseMember(name,birthDate,email,discipline,subscriptionCost);
 
@@ -35,7 +35,7 @@ class MemberTest {
         String name = "Mary Test";
         LocalDate birthDate = LocalDate.parse("2023-11-24");
         String email = "test@test.test";
-        String discipline = "Test";
+        DisciplineType discipline = DisciplineType.BACKSTROKE;
         double subscriptionCost = 400.0;
         Member testMember = new CompetitiveMember(name,birthDate,email,discipline,subscriptionCost);
 
@@ -55,7 +55,7 @@ class MemberTest {
         String name = "Siri Test";
         LocalDate birthDate = LocalDate.parse("2023-11-24");
         String email = "test@test.test";
-        String discipline = "Test";
+        DisciplineType discipline = DisciplineType.CRAWL;
         double subscriptionCost = 400.0;
         Member testMember = new PassiveMember(name,birthDate,email,discipline,subscriptionCost);
 

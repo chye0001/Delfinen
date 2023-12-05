@@ -1,5 +1,6 @@
 package domain_model.members;
 
+import domain_model.DisciplineType;
 import domain_model.MemberType;
 
 import domain_model.Result;
@@ -21,7 +22,7 @@ public class CompetitiveMember extends Member {
         super(name, birthDate, email, subscription);
     }
 
-    public CompetitiveMember(String name, LocalDate birthDate, String email, String discipline, double subscriptionValue) {
+    public CompetitiveMember(String name, LocalDate birthDate, String email, DisciplineType discipline, double subscriptionValue) {
         super(name, birthDate, email, discipline, subscriptionValue);
     }
 
