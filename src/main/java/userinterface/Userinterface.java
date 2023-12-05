@@ -4,8 +4,12 @@ import domain_model.Controller;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.members.Member;
+import userinterface.table.Row;
+import userinterface.table.Table;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Userinterface {
@@ -20,13 +24,15 @@ public class Userinterface {
     }
 
     private void buildMenuForStartProgram() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nUser\n").append("1. Administrator\n" +
-                "2. Accountant\n" +
-                "3. Coach\n" +
-                "0. Close program\n" +
-                "Enter your credentials: ");
-        System.out.print(sb);
+        ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
+        Table menuTable = new Table("Delfinen",columns,true);
+        menuTable.addRow(new Row().addCell("1").addCell("Adminstrator"));
+        menuTable.addRow(new Row().addCell("2").addCell("Accountant"));
+        menuTable.addRow(new Row().addCell("3").addCell("Coach"));
+        menuTable.addRow(new Row().addCell("0").addCell("Close program"));
+        System.out.println(menuTable);
+        System.out.print("> ");
+
     }
 
     private void menuOptionsForStartProgram() {
