@@ -88,17 +88,12 @@ public class Userinterface {
     }
 
     private void showListOfMembers(boolean withNumbers) {
-        //System.out.println(controller.showListOfMembers(withNumbers));
-        //# , name, type, birthdate, email
-        ArrayList<String> columns = new ArrayList<>(List.of(
-                "#",
-                "Name",
-                "Type",
-                "Birthdate",
-                "Email"
-        ));
-        Table memberTable = new Table("Members",columns,true);
-        ArrayList<Member> members = controller.get
+        if (withNumbers) {
+            System.out.println(createMemberListWithNumbers());
+        }
+        else {
+            System.out.println(createMemberList());
+        }
     }
 
     private void addNewMember() {
@@ -325,6 +320,57 @@ public class Userinterface {
         controller.addResultToTeam(email, time, discipline);
     }
 
+
+
+    private Table createMemberList() {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Type",
+                "Birthdate",
+                "Email"
+        ));
+        Table memberTable = new Table("Members",columns,true);
+        ArrayList<Member> members = controller.getClubMembers();
+        for(Member member : members) {
+            String name = member.getName();
+            String type = member.getType().toString();
+            String birthdate = member.getBirthDate().toString();
+            String email = member.getEmail();
+            memberTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(type)
+                    .addCell(birthdate)
+                    .addCell(email));
+        }
+        return memberTable;
+    }
+
+    private Table createMemberListWithNumbers() {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "#",
+                "Name",
+                "Type",
+                "Birthdate",
+                "Email"
+        ));
+        Table memberTable = new Table("Members",columns,true);
+        ArrayList<Member> members = controller.getClubMembers();
+        int count = 1;
+        for(Member member : members) {
+            String name = member.getName();
+            String type = member.getType().toString();
+            String birthdate = member.getBirthDate().toString();
+            String email = member.getEmail();
+            memberTable.addRow(new Row()
+                    .addCell(count)
+                    .addCell(name)
+                    .addCell(type)
+                    .addCell(birthdate)
+                    .addCell(email));
+            count++;
+        }
+        return memberTable;
+    }
 
     private Table createCompMemberTable(String header,ArrayList<Member> members) {
         ArrayList<String> columns = new ArrayList<>(List.of(
