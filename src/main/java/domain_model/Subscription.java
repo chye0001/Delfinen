@@ -25,7 +25,7 @@ public class Subscription {
 
 
 
-    private boolean isPaid () {
+    public boolean isPaid () {
         return (Period.between(lastPayment,LocalDate.now()).getYears() < 1);
     }
 

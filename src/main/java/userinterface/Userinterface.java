@@ -3,9 +3,15 @@ package userinterface;
 import domain_model.Controller;
 import domain_model.Result;
 import domain_model.MemberType;
+import domain_model.members.CompetitiveMember;
 import domain_model.members.Member;
+import userinterface.table.Row;
+import userinterface.table.Table;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Userinterface {
@@ -20,13 +26,15 @@ public class Userinterface {
     }
 
     private void buildMenuForStartProgram() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nUser\n").append("1. Administrator\n" +
-                "2. Accountant\n" +
-                "3. Coach\n" +
-                "0. Close program\n" +
-                "Enter your credentials: ");
-        System.out.print(sb);
+        ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
+        Table menuTable = new Table("Delfinen",columns,true);
+        menuTable.addRow(new Row().addCell("1").addCell("Adminstrator"));
+        menuTable.addRow(new Row().addCell("2").addCell("Accountant"));
+        menuTable.addRow(new Row().addCell("3").addCell("Coach"));
+        menuTable.addRow(new Row().addCell("0").addCell("Close program"));
+        System.out.println(menuTable);
+        System.out.print("> ");
+
     }
 
     private void menuOptionsForStartProgram() {
@@ -54,13 +62,15 @@ public class Userinterface {
     }
 
     private void buildMenuForAdministratorProgram() {
-        System.out.print("\nAdministrator - Options\n" +
-                "1. Add new member\n" +
-                "2. Show list of members\n" +
-                "3. Edit member information(not valid yet)\n" +
-                "4. Delete member(not valid yet)\n" +
-                "0. Sign out\n" +
-                "Choice: ");
+        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
+        Table tableMenu = new Table("Adminstrator",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Add new member"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show list of members"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Edit member information"));
+        tableMenu.addRow(new Row().addCell("4").addCell("Delete member"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
     }
 
     private int menuOptionsForAdministratorProgram() {
@@ -78,7 +88,12 @@ public class Userinterface {
     }
 
     private void showListOfMembers(boolean withNumbers) {
-        System.out.println(controller.showListOfMembers(withNumbers));
+        if (withNumbers) {
+            System.out.println(createMemberListWithNumbers());
+        }
+        else {
+            System.out.println(createMemberList());
+        }
     }
 
     private void addNewMember() {
@@ -184,11 +199,14 @@ public class Userinterface {
     }
 
     private void buildMenuForAccountantProgram() {
-        System.out.print("\nAccountant - Options\n" +
-                "1. Show list of subscriptions\n" +
-                "2. Show income forecast\n" +
-                "0. Sign out\n" +
-                "Choice: ");
+        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
+        Table tableMenu = new Table("Accountant",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
+
     }
 
     private int menuOptionsForAccountantProgram() {
@@ -204,7 +222,8 @@ public class Userinterface {
     }
 
     private void showSubscriptionList() {
-        System.out.println(controller.showListOfSubscriptions());
+        //System.out.println(controller.showListOfSubscriptions());
+        System.out.println(createSubscriptionTable());
     }
 
     private void showIncomeForecast() {
@@ -223,14 +242,22 @@ public class Userinterface {
     }
 
     private void buildMenuForCoachProgram() {
-        System.out.print("""
-                                    
-                Coach - Options
-                1. Show Junior Team
-                2. Show Senior Team
-                3. Add New Result
-                0. Sign Out
-                Choice:""");
+//        System.out.print("""
+//
+//                Coach - Options
+//                1. Show Junior Team
+//                2. Show Senior Team
+//                3. Add New Result
+//                0. Sign Out
+//                Choice:""");
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
+        Table tableMenu = new Table("Coach",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
     }
 
     private int menuOptionsForCoachProgram() {
@@ -252,21 +279,9 @@ public class Userinterface {
     }
 
     private void buildJuniorTeamList() {
-        String juniorTeam = "\nJunior Team:\n--------------------";
-
-        for (Member member : controller.getJuniorTeam().getMembers()) {
-            juniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
-                    "\nLeaderboard Results:";
-
-            for (Result result : controller.getJuniorTeam().getLeaderboard()) {
-                if (result.getMemberEmail().equals(member.getEmail())) {
-                    juniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
-                }
-            }
-            juniorTeam += "\n--------------------";
-        }
-
-        System.out.println(juniorTeam);
+        ArrayList<Member> juniorTeam = controller.getJuniorTeam().getMembers();
+        Table compTable = createCompMemberTable("Junior Team", juniorTeam);
+        System.out.println(compTable);
     }
 
     private void showSeniorTeam() {
@@ -274,21 +289,9 @@ public class Userinterface {
     }
 
     private void buildSeniorTeamList() {
-        String seniorTeam = "\nSenior Team:\n--------------------";
-
-        for (Member member : controller.getSeniorTeam().getMembers()) {
-            seniorTeam += "\n" + member.getName() + " - " + member.getEmail() +
-                    "\nLeaderboard Results:";
-
-            for (Result result : controller.getSeniorTeam().getLeaderboard()) {
-                if (result.getMemberEmail().equals(member.getEmail())) {
-                    seniorTeam += "\n- " + result.getDiscipline() + " - " + result.getTime() + " - " + result.getDate();
-                }
-            }
-            seniorTeam += "\n--------------------";
-        }
-
-        System.out.println(seniorTeam);
+        ArrayList<Member> seniorTeam = controller.getSeniorTeam().getMembers();
+        Table compTable = createCompMemberTable("Junior Team", seniorTeam);
+        System.out.println(compTable);
     }
 
     private void addNewResult() {
@@ -319,7 +322,126 @@ public class Userinterface {
     }
 
 
+    private Table createSubscriptionTable() {
+        ArrayList<Member> members = controller.getClubMembers();
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Email",
+                "Age",
+                "Type",
+                "Price",
+                "Paid",
+                "Debt",
+                "Last Payment",
+                "Next Payment"
+        ));
+        Table subscriptionTable = new Table("Subscirptions",columns,true);
+        for(Member member : members) {
+            String name = member.getName();
+            String email = member.getEmail();
+            int age = member.getAge();
+            String type = member.getType().toString();
+            double price = member.getSubscriptionCost();
+            String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+            String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
+            double debt = member.getSubscriptDebt();
+            String lastPayment = member.getLastPaymentDate();
+            String nextPayment = member.getNextPaymentDate();
+            subscriptionTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(email)
+                    .addCell(age)
+                    .addCell(type)
+                    .addCell(price)
+                    .addCell(paid,paidColor)
+                    .addCell(debt)
+                    .addCell(lastPayment)
+                    .addCell(nextPayment));
 
+            //String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+
+        }
+        return subscriptionTable;
+    }
+
+    private Table createMemberList() {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Type",
+                "Birthdate",
+                "Email"
+        ));
+        Table memberTable = new Table("Members",columns,true);
+        ArrayList<Member> members = controller.getClubMembers();
+        for(Member member : members) {
+            String name = member.getName();
+            String type = member.getType().toString();
+            String birthdate = member.getBirthDate().toString();
+            String email = member.getEmail();
+            memberTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(type)
+                    .addCell(birthdate)
+                    .addCell(email));
+        }
+        return memberTable;
+    }
+
+    private Table createMemberListWithNumbers() {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "#",
+                "Name",
+                "Type",
+                "Birthdate",
+                "Email"
+        ));
+        Table memberTable = new Table("Members",columns,true);
+        ArrayList<Member> members = controller.getClubMembers();
+        int count = 1;
+        for(Member member : members) {
+            String name = member.getName();
+            String type = member.getType().toString();
+            String birthdate = member.getBirthDate().toString();
+            String email = member.getEmail();
+            memberTable.addRow(new Row()
+                    .addCell(count)
+                    .addCell(name)
+                    .addCell(type)
+                    .addCell(birthdate)
+                    .addCell(email));
+            count++;
+        }
+        return memberTable;
+    }
+
+    private Table createCompMemberTable(String header,ArrayList<Member> members) {
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Email",
+                "Backstroke",
+                "Breaststroke",
+                "Butterfly",
+                "Crawl"
+        ));
+        Table compTable = new Table(header,columns,true);
+        for(Member member : members) {
+            CompetitiveMember compMember = (CompetitiveMember) member;
+            String name = member.getName();
+            String email = member.getEmail();
+            String breast = "01:19.434"; // TODO: Format time.
+            String back = "01:19.434"; // Format time, and get best time for dicipline
+            String fly = "01:19.434"; // Format time, and get best time for dicipline
+            String crawl = "01:19.434"; // Format time, and get best time for dicipline
+            compTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(email)
+                    .addCell(breast)
+                    .addCell(back)
+                    .addCell(fly)
+                    .addCell(crawl));
+        }
+        return compTable;
+    }
     private static String flipDateFormat(String date) {
         //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
         String[] splitInputDate = date.split("-");

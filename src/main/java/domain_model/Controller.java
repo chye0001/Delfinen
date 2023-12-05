@@ -1,6 +1,9 @@
 package domain_model;
 
+import domain_model.members.Member;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -41,6 +44,10 @@ public class Controller {
 
     public Team getSeniorTeam() {
         return memberDatabase.getSeniorTeam();
+    }
+
+    public ArrayList<Member> getClubMembers() {
+        return memberDatabase.getClubMembers();
     }
 
     public int getSizeOfMemberDatabase () {
