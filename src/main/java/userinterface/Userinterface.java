@@ -222,7 +222,8 @@ public class Userinterface {
     }
 
     private void showSubscriptionList() {
-        System.out.println(controller.showListOfSubscriptions());
+        //System.out.println(controller.showListOfSubscriptions());
+        System.out.println(createSubscriptionTable());
     }
 
     private void showIncomeForecast() {
@@ -321,6 +322,47 @@ public class Userinterface {
     }
 
 
+    private Table createSubscriptionTable() {
+        ArrayList<Member> members = controller.getClubMembers();
+        ArrayList<String> columns = new ArrayList<>(List.of(
+                "Name",
+                "Email",
+                "Age",
+                "Type",
+                "Price",
+                "Paid",
+                "Debt",
+                "Last Payment",
+                "Next Payment"
+        ));
+        Table subscriptionTable = new Table("Subscirptions",columns,true);
+        for(Member member : members) {
+            String name = member.getName();
+            String email = member.getEmail();
+            int age = member.getAge();
+            String type = member.getType().toString();
+            double price = member.getSubscriptionCost();
+            String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+            String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
+            double debt = member.getSubscriptDebt();
+            String lastPayment = member.getLastPaymentDate();
+            String nextPayment = member.getNextPaymentDate();
+            subscriptionTable.addRow(new Row()
+                    .addCell(name)
+                    .addCell(email)
+                    .addCell(age)
+                    .addCell(type)
+                    .addCell(price)
+                    .addCell(paid,paidColor)
+                    .addCell(debt)
+                    .addCell(lastPayment)
+                    .addCell(nextPayment));
+
+            //String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+
+        }
+        return subscriptionTable;
+    }
 
     private Table createMemberList() {
         ArrayList<String> columns = new ArrayList<>(List.of(
