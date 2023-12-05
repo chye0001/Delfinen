@@ -22,7 +22,7 @@ public class Controller {
         memberDatabase.addMemberToList(type, name, birthDate, email);
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
+    public void addResultToTeam(String email, double time, DisciplineType discipline) {
         memberDatabase.addResultToTeam(email,time,discipline);
     }
 

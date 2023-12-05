@@ -1,5 +1,6 @@
 package datasource;
 
+import domain_model.DisciplineType;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.Subscription;
@@ -15,8 +16,6 @@ import java.util.Scanner;
 public class FileHandler {
 
     public static void clubMembersSave(ArrayList<Member> listOfMembers, File fileToSaveTo) throws FileNotFoundException {
-        //TODO change way that info is saved
-        //why? -Kristoffer
         PrintStream printStream = new PrintStream(fileToSaveTo);
 
         for (Member member : listOfMembers) {
@@ -155,7 +154,7 @@ public class FileHandler {
             Result loadedResult = new Result(
                     attributes[0],
                     Double.parseDouble(attributes[1]),
-                    attributes[2],
+                    DisciplineType.valueOf(attributes[2].toUpperCase()),
                     LocalDate.parse(attributes[3])
             );
 

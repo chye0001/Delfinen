@@ -159,7 +159,6 @@ public class MemberDatabase {
             if (member != null) {
                 //takes birthdate of member with matching email and uses it to figure out which of the two teams
                 //that the result should be added to
-                //TODO make age comparison better, since it is currently just based on year comparison
                 int age = member.getAge();
                 if (age < 18) {
                     juniorTeam.addResultToLeaderboard(loadedResults.get(i));
@@ -170,7 +169,7 @@ public class MemberDatabase {
         }
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
+    public void addResultToTeam(String email, double time, DisciplineType discipline) {
         //the LocalDate is set to the moment the entry is made
         Result newResult = new Result(email, time, discipline, LocalDate.now());
 
@@ -194,7 +193,6 @@ public class MemberDatabase {
             }
         }
         if (member != null) {
-            //TODO make age comparison better, since it is currently just based on year comparison
             int age = member.getAge();
             if (age < 18) {
                 juniorTeam.addResultToLeaderboard(newResult);
