@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MemberDatabase {
 
@@ -147,6 +148,8 @@ public class MemberDatabase {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        Collections.sort(loadedResults, new ResultTimeComparator());
 
         for (int i = 0; i < loadedResults.size(); i++) {
             //starts off by finding a member that has the same email as the result
