@@ -41,7 +41,6 @@ public class FileHandler {
                                File resultsFile) throws FileNotFoundException {
         clubMembersSave(members, memberFile,resultsFile);
         subscriptionSave(members, subscriptionFile);
-        //resultsSave(members, resultsFile);
 
     }
 
@@ -76,8 +75,8 @@ public class FileHandler {
                     member.getLastPaymentDate() + ";" +
                     member.getNextPaymentDate() + ";" +
                     member.getSubscriptionCost() + ";" +
-                    member.getSubscriptDebt() + ";" +
-                    member.getIsPaid());
+                    member.getSubscriptDebt() + ";");
+
 
         }
 
@@ -163,7 +162,6 @@ public class FileHandler {
                 LocalDate nextPayment;
                 double cost = Double.parseDouble(attributes[3]);
                 double debt = Double.parseDouble(attributes[4]);
-                boolean isPaid = Boolean.parseBoolean(attributes[5]);
 
                 if (attributes[1].equalsIgnoreCase("-")) {
                     lastPayment = null;
@@ -173,24 +171,11 @@ public class FileHandler {
                     lastPayment = LocalDate.parse(attributes[1]);
                     nextPayment = LocalDate.parse(attributes[2]);
                 }
-                return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
+                return new Subscription(lastPayment, nextPayment, cost, debt);
             }
 
         }
         return null;
-    }
-
-    public static void competitiveResultsSave(ArrayList<Result> resultsList,
-                                              File fileToSaveTo) throws FileNotFoundException {
-        PrintStream printStream = new PrintStream(fileToSaveTo);
-
-        for (Result result : resultsList) {
-            printStream.println(
-                    result.getMemberEmail() + ";" +
-                            result.getTime() + ";" +
-                            result.getDate() + ";"
-            );
-        }
     }
 
     public static ArrayList<Result> competitiveResultsLoad(File fileToLoadFrom) throws FileNotFoundException {
