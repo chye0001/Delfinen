@@ -65,7 +65,8 @@ public class FileHandler {
                     member.getLastPaymentDate() + ";" +
                     member.getNextPaymentDate() + ";" +
                     member.getSubscriptionCost() + ";" +
-                    member.getSubscriptDebt());
+                    member.getSubscriptDebt() + ";" +
+                    member.getIsPaid());
 
         }
         
@@ -122,11 +123,22 @@ public class FileHandler {
             String[] attributes = line.split(";");
 
             if(attributes[0].equals(email)) {
-                LocalDate lastPayment = LocalDate.parse(attributes[1]);
-                LocalDate nextPayment = LocalDate.parse(attributes[2]);
-                double cost = Double.parseDouble( attributes[3]);
-                double debt = Double.parseDouble( attributes[4]);
-                return new Subscription(lastPayment,nextPayment,cost,debt);
+                if (attributes[1].equalsIgnoreCase("-")) {
+                    LocalDate lastPayment = null;
+                    LocalDate nextPayment = null;
+                    double cost = Double.parseDouble(attributes[3]);
+                    double debt = Double.parseDouble(attributes[4]);
+                    boolean isPaid = Boolean.parseBoolean(attributes[5]);
+                    return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
+
+                } else {
+                    LocalDate lastPayment = LocalDate.parse(attributes[1]);
+                    LocalDate nextPayment = LocalDate.parse(attributes[2]);
+                    double cost = Double.parseDouble(attributes[3]);
+                    double debt = Double.parseDouble(attributes[4]);
+                    boolean isPaid = Boolean.parseBoolean(attributes[5]);
+                    return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
+                }
             }
 
         }

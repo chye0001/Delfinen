@@ -31,7 +31,7 @@ public abstract class Member {
                   LocalDate birthDate,
                   String email,
                   String discipline,
-                  double subscriptionCost){
+                  double subscriptionCost) {
 
         this.name = name;
         this.birthDate = birthDate;
@@ -43,7 +43,7 @@ public abstract class Member {
     public Member(String name,
                   LocalDate birthDate,
                   String email,
-                  String discipline){
+                  String discipline) {
 
         this.name = name;
         this.birthDate = birthDate;
@@ -52,51 +52,70 @@ public abstract class Member {
     }
 
 
-
     //used for setting the subscription cost within the constructor of the sub-classes
     public void setSubscriptionByTypeAndAge() {
-        if (getType() == MemberType.PASSIVE){
+        if (getType() == MemberType.PASSIVE) {
             this.subscription = new Subscription(getType().getCost());
-        }else {
-            if (getAge() < 18){
+        } else {
+            if (getAge() < 18) {
                 this.subscription = new Subscription(getType().getCost());
-            }else if(getAge() < 60){
-                double seniorCost = getType().getCost()+600;
+            } else if (getAge() < 60) {
+                double seniorCost = getType().getCost() + 600;
                 this.subscription = new Subscription(seniorCost);
-            }else{
-                double pensionerCost = (getType().getCost()+600) * 0.75;
+            } else {
+                double pensionerCost = (getType().getCost() + 600) * 0.75;
                 this.subscription = new Subscription(pensionerCost);
             }
         }
     }
 
-    public double getSubscriptionCost(){
+    public double getSubscriptionCost() {
         return subscription.getPrice();
     }
 
     public Subscription getSubscription() {
         return subscription;
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public LocalDate getBirthDate(){
+
+    public LocalDate getBirthDate() {
         return birthDate;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public String getDiscipline(){
+
+    public String getDiscipline() {
         return discipline;
     }
+
+    public boolean getIsPaid() {
+        return subscription.havePaid();
+    }
+
     public abstract MemberType getType();
 
     public String getLastPaymentDate() {
-        return subscription.getLastPayment().toString();
+        if (subscription.getLastPayment() == null) {
+            return "-";
+
+        } else {
+            return subscription.getLastPayment().toString();
+        }
+
     }
 
     public String getNextPaymentDate() {
-        return subscription.getNextPayment().toString();
+        if (subscription.getNextPayment() == null) {
+            return "-";
+
+        } else {
+            return subscription.getNextPayment().toString();
+        }
     }
 
     public double getSubscriptDebt() {
@@ -105,7 +124,7 @@ public abstract class Member {
 
 
     public int getAge() {
-        return Period.between(birthDate,LocalDate.now()).getYears();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
 

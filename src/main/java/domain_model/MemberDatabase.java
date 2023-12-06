@@ -142,13 +142,11 @@ public class MemberDatabase {
     public String showIncomeForecast() {
         double totalExpectedIncome = 0;
         double duePaymentTotal = 0;
-        int paid = 0;
         int notPaid = 0;
         for (Member paymentStatus : clubMembers) {
 
             if (paymentStatus.getSubscription().havePaid()) {
                 totalExpectedIncome += paymentStatus.getSubscriptionCost();
-                paid++;
 
             } else {
                 notPaid++;
@@ -156,7 +154,7 @@ public class MemberDatabase {
             }
         }
         return "Expected 1 year revenue: " + totalExpectedIncome + "kr\n" +
-                (notPaid - paid) + " are due for payment totaling " + duePaymentTotal + "kr";
+                (notPaid) + " are due for payment totaling " + duePaymentTotal + "kr";
     }
 
 

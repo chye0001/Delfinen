@@ -229,7 +229,7 @@ public class Userinterface {
     }
     private void changePaymentStatus() {
         showSubscriptionList();
-        System.out.print("Change payment status for: ");
+        System.out.print("Cancel process by entering 0\nChange payment status for: ");
         int accountantChoise = Input.scannerInt(scanner, 0, controller.getClubMembers().size());
 
         if (accountantChoise == 0) {
@@ -350,6 +350,7 @@ public class Userinterface {
                 "Next Payment"
         ));
         Table subscriptionTable = new Table("Subscriptions",columns,true);
+        int count = 1;
         for(Member member : members) {
             String name = member.getName();
             String email = member.getEmail();
@@ -364,7 +365,7 @@ public class Userinterface {
             String lastPayment = member.getLastPaymentDate();
             String nextPayment = member.getNextPaymentDate();
             subscriptionTable.addRow(new Row()
-                    .addCell(name)
+                    .addCell(count + ": " + name)
                     .addCell(email)
                     .addCell(age)
                     .addCell(type)
@@ -375,7 +376,7 @@ public class Userinterface {
                     .addCell(nextPayment));
 
             //String paid = member.getSubscription().isPaid() ? "Yes" : "No";
-
+            count++;
         }
         return subscriptionTable;
     }

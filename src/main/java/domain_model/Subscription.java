@@ -10,11 +10,12 @@ public class Subscription {
     private double debt;
     private boolean isPaid = false;
 
-    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt, boolean isPaid){
         this.lastPayment = lastPayment;
         this.nextPayment = nextPayment;
         this.price = price;
         this.debt = debt;
+        this.isPaid = isPaid;
     }
 
     public Subscription (double price){
@@ -22,6 +23,7 @@ public class Subscription {
         this.nextPayment = null;
         this.price = price;
         this.debt = price;
+        this.isPaid = false;
     }
 
     public boolean havePaid() {
