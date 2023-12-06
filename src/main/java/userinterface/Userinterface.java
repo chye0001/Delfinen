@@ -198,9 +198,20 @@ public class Userinterface {
         String memberBirthDate = flipDateFormat(inputDate);
 
 
-        System.out.print("Email: ");
-        String memberEmail = Input.scannerEmail(scanner);
 
+        String memberEmail = "";
+        boolean uniqueEmail = false;
+        while(!uniqueEmail) {
+            System.out.print("Email: ");
+            uniqueEmail = true;
+            memberEmail = Input.scannerEmail(scanner);
+            for (Member member: controller.getClubMembers()) {
+                if (member.getEmail().equalsIgnoreCase(memberEmail)){
+                    uniqueEmail = false;
+                    System.out.println(Color.red("Email already exists!"));
+                }
+            }
+        }
 
         buildMenuForAddMember();
 
