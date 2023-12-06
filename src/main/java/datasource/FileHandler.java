@@ -1,5 +1,6 @@
 package datasource;
 
+import domain_model.Discipline;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.Subscription;
@@ -155,7 +156,7 @@ public class FileHandler {
             Result loadedResult = new Result(
                     attributes[0],
                     Double.parseDouble(attributes[1]),
-                    attributes[2],
+                    Discipline.valueOf(attributes[2].toUpperCase()),
                     LocalDate.parse(attributes[3])
             );
 
