@@ -38,19 +38,15 @@ public class CompetitiveMember extends Member {
             case CRAWL -> resultsCrawl;
         };
 
-        if (listContainsNull(results))
-            for (int i = 0; i < 5; i++) {
-                if (results[i] == null) results[i] = result;
-            }
-        else {
-            for (int i = 4; i >= 0; i--) {
-                if (results[i].compareTo(result) < 0) {
-                    results[i] = result;
-                    Arrays.sort(results);
-                }
+
+        for (int i = 4; i >= 0; i--) {
+            if (results[i].compareTo(result) < 0) {
+                results[i] = result;
+                Arrays.sort(results);
             }
         }
     }
+
 
     private boolean listContainsNull(Object[] list) {
         for (Object o : list) {
@@ -60,7 +56,6 @@ public class CompetitiveMember extends Member {
         }
         return false; // Array indeholder ikke null
     }
-
 
 
     @Override

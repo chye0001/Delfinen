@@ -17,6 +17,7 @@ public class Result implements Comparable<Result> {
 
     @Override
     public int compareTo(Result result) {
+        if (result == null) return 1;
         int compareTime = Double.compare(time, result.getTime());
         if (compareTime == 0) {
             return date.compareTo(result.getDate());
