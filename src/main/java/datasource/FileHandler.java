@@ -55,8 +55,8 @@ public class FileHandler {
 //        }
 //    }
 
-    private static void subscriptionSave(ArrayList<Member> members,
-                                         File subscriptionFile) throws FileNotFoundException {
+    public static void subscriptionSave(ArrayList<Member> members,
+                                        File subscriptionFile) throws FileNotFoundException {
         PrintStream printStream = new PrintStream(subscriptionFile);
 
         for (Member member : members) {
