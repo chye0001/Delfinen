@@ -18,7 +18,10 @@ public class Result implements Comparable<Result> {
     @Override
     public int compareTo(Result result) {
         if (result == null) return 1;
+        System.out.println("time = " + time);
+        System.out.println("Result " + result);
         int compareTime = Double.compare(time, result.getTime());
+        System.out.println("compareTime = " + compareTime);
         if (compareTime == 0) {
             return date.compareTo(result.getDate());
         } else return compareTime;
@@ -36,13 +39,21 @@ public class Result implements Comparable<Result> {
         return "";
     }
 
-    public String getDiscipline() {
-        return discipline.toString();
+    public Discipline getDiscipline() {
+        return discipline;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-
+    @Override
+    public String toString() {
+        return "Result{" +
+                "memberEmail='" + memberEmail + '\'' +
+                ", time=" + time +
+                ", discipline=" + discipline +
+                ", date=" + date +
+                '}';
+    }
 }
