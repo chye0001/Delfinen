@@ -64,6 +64,7 @@ public class Controller {
 
     public void changePaymentStatus(int accountantChoise) {
         memberDatabase.changePaymentStatus(accountantChoise);
+
     }
 
     public void editMember(int index, Member member){
