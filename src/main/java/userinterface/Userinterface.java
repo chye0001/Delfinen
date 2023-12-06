@@ -202,7 +202,8 @@ public class Userinterface {
         ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
         Table tableMenu = new Table("Accountant",columns,true);
         tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
-        tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Change payment status"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Show income forecast"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
         System.out.print("> ");
@@ -211,11 +212,12 @@ public class Userinterface {
 
     private int menuOptionsForAccountantProgram() {
         int accountantChosenOption;
-        accountantChosenOption = Input.scannerInt(scanner, 0, 2);
+        accountantChosenOption = Input.scannerInt(scanner, 0, 3);
 
         switch (accountantChosenOption) {
             case 1 -> showSubscriptionList();
-            case 2 -> showIncomeForecast();
+            case 2 -> changePaymentStatus();
+            case 3 -> showIncomeForecast();
             case 0 -> signOut();
         }
         return accountantChosenOption;
@@ -225,9 +227,21 @@ public class Userinterface {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
     }
+    private void changePaymentStatus() {
+        showSubscriptionList();
+        System.out.print("Change payment status for: ");
+        int accountantChoise = Input.scannerInt(scanner, 0, controller.getClubMembers().size());
+
+        if (accountantChoise == 0) {
+            System.out.println("canceling process...");
+        } else {
+            controller.changePaymentStatus(accountantChoise);
+            System.out.println("Payment status updated");
+        }
+    }
 
     private void showIncomeForecast() {
-        System.out.println("\nExpected 1 year revenue: " + controller.showIncomeForecast() + "kr.");
+        System.out.println(controller.showIncomeForecast());
     }
 
 
@@ -343,8 +357,8 @@ public class Userinterface {
             String type = member.getType().toString();
             double price = member.getSubscriptionCost();
             //ternary operators------------------------------------------------------------
-            String paid = member.getSubscription().isPaid() ? "Yes" : "No";
-            String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
+            String paid = member.getSubscription().havePaid() ? "Yes" : "No";
+            String paidColor = member.getSubscription().havePaid() ? Color.GREEN : Color.RED;
             //-----------------------------------------------------------------------------
             double debt = member.getSubscriptDebt();
             String lastPayment = member.getLastPaymentDate();

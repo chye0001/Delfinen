@@ -122,13 +122,41 @@ public class MemberDatabase {
         return sb.toString();
     }
 
+    public void changePaymentStatus(int accountantChoise) {
+        int paid = 0;
+        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
 
-    public double showIncomeForecast() {
-        double totalExpectedIncome = 0;
-        for (Member income : clubMembers) {
-            totalExpectedIncome += income.getSubscriptionCost();
+        memberSubscription.setIsPaid();
+        memberSubscription.setDebt(paid);
+        memberSubscription.setLastPayment(LocalDate.now());
+        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
+
+        try {
+            FileHandler.clubMembersSave(clubMembers, subscriptionFile);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return totalExpectedIncome;
+    }
+
+    public String showIncomeForecast() {
+        double totalExpectedIncome = 0;
+        double duePaymentTotal = 0;
+        int paid = 0;
+        int notPaid = 0;
+        for (Member paymentStatus : clubMembers) {
+
+            if (paymentStatus.getSubscription().havePaid()) {
+                totalExpectedIncome += paymentStatus.getSubscriptionCost();
+                paid++;
+
+            } else {
+                notPaid++;
+                duePaymentTotal += paymentStatus.getSubscriptionCost();
+            }
+        }
+        return "Expected 1 year revenue: " + totalExpectedIncome + "kr\n" +
+                (notPaid - paid) + " are due for payment totaling " + duePaymentTotal + "kr";
     }
 
 
