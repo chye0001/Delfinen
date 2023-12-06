@@ -7,6 +7,7 @@ import domain_model.Result;
 import domain_model.Subscription;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CompetitiveMember extends Member {
@@ -57,7 +58,20 @@ public class CompetitiveMember extends Member {
         return false; // Array indeholder ikke null
     }
 
-
+    public ArrayList<Result> getAllResults() {
+        ArrayList<Result> results = new ArrayList<>();
+        for(int i = 0; i < 5; i++) {
+            Result back = resultsBackstroke[i];
+            Result breast = resultsBreaststroke[i];
+            Result fly = resultsButterfly[i];
+            Result crawl = resultsCrawl[i];
+            if (back != null) results.add(back);
+            if (breast != null) results.add(breast);
+            if (fly != null) results.add(fly);
+            if (crawl != null) results.add(crawl);
+        }
+        return results;
+    }
     @Override
     public MemberType getType() {
         return type;
