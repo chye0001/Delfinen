@@ -11,7 +11,7 @@ public class Controller {
 
     public Controller() {
         memberDatabase.loadMemberDatabase();
-        memberDatabase.loadCompetitiveResults();
+        //memberDatabase.loadCompetitiveResults();
     }
 
     public void addMemberToList(MemberType type,
@@ -23,7 +23,7 @@ public class Controller {
     }
 
     public void addResultToTeam(String email, double time, String discipline) {
-        memberDatabase.addResultToTeam(email,time,discipline);
+        //memberDatabase.addResultToTeam(email,time,discipline);
     }
 
     public String showListOfMembers(boolean withNumbers) {
