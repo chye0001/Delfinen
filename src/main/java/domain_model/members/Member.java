@@ -93,8 +93,8 @@ public abstract class Member {
         return discipline;
     }
 
-    public boolean getIsPaid() {
-        return subscription.havePaid();
+    public boolean isPaid() {
+        return subscription.isPaid();
     }
 
     public abstract MemberType getType();
@@ -145,5 +145,9 @@ public abstract class Member {
 
     public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
+    }
+
+    public void pay() {
+        subscription.pay();
     }
 }
