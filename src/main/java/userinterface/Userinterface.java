@@ -18,6 +18,7 @@ public class Userinterface {
 
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
+    private final String promptSymbol = "> ";
 
 
     public void startProgram() {
@@ -33,7 +34,7 @@ public class Userinterface {
         menuTable.addRow(new Row().addCell("3").addCell("Coach"));
         menuTable.addRow(new Row().addCell("0").addCell("Close program"));
         System.out.println(menuTable);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
 
     }
 
@@ -70,7 +71,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("4").addCell("Delete member"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
     }
 
     private int menuOptionsForAdministratorProgram() {
@@ -205,7 +206,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
 
     }
 
@@ -257,7 +258,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
     }
 
     private int menuOptionsForCoachProgram() {
