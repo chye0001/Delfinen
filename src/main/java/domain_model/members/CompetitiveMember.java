@@ -40,6 +40,7 @@ public class CompetitiveMember extends Member {
             if (results[i] == null) {
                 results[i] = result;
                 Arrays.sort(results, new ResultTimeComparator());
+                break;
             } else {
                 if (results[i].compareTo(result) < 0) {
                     results[i] = result;
