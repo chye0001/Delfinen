@@ -23,9 +23,9 @@ public class FileHandler {
         for (Member member : listOfMembers) {
             printStream.println(
                     member.getType() + ";" +
-                    member.getName() + ";" +
-                    member.getBirthDate() + ";" +
-                    member.getEmail());
+                            member.getName() + ";" +
+                            member.getBirthDate() + ";" +
+                            member.getEmail());
         }
     }
 
@@ -33,27 +33,32 @@ public class FileHandler {
                                File memberFile,
                                File subscriptionFile,
                                File resultsFile) throws FileNotFoundException {
-        clubMembersSave(members,memberFile);
+        clubMembersSave(members, memberFile);
         subscriptionSave(members, subscriptionFile);
         //resultsSave(members, resultsFile);
-        
+
     }
 
-//    private static void resultsSave(ArrayList<Member> members,
-//                                    File resultsFile) {
-//        PrintStream printStream = new PrintStream(resultsFile);
-//
-//        for (Member member : members) {
-//            if (member instanceof CompetitiveMember compMember) {
-//                printStream.println(
-//                    compMember.getEmail() + ";" +
-//                    compMember.get
-//            }
-//
-//
-//
-//        }
-//    }
+    private static void resultsSave(CompetitiveMember member,
+                                    File resultsFile) {
+        PrintStream printStream = null;
+        try {
+            printStream = new PrintStream(resultsFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String email = member.getEmail();
+        ArrayList<Result> results = member.getAllResults();
+        for (Result result : results) {
+            printStream.println(
+                    member.getEmail() + ";" +
+                    result.getTime() + ";" +
+                    result.getDiscipline() + ";" +
+                    result.getDate());
+        }
+
+
+    }
 
     private static void subscriptionSave(ArrayList<Member> members,
                                          File subscriptionFile) throws FileNotFoundException {
@@ -62,49 +67,46 @@ public class FileHandler {
         for (Member member : members) {
             printStream.println(
                     member.getEmail() + ";" +
-                    member.getLastPaymentDate() + ";" +
-                    member.getNextPaymentDate() + ";" +
-                    member.getSubscriptionCost() + ";" +
-                    member.getSubscriptDebt());
+                            member.getLastPaymentDate() + ";" +
+                            member.getNextPaymentDate() + ";" +
+                            member.getSubscriptionCost() + ";" +
+                            member.getSubscriptDebt());
 
         }
-        
+
     }
 
-    public static ArrayList<Member> clubMembersLoad(File memberFile, File subscriptionFile) throws FileNotFoundException{
+    public static ArrayList<Member> clubMembersLoad(File memberFile, File subscriptionFile) throws FileNotFoundException {
 
         Scanner readFile = new Scanner(memberFile);
         ArrayList<Member> loadedFile = new ArrayList<>();
 
-        while (readFile.hasNext()){
+        while (readFile.hasNext()) {
             String line = readFile.nextLine();
             String[] attributes = line.split(";");
 
             Member addMember;
             MemberType memberType = MemberType.valueOf(attributes[0].toUpperCase());
-            switch (memberType){
-                case PASSIVE ->
-                    addMember = new PassiveMember(attributes[1],
-                            LocalDate.parse(attributes[2]),
-                            attributes[3],
-                            loadSubscription(attributes[3],subscriptionFile));
+            switch (memberType) {
+                case PASSIVE -> addMember = new PassiveMember(attributes[1],
+                        LocalDate.parse(attributes[2]),
+                        attributes[3],
+                        loadSubscription(attributes[3], subscriptionFile));
 
-                case EXERCISE ->
-                    addMember = new ExerciseMember(attributes[1],
-                            LocalDate.parse(attributes[2]),
-                            attributes[3],
-                            loadSubscription(attributes[3],subscriptionFile));
+                case EXERCISE -> addMember = new ExerciseMember(attributes[1],
+                        LocalDate.parse(attributes[2]),
+                        attributes[3],
+                        loadSubscription(attributes[3], subscriptionFile));
 
-                case COMPETITIVE ->
-                    addMember = new CompetitiveMember(attributes[1],
-                            LocalDate.parse(attributes[2]),
-                            attributes[3],
-                            loadSubscription(attributes[3],subscriptionFile));
+                case COMPETITIVE -> addMember = new CompetitiveMember(attributes[1],
+                        LocalDate.parse(attributes[2]),
+                        attributes[3],
+                        loadSubscription(attributes[3], subscriptionFile));
 
                 default -> addMember = null;
             }
 
-            if (!loadedFile.contains(addMember)){
+            if (!loadedFile.contains(addMember)) {
                 loadedFile.add(addMember);
             }
         }
@@ -116,17 +118,16 @@ public class FileHandler {
         Scanner readFile = new Scanner(subscriptionFile);
 
 
-
-        while (readFile.hasNext()){
+        while (readFile.hasNext()) {
             String line = readFile.nextLine();
             String[] attributes = line.split(";");
 
-            if(attributes[0].equals(email)) {
+            if (attributes[0].equals(email)) {
                 LocalDate lastPayment = LocalDate.parse(attributes[1]);
                 LocalDate nextPayment = LocalDate.parse(attributes[2]);
-                double cost = Double.parseDouble( attributes[3]);
-                double debt = Double.parseDouble( attributes[4]);
-                return new Subscription(lastPayment,nextPayment,cost,debt);
+                double cost = Double.parseDouble(attributes[3]);
+                double debt = Double.parseDouble(attributes[4]);
+                return new Subscription(lastPayment, nextPayment, cost, debt);
             }
 
         }
@@ -137,20 +138,20 @@ public class FileHandler {
                                               File fileToSaveTo) throws FileNotFoundException {
         PrintStream printStream = new PrintStream(fileToSaveTo);
 
-        for (Result result : resultsList){
+        for (Result result : resultsList) {
             printStream.println(
-                    result.getMemberEmail()+";"+
-                            result.getTime()+";"+
-                            result.getDate()+";"
+                    result.getMemberEmail() + ";" +
+                            result.getTime() + ";" +
+                            result.getDate() + ";"
             );
         }
     }
 
-    public static ArrayList<Result> competitiveResultsLoad(File fileToLoadFrom) throws FileNotFoundException{
+    public static ArrayList<Result> competitiveResultsLoad(File fileToLoadFrom) throws FileNotFoundException {
         Scanner fileReader = new Scanner(fileToLoadFrom);
         ArrayList<Result> loadedList = new ArrayList<>();
 
-        while (fileReader.hasNext()){
+        while (fileReader.hasNext()) {
             String[] attributes = fileReader.nextLine().split(";");
 
             Result loadedResult = new Result(
@@ -160,7 +161,7 @@ public class FileHandler {
                     LocalDate.parse(attributes[3])
             );
 
-            if(!loadedList.contains(loadedResult)){
+            if (!loadedList.contains(loadedResult)) {
                 loadedList.add(loadedResult);
             }
         }
