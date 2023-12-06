@@ -150,9 +150,9 @@ public class Userinterface {
     }
 
     private void deleteMember() {
+        showListOfMembers(true);
         System.out.println("Choose member to delete:");
         System.out.println("0. Cancel");
-        showListOfMembers(true);
         int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
         if (input == 0) {
             System.out.println("Exiting...");
