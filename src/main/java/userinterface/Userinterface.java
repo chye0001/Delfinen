@@ -228,15 +228,6 @@ public class Userinterface {
             memberType = MemberType.COMPETITIVE;
         }
 
-        /*
-        String memberDiscipline = "None";
-        if (menuChoiceMemberType == 3) {
-            System.out.print("Discipline: \n1. Backstroke\n2. Breaststroke\n3. Butterfly\n4. Crawl\nChoice: ");
-
-            memberDiscipline = menuOptionsForMemberDisciplin();
-        }
-        */
-
         try {
             controller.addMemberToList(memberType,
                     memberName,
@@ -342,14 +333,6 @@ public class Userinterface {
     }
 
     private void buildMenuForCoachProgram() {
-//        System.out.print("""
-//
-//                Coach - Options
-//                1. Show Junior Team
-//                2. Show Senior Team
-//                3. Add New Result
-//                0. Sign Out
-//                Choice:""");
         ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
         Table tableMenu = new Table("Coach",columns,true);
         tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));

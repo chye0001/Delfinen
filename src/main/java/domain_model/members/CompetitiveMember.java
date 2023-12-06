@@ -50,16 +50,6 @@ public class CompetitiveMember extends Member {
         }
     }
 
-
-    private boolean listContainsNull(Object[] list) {
-        for (Object o : list) {
-            if (o == null) {
-                return true; // Array indeholder null
-            }
-        }
-        return false; // Array indeholder ikke null
-    }
-
     public ArrayList<Result> getAllResults() {
         ArrayList<Result> results = new ArrayList<>();
         for(int i = 0; i < 5; i++) {
