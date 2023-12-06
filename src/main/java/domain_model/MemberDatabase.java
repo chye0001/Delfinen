@@ -123,20 +123,27 @@ public class MemberDatabase {
     }
 
     public void changePaymentStatus(int accountantChoise) {
-        int paid = 0;
-        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
-
-        memberSubscription.setIsPaid();
-        memberSubscription.setDebt(paid);
-        memberSubscription.setLastPayment(LocalDate.now());
-        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
-
+        Member member = getClubMembers().get(accountantChoise-1);
+        member.pay();
         try {
-            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            FileHandler.saveAll(clubMembers,administratorFile,subscriptionFile,resultsFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
+//        int paid = 0;
+//        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
+//
+//        memberSubscription.setIsPaid();
+//        memberSubscription.setDebt(paid);
+//        memberSubscription.setLastPayment(LocalDate.now());
+//        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
+//
+//        try {
+//            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public String showIncomeForecast() {
@@ -145,7 +152,7 @@ public class MemberDatabase {
         int notPaid = 0;
         for (Member paymentStatus : clubMembers) {
 
-            if (paymentStatus.getSubscription().havePaid()) {
+            if (paymentStatus.getSubscription().isPaid()) {
                 totalExpectedIncome += paymentStatus.getSubscriptionCost();
 
             } else {
@@ -166,35 +173,35 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void loadCompetitiveResults() {
-        ArrayList<Result> loadedResults = new ArrayList<>();
-        try {
-            loadedResults = FileHandler.competitiveResultsLoad(competitiveResultsFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        for (int i = 0; i < loadedResults.size(); i++) {
-            //starts off by finding a member that has the same email as the result
-            Member member = null;
-            for (Member clubMember : clubMembers) {
-                if (loadedResults.get(i).getMemberEmail().equals(clubMember.getEmail())) {
-                    member = clubMember;
-                }
-            }
-            if (member != null) {
-                //takes birthdate of member with matching email and uses it to figure out which of the two teams
-                //that the result should be added to
-                //TODO make age comparison better, since it is currently just based on year comparison
-                int age = member.getAge();
-                if (age < 18) {
-                    juniorTeam.addResultToLeaderboard(loadedResults.get(i));
-                } else {
-                    seniorTeam.addResultToLeaderboard(loadedResults.get(i));
-                }
-            }
-        }
-    }
+//    public void loadCompetitiveResults() {
+//        ArrayList<Result> loadedResults = new ArrayList<>();
+//        try {
+//            loadedResults = FileHandler.competitiveResultsLoad(competitiveResultsFile);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+//
+//        for (int i = 0; i < loadedResults.size(); i++) {
+//            //starts off by finding a member that has the same email as the result
+//            Member member = null;
+//            for (Member clubMember : clubMembers) {
+//                if (loadedResults.get(i).getMemberEmail().equals(clubMember.getEmail())) {
+//                    member = clubMember;
+//                }
+//            }
+//            if (member != null) {
+//                //takes birthdate of member with matching email and uses it to figure out which of the two teams
+//                //that the result should be added to
+//                //TODO make age comparison better, since it is currently just based on year comparison
+//                int age = member.getAge();
+//                if (age < 18) {
+//                    juniorTeam.addResultToLeaderboard(loadedResults.get(i));
+//                } else {
+//                    seniorTeam.addResultToLeaderboard(loadedResults.get(i));
+//                }
+//            }
+//        }
+//    }
 
     public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
