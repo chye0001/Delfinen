@@ -61,4 +61,8 @@ public class Controller {
     public void deleteMember(int memberIndex) {
         memberDatabase.deleteMember(memberIndex);
     }
+
+    public void editMember(int index, Member member){
+        memberDatabase.editMember(index,member);
+    }
 }

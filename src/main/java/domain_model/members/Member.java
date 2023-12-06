@@ -108,5 +108,23 @@ public abstract class Member {
         return Period.between(birthDate,LocalDate.now()).getYears();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
 }

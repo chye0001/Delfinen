@@ -205,4 +205,13 @@ public class MemberDatabase {
             e.printStackTrace();
         }
     }
+
+    public void editMember(int index, Member member){
+        clubMembers.set(index,member);
+        try {
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }

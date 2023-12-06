@@ -4,7 +4,9 @@ import domain_model.Controller;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.members.CompetitiveMember;
+import domain_model.members.ExerciseMember;
 import domain_model.members.Member;
+import domain_model.members.PassiveMember;
 import userinterface.table.Row;
 import userinterface.table.Table;
 
@@ -18,7 +20,6 @@ public class Userinterface {
 
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
-    private final String promptSymbol = "> ";
 
 
     public void startProgram() {
@@ -34,7 +35,7 @@ public class Userinterface {
         menuTable.addRow(new Row().addCell("3").addCell("Coach"));
         menuTable.addRow(new Row().addCell("0").addCell("Close program"));
         System.out.println(menuTable);
-        System.out.print(promptSymbol);
+        System.out.print("> ");
 
     }
 
@@ -71,7 +72,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("4").addCell("Delete member"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print(promptSymbol);
+        System.out.print("> ");
     }
 
     private int menuOptionsForAdministratorProgram() {
@@ -81,11 +82,99 @@ public class Userinterface {
         switch (administratorChosenOption) {
             case 1 -> addNewMember();
             case 2 -> showListOfMembers(false);
-//                case 3 -> editMemberInformation(); //TODO - add edit
+            case 3 -> editMemberInformation();
             case 4 -> deleteMember();
             case 0 -> signOut();
         }
         return administratorChosenOption;
+    }
+
+    private void editMemberInformation(){
+        showListOfMembers(true);
+        System.out.println("Choose member to delete:");
+        System.out.println("0. Cancel");
+        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
+        if (input == 0) {
+            System.out.println("Cancelling...");
+            administratorProgram();
+        } else {
+            Member chosenMember = controller.getClubMembers().get(input-1);
+            System.out.print("""
+                    
+                    Chose the information that you wish to change:
+                    1. Name
+                    2. Birth Date
+                    3. Email
+                    4. Membership Type
+                    0. Cancel
+                    """);
+            int choice = Input.scannerInt(scanner,0,4);
+            switch (choice){
+                case 1 -> {
+                    System.out.print("\nName: ");
+                    chosenMember.setName(scanner.nextLine());
+                }
+                case 2 -> {
+                    System.out.print("Birth date in DD-MM-YYYY: ");
+                    chosenMember.setBirthDate(LocalDate.parse(
+                            flipDateFormat(Input.scannerDate(scanner))));
+                }
+                case 3 -> {
+                    System.out.print("Email: ");
+                    String memberEmail = Input.scannerEmail(scanner);
+                    for (Member member: controller.getClubMembers()) {
+                        //returns to menu if email already exists
+                        if (member.getEmail().equalsIgnoreCase(memberEmail)){
+                            System.out.println(Color.red("Email already exists!\nNo changes made!"));
+                            administratorProgram();
+                        }
+                    }
+                    chosenMember.setEmail(memberEmail);
+                }
+                case 4 -> {
+                    buildMenuForAddMember();
+                    int menuChoiceMemberType = Input.scannerInt(scanner, 1, 3);
+
+                    if (menuChoiceMemberType == 1) {
+                        chosenMember = new PassiveMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                    if (menuChoiceMemberType == 2) {
+                        chosenMember = new ExerciseMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                    if (menuChoiceMemberType == 3) {
+                        chosenMember = new CompetitiveMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                }
+                case 0 -> {
+                    System.out.println("Cancelling...");
+                    administratorProgram();
+                }
+            }
+
+            editMemberByIndex(input - 1,chosenMember);
+        }
+    }
+
+    private void editMemberByIndex(int index, Member member){
+        controller.editMember(index,member);
+    }
+
+    private void deleteMember() {
+        showListOfMembers(true);
+        System.out.println("Choose member to delete:");
+        System.out.println("0. Cancel");
+        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
+        if (input == 0) {
+            System.out.println("Cancelling...");
+            administratorProgram();
+        } else {
+            System.out.println(memberNameFromIndex(input - 1) + " deleted");
+            deleteMemberByIndex(input - 1);
+        }
+
     }
 
     private void showListOfMembers(boolean withNumbers) {
@@ -149,22 +238,6 @@ public class Userinterface {
         }
     }
 
-    private void deleteMember() {
-        showListOfMembers(true);
-        System.out.println("Choose member to delete:");
-        System.out.println("0. Cancel");
-        System.out.print(promptSymbol);
-        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
-        if (input == 0) {
-            System.out.println("Exiting...");
-            administratorProgram();
-        } else {
-            System.out.println(memberNameFromIndex(input - 1) + " deleted");
-            deleteMemberByIndex(input - 1);
-        }
-
-    }
-
     private void buildMenuForAddMember() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMember Type:\n").
@@ -207,7 +280,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print(promptSymbol);
+        System.out.print("> ");
 
     }
 
@@ -259,7 +332,7 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print(promptSymbol);
+        System.out.print("> ");
     }
 
     private int menuOptionsForCoachProgram() {
