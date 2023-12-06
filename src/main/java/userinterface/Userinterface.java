@@ -444,8 +444,8 @@ public class Userinterface {
             String type = member.getType().toString();
             double price = member.getSubscriptionCost();
             //ternary operators------------------------------------------------------------
-            String paid = member.getSubscription().havePaid() ? "Yes" : "No";
-            String paidColor = member.getSubscription().havePaid() ? Color.GREEN : Color.RED;
+            String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+            String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
             //-----------------------------------------------------------------------------
             double debt = member.getSubscriptDebt();
             String lastPayment = member.getLastPaymentDate();
