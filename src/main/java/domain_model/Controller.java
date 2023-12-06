@@ -34,7 +34,7 @@ public class Controller {
         return memberDatabase.showListOfSubscription();
     }
 
-    public double showIncomeForecast() {
+    public String showIncomeForecast() {
         return memberDatabase.showIncomeForecast();
     }
 
@@ -60,5 +60,13 @@ public class Controller {
 
     public void deleteMember(int memberIndex) {
         memberDatabase.deleteMember(memberIndex);
+    }
+
+    public void changePaymentStatus(int accountantChoise) {
+        memberDatabase.changePaymentStatus(accountantChoise);
+    }
+
+    public void editMember(int index, Member member){
+        memberDatabase.editMember(index,member);
     }
 }

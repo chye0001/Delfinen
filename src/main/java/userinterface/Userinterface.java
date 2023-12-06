@@ -4,7 +4,9 @@ import domain_model.Controller;
 import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.members.CompetitiveMember;
+import domain_model.members.ExerciseMember;
 import domain_model.members.Member;
+import domain_model.members.PassiveMember;
 import userinterface.table.Row;
 import userinterface.table.Table;
 
@@ -80,11 +82,99 @@ public class Userinterface {
         switch (administratorChosenOption) {
             case 1 -> addNewMember();
             case 2 -> showListOfMembers(false);
-//                case 3 -> editMemberInformation(); //TODO - add edit
+            case 3 -> editMemberInformation();
             case 4 -> deleteMember();
             case 0 -> signOut();
         }
         return administratorChosenOption;
+    }
+
+    private void editMemberInformation(){
+        showListOfMembers(true);
+        System.out.println("Choose member to delete:");
+        System.out.println("0. Cancel");
+        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
+        if (input == 0) {
+            System.out.println("Cancelling...");
+            administratorProgram();
+        } else {
+            Member chosenMember = controller.getClubMembers().get(input-1);
+            System.out.print("""
+                    
+                    Chose the information that you wish to change:
+                    1. Name
+                    2. Birth Date
+                    3. Email
+                    4. Membership Type
+                    0. Cancel
+                    """);
+            int choice = Input.scannerInt(scanner,0,4);
+            switch (choice){
+                case 1 -> {
+                    System.out.print("\nName: ");
+                    chosenMember.setName(scanner.nextLine());
+                }
+                case 2 -> {
+                    System.out.print("Birth date in DD-MM-YYYY: ");
+                    chosenMember.setBirthDate(LocalDate.parse(
+                            flipDateFormat(Input.scannerDate(scanner))));
+                }
+                case 3 -> {
+                    System.out.print("Email: ");
+                    String memberEmail = Input.scannerEmail(scanner);
+                    for (Member member: controller.getClubMembers()) {
+                        //returns to menu if email already exists
+                        if (member.getEmail().equalsIgnoreCase(memberEmail)){
+                            System.out.println(Color.red("Email already exists!\nNo changes made!"));
+                            administratorProgram();
+                        }
+                    }
+                    chosenMember.setEmail(memberEmail);
+                }
+                case 4 -> {
+                    buildMenuForAddMember();
+                    int menuChoiceMemberType = Input.scannerInt(scanner, 1, 3);
+
+                    if (menuChoiceMemberType == 1) {
+                        chosenMember = new PassiveMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                    if (menuChoiceMemberType == 2) {
+                        chosenMember = new ExerciseMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                    if (menuChoiceMemberType == 3) {
+                        chosenMember = new CompetitiveMember(chosenMember.getName(),
+                                chosenMember.getBirthDate(), chosenMember.getEmail());
+                    }
+                }
+                case 0 -> {
+                    System.out.println("Cancelling...");
+                    administratorProgram();
+                }
+            }
+
+            editMemberByIndex(input - 1,chosenMember);
+        }
+    }
+
+    private void editMemberByIndex(int index, Member member){
+        controller.editMember(index,member);
+    }
+
+    private void deleteMember() {
+        showListOfMembers(true);
+        System.out.println("Choose member to delete:");
+        System.out.println("0. Cancel");
+        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
+        if (input == 0) {
+            System.out.println("Cancelling...");
+            administratorProgram();
+        } else {
+            System.out.println(memberNameFromIndex(input - 1) + " deleted");
+            deleteMemberByIndex(input - 1);
+        }
+
     }
 
     private void showListOfMembers(boolean withNumbers) {
@@ -108,9 +198,20 @@ public class Userinterface {
         String memberBirthDate = flipDateFormat(inputDate);
 
 
-        System.out.print("Email: ");
-        String memberEmail = Input.scannerEmail(scanner);
 
+        String memberEmail = "";
+        boolean uniqueEmail = false;
+        while(!uniqueEmail) {
+            System.out.print("Email: ");
+            uniqueEmail = true;
+            memberEmail = Input.scannerEmail(scanner);
+            for (Member member: controller.getClubMembers()) {
+                if (member.getEmail().equalsIgnoreCase(memberEmail)){
+                    uniqueEmail = false;
+                    System.out.println(Color.red("Email already exists!"));
+                }
+            }
+        }
 
         buildMenuForAddMember();
 
@@ -146,21 +247,6 @@ public class Userinterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private void deleteMember() {
-        System.out.println("Choose member to delete:");
-        System.out.println("0. Cancel");
-        showListOfMembers(true);
-        int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
-        if (input == 0) {
-            System.out.println("Exiting...");
-            administratorProgram();
-        } else {
-            System.out.println(memberNameFromIndex(input - 1) + " deleted");
-            deleteMemberByIndex(input - 1);
-        }
-
     }
 
     private void buildMenuForAddMember() {
@@ -202,7 +288,8 @@ public class Userinterface {
         ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
         Table tableMenu = new Table("Accountant",columns,true);
         tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
-        tableMenu.addRow(new Row().addCell("2").addCell("Show income forecast"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Change payment status"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Show income forecast"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
         System.out.print("> ");
@@ -211,11 +298,12 @@ public class Userinterface {
 
     private int menuOptionsForAccountantProgram() {
         int accountantChosenOption;
-        accountantChosenOption = Input.scannerInt(scanner, 0, 2);
+        accountantChosenOption = Input.scannerInt(scanner, 0, 3);
 
         switch (accountantChosenOption) {
             case 1 -> showSubscriptionList();
-            case 2 -> showIncomeForecast();
+            case 2 -> changePaymentStatus();
+            case 3 -> showIncomeForecast();
             case 0 -> signOut();
         }
         return accountantChosenOption;
@@ -225,9 +313,21 @@ public class Userinterface {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
     }
+    private void changePaymentStatus() {
+        showSubscriptionList();
+        System.out.print("Cancel process by entering 0\nChange payment status for: ");
+        int accountantChoise = Input.scannerInt(scanner, 0, controller.getClubMembers().size());
+
+        if (accountantChoise == 0) {
+            System.out.println("canceling process...");
+        } else {
+            controller.changePaymentStatus(accountantChoise);
+            System.out.println("Payment status updated");
+        }
+    }
 
     private void showIncomeForecast() {
-        System.out.println("\nExpected 1 year revenue: " + controller.showIncomeForecast() + "kr.");
+        System.out.println(controller.showIncomeForecast());
     }
 
 
@@ -335,20 +435,23 @@ public class Userinterface {
                 "Last Payment",
                 "Next Payment"
         ));
-        Table subscriptionTable = new Table("Subscirptions",columns,true);
+        Table subscriptionTable = new Table("Subscriptions",columns,true);
+        int count = 1;
         for(Member member : members) {
             String name = member.getName();
             String email = member.getEmail();
             int age = member.getAge();
             String type = member.getType().toString();
             double price = member.getSubscriptionCost();
-            String paid = member.getSubscription().isPaid() ? "Yes" : "No";
-            String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
+            //ternary operators------------------------------------------------------------
+            String paid = member.getSubscription().havePaid() ? "Yes" : "No";
+            String paidColor = member.getSubscription().havePaid() ? Color.GREEN : Color.RED;
+            //-----------------------------------------------------------------------------
             double debt = member.getSubscriptDebt();
             String lastPayment = member.getLastPaymentDate();
             String nextPayment = member.getNextPaymentDate();
             subscriptionTable.addRow(new Row()
-                    .addCell(name)
+                    .addCell(count + ": " + name)
                     .addCell(email)
                     .addCell(age)
                     .addCell(type)
@@ -359,7 +462,7 @@ public class Userinterface {
                     .addCell(nextPayment));
 
             //String paid = member.getSubscription().isPaid() ? "Yes" : "No";
-
+            count++;
         }
         return subscriptionTable;
     }

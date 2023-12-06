@@ -66,17 +66,18 @@ public class FileHandler {
 
     }
 
-    private static void subscriptionSave(ArrayList<Member> members,
-                                         File subscriptionFile) throws FileNotFoundException {
+    public static void subscriptionSave(ArrayList<Member> members,
+                                        File subscriptionFile) throws FileNotFoundException {
         PrintStream printStream = new PrintStream(subscriptionFile);
 
         for (Member member : members) {
             printStream.println(
                     member.getEmail() + ";" +
-                            member.getLastPaymentDate() + ";" +
-                            member.getNextPaymentDate() + ";" +
-                            member.getSubscriptionCost() + ";" +
-                            member.getSubscriptDebt());
+                    member.getLastPaymentDate() + ";" +
+                    member.getNextPaymentDate() + ";" +
+                    member.getSubscriptionCost() + ";" +
+                    member.getSubscriptDebt() + ";" +
+                    member.getIsPaid());
 
         }
 
@@ -157,12 +158,22 @@ public class FileHandler {
             String line = readFile.nextLine();
             String[] attributes = line.split(";");
 
-            if (attributes[0].equals(email)) {
-                LocalDate lastPayment = LocalDate.parse(attributes[1]);
-                LocalDate nextPayment = LocalDate.parse(attributes[2]);
+            if(attributes[0].equals(email)) {
+                LocalDate lastPayment;
+                LocalDate nextPayment;
                 double cost = Double.parseDouble(attributes[3]);
                 double debt = Double.parseDouble(attributes[4]);
-                return new Subscription(lastPayment, nextPayment, cost, debt);
+                boolean isPaid = Boolean.parseBoolean(attributes[5]);
+
+                if (attributes[1].equalsIgnoreCase("-")) {
+                    lastPayment = null;
+                    nextPayment = null;
+
+                } else {
+                    lastPayment = LocalDate.parse(attributes[1]);
+                    nextPayment = LocalDate.parse(attributes[2]);
+                }
+                return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
             }
 
         }

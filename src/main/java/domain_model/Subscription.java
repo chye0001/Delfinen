@@ -8,25 +8,29 @@ public class Subscription {
     private LocalDate nextPayment;
     private double price;
     private double debt;
+    private boolean isPaid = false;
 
-    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt, boolean isPaid){
         this.lastPayment = lastPayment;
         this.nextPayment = nextPayment;
         this.price = price;
         this.debt = debt;
+        this.isPaid = isPaid;
     }
 
     public Subscription (double price){
-        this.lastPayment = LocalDate.now();
-        this.nextPayment = lastPayment.plusYears(1);
+        this.lastPayment = null;
+        this.nextPayment = null;
         this.price = price;
-        this.debt = 0;
+        this.debt = price;
+        this.isPaid = false;
     }
 
-
-
-    public boolean isPaid () {
-        return (Period.between(lastPayment,LocalDate.now()).getYears() < 1);
+    public boolean havePaid() {
+        return isPaid;
+    }
+    public void setIsPaid() {
+        this.isPaid = !isPaid;
     }
 
     public LocalDate getLastPayment() {
@@ -39,19 +43,35 @@ public class Subscription {
     public double getPrice() {
         return price;
     }
-
-
-
     public double getDebt() {
         return debt;
+    }
+    public void setDebt(int amount) {
+        this.debt = amount;
+    }
+    public void setLastPayment(LocalDate paymentDate) {
+        this.lastPayment = paymentDate;
+    }
+    public void setNextPayment(LocalDate nextPaymentDate) {
+        this.nextPayment = nextPaymentDate;
     }
 
     @Override
     public String toString() {
-        return  "Price: " + price +
-                ", Last payment date: " + lastPayment +
-                ", Next payment date: " + nextPayment +
-                ", Payment status: " + (isPaid() ? "Paid" : "Not paid") +
-                ", Debt: " + debt;
+        if (lastPayment == null){
+            return  "Price: " + price +
+                    ", Last payment date: " + "-" +
+                    ", Next payment date: " + "-" +
+                    ", Payment status: " + (havePaid() ? "Paid" : "Not paid") +
+                    ", Debt: " + debt;
+
+        } else {
+           return  "Price: " + price +
+                    ", Last payment date: " + lastPayment +
+                    ", Next payment date: " + nextPayment +
+                    ", Payment status: " + (havePaid() ? "Paid" : "Not paid") +
+                    ", Debt: " + debt;
+        }
+
     }
 }
