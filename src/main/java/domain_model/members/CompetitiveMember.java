@@ -1,10 +1,6 @@
 package domain_model.members;
 
-import domain_model.Discipline;
-import domain_model.MemberType;
-
-import domain_model.Result;
-import domain_model.Subscription;
+import domain_model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,7 +27,8 @@ public class CompetitiveMember extends Member {
     }
 
 
-    public void addResult(Result result, Discipline discipline) {
+    public void addResult(Result result) {
+        Discipline discipline = result.getDiscipline();
         Result[] results = switch (discipline) {
             case BACKSTROKE -> resultsBackstroke;
             case BREASTSTROKE -> resultsBreaststroke;
@@ -39,11 +36,15 @@ public class CompetitiveMember extends Member {
             case CRAWL -> resultsCrawl;
         };
 
-
         for (int i = 4; i >= 0; i--) {
-            if (results[i].compareTo(result) < 0) {
+            if (results[i] == null) {
                 results[i] = result;
-                Arrays.sort(results);
+                Arrays.sort(results, new ResultTimeComparator());
+            } else {
+                if (results[i].compareTo(result) < 0) {
+                    results[i] = result;
+                    Arrays.sort(results,new ResultTimeComparator());
+                }
             }
         }
     }
@@ -77,4 +78,9 @@ public class CompetitiveMember extends Member {
         return type;
     }
 
+    public void setResults(ArrayList<Result> results) {
+        for(Result result : results) {
+            if (result != null) addResult(result);
+        }
+    }
 }
