@@ -1,7 +1,6 @@
 package userinterface;
 
 import domain_model.Controller;
-import domain_model.Result;
 import domain_model.MemberType;
 import domain_model.members.CompetitiveMember;
 import domain_model.members.ExerciseMember;
@@ -10,7 +9,6 @@ import domain_model.members.PassiveMember;
 import userinterface.table.Row;
 import userinterface.table.Table;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +18,19 @@ public class Userinterface {
 
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
-
-
+    private boolean run = true;
+    
     public void startProgram() {
-        buildMenuForStartProgram();
-        menuOptionsForStartProgram();
+        mainProgram();
     }
-
-    private void buildMenuForStartProgram() {
+    
+    private void mainProgram () {
+        while (run) {
+            buildMainMenu();
+            mainMenuOptions();
+        }
+    }
+    private void buildMainMenu() {
         ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
         Table menuTable = new Table("Delfinen",columns,true);
         menuTable.addRow(new Row().addCell("1").addCell("Adminstrator"));
@@ -38,8 +41,7 @@ public class Userinterface {
         System.out.print("> ");
 
     }
-
-    private void menuOptionsForStartProgram() {
+    private void mainMenuOptions() {
 
         int choice = Input.scannerInt(scanner, 0, 3);
 
@@ -54,16 +56,10 @@ public class Userinterface {
 
 
     private void administratorProgram() {
-        int administratorChosenOption;
-
-        do {
-            buildMenuForAdministratorProgram();
-            administratorChosenOption = menuOptionsForAdministratorProgram();
-
-        } while (administratorChosenOption != 0);
+            buildAdministratorMenu();
+            administratorMenuOptions();
     }
-
-    private void buildMenuForAdministratorProgram() {
+    private void buildAdministratorMenu() {
         ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
         Table tableMenu = new Table("Adminstrator",columns,true);
         tableMenu.addRow(new Row().addCell("1").addCell("Add new member"));
@@ -74,24 +70,77 @@ public class Userinterface {
         System.out.println(tableMenu);
         System.out.print("> ");
     }
-
-    private int menuOptionsForAdministratorProgram() {
-        int administratorChosenOption;
-        administratorChosenOption = Input.scannerInt(scanner, 0, 4);
-
-        switch (administratorChosenOption) {
+    private void administratorMenuOptions() {
+        int input = Input.scannerInt(scanner, 0, 4);
+        switch (input) {
             case 1 -> addNewMember();
             case 2 -> showListOfMembers(false);
             case 3 -> editMemberInformation();
             case 4 -> deleteMember();
-            case 0 -> signOut();
+            case 0 -> signOutToMainProgram();
         }
-        return administratorChosenOption;
     }
 
+
+    private void accountantProgram() {
+            buildAccountantMenu();
+            accountantMenuOptions();
+    }
+    private void buildAccountantMenu() {
+        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
+        Table tableMenu = new Table("Accountant",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Change payment status"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Show income forecast"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
+
+    }
+    private void accountantMenuOptions() {
+        int input = Input.scannerInt(scanner, 0, 3);
+        switch (input) {
+            case 1 -> showSubscriptionList();
+            case 2 -> changePaymentStatus();
+            case 3 -> showIncomeForecast();
+            case 0 -> signOutToMainProgram();
+        }
+    }
+
+
+    private void coachProgram() {
+            buildCoachMenu();
+            coachMenuOptions();
+    }
+    private void buildCoachMenu() {
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
+        Table tableMenu = new Table("Coach",columns,true);
+        tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
+        tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
+        tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
+        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
+        System.out.println(tableMenu);
+        System.out.print("> ");
+    }
+    private void coachMenuOptions() {
+        int input = Input.scannerInt(scanner, 0, 3);
+        switch (input) {
+            case 1 -> showJuniorTeam();
+            case 2 -> showSeniorTeam();
+            case 3 -> addNewResult();
+            case 0 -> signOutToMainProgram();
+        }
+    }
+
+
+    private void signOutToMainProgram() {
+        System.out.println("Signing out...");
+        mainProgram();
+    }
+    
     private void editMemberInformation(){
         showListOfMembers(true);
-        System.out.println("Choose member to delete:");
+        System.out.println("Choose member to edit:");
         System.out.println("0. Cancel");
         int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
         if (input == 0) {
@@ -174,7 +223,9 @@ public class Userinterface {
             System.out.println(memberNameFromIndex(input - 1) + " deleted");
             deleteMemberByIndex(input - 1);
         }
-
+    }
+    private void deleteMemberByIndex(int memberIndex) {
+        controller.deleteMember(memberIndex);
     }
 
     private void showListOfMembers(boolean withNumbers) {
@@ -261,44 +312,9 @@ public class Userinterface {
         };
     }
 
-    private void defaultScreen() {
-        startProgram();
-    }
 
-    private void accountantProgram() {
-        int accountantChosenOption;
 
-        do {
-            buildMenuForAccountantProgram();
-            accountantChosenOption = menuOptionsForAccountantProgram();
-
-        } while (accountantChosenOption != 0);
-    }
-
-    private void buildMenuForAccountantProgram() {
-        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
-        Table tableMenu = new Table("Accountant",columns,true);
-        tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
-        tableMenu.addRow(new Row().addCell("2").addCell("Change payment status"));
-        tableMenu.addRow(new Row().addCell("3").addCell("Show income forecast"));
-        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
-        System.out.println(tableMenu);
-        System.out.print("> ");
-
-    }
-
-    private int menuOptionsForAccountantProgram() {
-        int accountantChosenOption;
-        accountantChosenOption = Input.scannerInt(scanner, 0, 3);
-
-        switch (accountantChosenOption) {
-            case 1 -> showSubscriptionList();
-            case 2 -> changePaymentStatus();
-            case 3 -> showIncomeForecast();
-            case 0 -> signOut();
-        }
-        return accountantChosenOption;
-    }
+    
 
     private void showSubscriptionList() {
         //System.out.println(controller.showListOfSubscriptions());
@@ -322,40 +338,7 @@ public class Userinterface {
     }
 
 
-    private void coachProgram() {
-        int coachChosenOption;
-
-        do {
-            buildMenuForCoachProgram();
-            coachChosenOption = menuOptionsForCoachProgram();
-        }
-        while (coachChosenOption != 0);
-    }
-
-    private void buildMenuForCoachProgram() {
-        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
-        Table tableMenu = new Table("Coach",columns,true);
-        tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
-        tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
-        tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
-        tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
-        System.out.println(tableMenu);
-        System.out.print("> ");
-    }
-
-    private int menuOptionsForCoachProgram() {
-        int coachChosenOption;
-        coachChosenOption = Input.scannerInt(scanner, 0, 3);
-
-        switch (coachChosenOption) {
-            case 1 -> showJuniorTeam();
-            case 2 -> showSeniorTeam();
-            case 3 -> addNewResult();
-            case 0 -> signOut();
-        }
-
-        return coachChosenOption;
-    }
+    
 
     private void showJuniorTeam() {
         buildJuniorTeamList();
@@ -373,7 +356,7 @@ public class Userinterface {
 
     private void buildSeniorTeamList() {
         ArrayList<Member> seniorTeam = controller.getSeniorTeam().getMembers();
-        Table compTable = createCompMemberTable("Junior Team", seniorTeam);
+        Table compTable = createCompMemberTable("Senior Team", seniorTeam);
         System.out.println(compTable);
     }
 
@@ -542,15 +525,11 @@ public class Userinterface {
         return controller.getMemberName(memberIndex);
     }
 
-    private void deleteMemberByIndex(int memberIndex) {
-        controller.deleteMember(memberIndex);
-    }
-    private void signOut() {
-        System.out.println("Signing out...");
-        defaultScreen();
-    }
+
+
 
     private void shutDown() {
         System.out.println("Shutting down...");
+        run = false;
     }
 }
