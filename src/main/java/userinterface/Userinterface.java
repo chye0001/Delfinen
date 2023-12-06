@@ -335,15 +335,17 @@ public class Userinterface {
                 "Last Payment",
                 "Next Payment"
         ));
-        Table subscriptionTable = new Table("Subscirptions",columns,true);
+        Table subscriptionTable = new Table("Subscriptions",columns,true);
         for(Member member : members) {
             String name = member.getName();
             String email = member.getEmail();
             int age = member.getAge();
             String type = member.getType().toString();
             double price = member.getSubscriptionCost();
+            //ternary operators------------------------------------------------------------
             String paid = member.getSubscription().isPaid() ? "Yes" : "No";
             String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
+            //-----------------------------------------------------------------------------
             double debt = member.getSubscriptDebt();
             String lastPayment = member.getLastPaymentDate();
             String nextPayment = member.getNextPaymentDate();
