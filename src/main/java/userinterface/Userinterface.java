@@ -153,6 +153,7 @@ public class Userinterface {
         showListOfMembers(true);
         System.out.println("Choose member to delete:");
         System.out.println("0. Cancel");
+        System.out.print(promptSymbol);
         int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
         if (input == 0) {
             System.out.println("Exiting...");
