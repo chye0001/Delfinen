@@ -8,14 +8,12 @@ public class Subscription {
     private LocalDate nextPayment;
     private double price;
     private double debt;
-    private boolean isPaid = false;
 
-    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt, boolean isPaid){
+    public Subscription (LocalDate lastPayment, LocalDate nextPayment, double price, double debt){
         this.lastPayment = lastPayment;
         this.nextPayment = nextPayment;
         this.price = price;
         this.debt = debt;
-        this.isPaid = isPaid;
     }
 
     public Subscription (double price){
@@ -23,14 +21,18 @@ public class Subscription {
         this.nextPayment = null;
         this.price = price;
         this.debt = price;
-        this.isPaid = false;
     }
 
-    public boolean havePaid() {
-        return isPaid;
+
+    public boolean isPaid() {
+        if (lastPayment == null) return false;
+        return nextPayment.isAfter(LocalDate.now());
     }
-    public void setIsPaid() {
-        this.isPaid = !isPaid;
+
+    public void pay() {
+        LocalDate now = LocalDate.now();
+        lastPayment = now;
+        nextPayment = now.plusYears(1);
     }
 
     public LocalDate getLastPayment() {
@@ -49,12 +51,8 @@ public class Subscription {
     public void setDebt(int amount) {
         this.debt = amount;
     }
-    public void setLastPayment(LocalDate paymentDate) {
-        this.lastPayment = paymentDate;
-    }
-    public void setNextPayment(LocalDate nextPaymentDate) {
-        this.nextPayment = nextPaymentDate;
-    }
+
+
 
     @Override
     public String toString() {
@@ -62,14 +60,14 @@ public class Subscription {
             return  "Price: " + price +
                     ", Last payment date: " + "-" +
                     ", Next payment date: " + "-" +
-                    ", Payment status: " + (havePaid() ? "Paid" : "Not paid") +
+                    ", Payment status: " + (isPaid() ? "Paid" : "Not paid") +
                     ", Debt: " + debt;
 
         } else {
            return  "Price: " + price +
                     ", Last payment date: " + lastPayment +
                     ", Next payment date: " + nextPayment +
-                    ", Payment status: " + (havePaid() ? "Paid" : "Not paid") +
+                    ", Payment status: " + (isPaid() ? "Paid" : "Not paid") +
                     ", Debt: " + debt;
         }
 
