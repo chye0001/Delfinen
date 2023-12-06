@@ -28,7 +28,7 @@ public class MemberDatabase {
 
     public void loadMemberDatabase() {
         try {
-            clubMembers = FileHandler.clubMembersLoad(administratorFile, subscriptionFile);
+            clubMembers = FileHandler.clubMembersLoad(administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -174,8 +174,7 @@ public class MemberDatabase {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
-                new Result(compMember.getEmail(), time, discipline, date),
-                discipline);
+                new Result(compMember.getEmail(), time, discipline, date));
 
     }
 
