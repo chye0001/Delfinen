@@ -132,7 +132,7 @@ public class MemberDatabase {
         memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
 
         try {
-            FileHandler.clubMembersSave(clubMembers, subscriptionFile);
+            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
 
         } catch (Exception e) {
             e.printStackTrace();
