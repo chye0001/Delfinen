@@ -123,22 +123,21 @@ public class FileHandler {
             String[] attributes = line.split(";");
 
             if(attributes[0].equals(email)) {
+                LocalDate lastPayment;
+                LocalDate nextPayment;
+                double cost = Double.parseDouble(attributes[3]);
+                double debt = Double.parseDouble(attributes[4]);
+                boolean isPaid = Boolean.parseBoolean(attributes[5]);
+
                 if (attributes[1].equalsIgnoreCase("-")) {
-                    LocalDate lastPayment = null;
-                    LocalDate nextPayment = null;
-                    double cost = Double.parseDouble(attributes[3]);
-                    double debt = Double.parseDouble(attributes[4]);
-                    boolean isPaid = Boolean.parseBoolean(attributes[5]);
-                    return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
+                    lastPayment = null;
+                    nextPayment = null;
 
                 } else {
-                    LocalDate lastPayment = LocalDate.parse(attributes[1]);
-                    LocalDate nextPayment = LocalDate.parse(attributes[2]);
-                    double cost = Double.parseDouble(attributes[3]);
-                    double debt = Double.parseDouble(attributes[4]);
-                    boolean isPaid = Boolean.parseBoolean(attributes[5]);
-                    return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
+                    lastPayment = LocalDate.parse(attributes[1]);
+                    nextPayment = LocalDate.parse(attributes[2]);
                 }
+                return new Subscription(lastPayment, nextPayment, cost, debt, isPaid);
             }
 
         }
