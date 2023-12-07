@@ -130,7 +130,7 @@ public class Userinterface {
         switch (input) {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
-            case 3 -> addNewResult();
+            //case 3 -> addNewResult(); //TODO implement addNewResult();
             case 4 -> showLeaderBoard();
             case 0 -> signOutToMainProgram();
         }
@@ -346,33 +346,6 @@ public class Userinterface {
         ArrayList<Member> seniorTeam = controller.getSeniorTeam().getMembers();
         Table compTable = createCompMemberTable("Senior Team", seniorTeam);
         System.out.println(compTable);
-    }
-
-    private void addNewResult() {
-        System.out.print("\nAdding new result:\nEnter member email: ");
-        String email = Input.scannerEmail(scanner);
-
-        System.out.print("\nChoose discipline: ");
-        System.out.print("""
-                                
-                1. Backstroke
-                2. Breaststroke
-                3. Butterfly
-                4. Crawl
-                """);
-        int disciplineChoice = Input.scannerInt(scanner, 1, 4);
-        String discipline = "";
-        switch (disciplineChoice) {
-            case 1 -> discipline = "Backstroke";
-            case 2 -> discipline = "Breaststroke";
-            case 3 -> discipline = "Butterfly";
-            case 4 -> discipline = "Crawl";
-        }
-
-        System.out.print("\nEnter time in seconds: ");
-        double time = Input.scannerDouble(scanner);
-
-        controller.addResultToTeam(email, time, discipline);
     }
 
     private void showLeaderBoard() {

@@ -22,10 +22,6 @@ public class Controller {
         memberDatabase.addMemberToList(type, name, birthDate, email);
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
-       // memberDatabase.addResultToTeam(email,time,discipline);
-    }
-
     public String showIncomeForecast() {
         return memberDatabase.showIncomeForecast();
     }
