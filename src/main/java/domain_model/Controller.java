@@ -23,15 +23,7 @@ public class Controller {
     }
 
     public void addResultToTeam(String email, double time, String discipline) {
-        //memberDatabase.addResultToTeam(email,time,discipline);
-    }
-
-    public String showListOfMembers(boolean withNumbers) {
-        return memberDatabase.showListOfMembers(withNumbers);
-    }
-
-    public String showListOfSubscriptions() {
-        return memberDatabase.showListOfSubscription();
+       // memberDatabase.addResultToTeam(email,time,discipline);
     }
 
     public String showIncomeForecast() {

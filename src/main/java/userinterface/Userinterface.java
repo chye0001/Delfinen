@@ -31,6 +31,7 @@ public class Userinterface {
             mainMenuOptions();
         }
     }
+
     private void buildMainMenu() {
         ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
         Table menuTable = new Table("Delfinen",columns,true);

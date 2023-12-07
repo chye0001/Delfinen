@@ -18,7 +18,6 @@ public class MemberDatabase {
 
     private Team juniorTeam;
     private Team seniorTeam;
-    File competitiveResultsFile = new File("CompetitiveResults.csv");
 
     public MemberDatabase() {
         clubMembers = new ArrayList<>();
