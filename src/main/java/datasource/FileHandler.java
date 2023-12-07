@@ -68,6 +68,7 @@ public class FileHandler {
         PrintStream printStream = new PrintStream(subscriptionFile);
 
         for (Member member : members) {
+            System.out.println("Member to save: " + member);
             printStream.println(
                     member.getEmail() + ";" +
                     member.getLastPaymentDate() + ";" +
