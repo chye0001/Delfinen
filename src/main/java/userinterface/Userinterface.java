@@ -139,6 +139,7 @@ public class Userinterface {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
             case 3 -> addNewResult();
+            case 4 -> showLeaderBoard();
             case 0 -> signOutToMainProgram();
         }
     }
