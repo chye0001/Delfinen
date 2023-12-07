@@ -318,6 +318,7 @@ public class Userinterface {
     private void showSubscriptionList() {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
+        Input.scannerPressEnterToContinue(scanner);
     }
     private void changePaymentStatus() {
         showSubscriptionList();
