@@ -33,7 +33,7 @@ public class Userinterface {
     private void buildMainMenu() {
         ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
         Table menuTable = new Table("Delfinen",columns,true);
-        menuTable.addRow(new Row().addCell("1").addCell("Adminstrator"));
+        menuTable.addRow(new Row().addCell("1").addCell("Administrator"));
         menuTable.addRow(new Row().addCell("2").addCell("Accountant"));
         menuTable.addRow(new Row().addCell("3").addCell("Coach"));
         menuTable.addRow(new Row().addCell("0").addCell("Close program"));
@@ -242,7 +242,6 @@ public class Userinterface {
 
         String memberName = scanner.nextLine();
 
-        //TODO more robust date validation
         System.out.print("Birth date in DD-MM-YYYY: ");
         String inputDate = Input.scannerDate(scanner);
         //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
@@ -524,9 +523,6 @@ public class Userinterface {
     private String memberNameFromIndex(int memberIndex) {
         return controller.getMemberName(memberIndex);
     }
-
-
-
 
     private void shutDown() {
         System.out.println("Shutting down...");

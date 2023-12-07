@@ -19,8 +19,7 @@ public class FileHandler {
     public static void clubMembersSave(ArrayList<Member> listOfMembers,
                                        File fileToSaveTo,
                                        File resultsFile) throws FileNotFoundException {
-        //TODO change way that info is saved
-        //why? -Kristoffer
+
         PrintStream printStream = new PrintStream(fileToSaveTo);
 
         for (Member member : listOfMembers) {
