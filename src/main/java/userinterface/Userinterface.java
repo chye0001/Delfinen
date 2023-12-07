@@ -1,6 +1,7 @@
 package userinterface;
 
 import domain_model.Controller;
+import domain_model.Discipline;
 import domain_model.MemberType;
 import domain_model.members.CompetitiveMember;
 import domain_model.members.ExerciseMember;
@@ -19,28 +20,31 @@ public class Userinterface {
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
     private boolean run = true;
-    
+    private final String promptSymbol = "> ";
+
     public void startProgram() {
         mainProgram();
     }
-    
-    private void mainProgram () {
+
+    private void mainProgram() {
         while (run) {
             buildMainMenu();
             mainMenuOptions();
         }
     }
+
     private void buildMainMenu() {
-        ArrayList<String> columns = new ArrayList<>(List.of("#","User"));
-        Table menuTable = new Table("Delfinen",columns,true);
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "User"));
+        Table menuTable = new Table("Delfinen", columns, true);
         menuTable.addRow(new Row().addCell("1").addCell("Administrator"));
         menuTable.addRow(new Row().addCell("2").addCell("Accountant"));
         menuTable.addRow(new Row().addCell("3").addCell("Coach"));
         menuTable.addRow(new Row().addCell("0").addCell("Close program"));
         System.out.println(menuTable);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
 
     }
+
     private void mainMenuOptions() {
 
         int choice = Input.scannerInt(scanner, 0, 3);
@@ -56,25 +60,27 @@ public class Userinterface {
 
 
     private void administratorProgram() {
-            buildAdministratorMenu();
-            administratorMenuOptions();
+        buildAdministratorMenu();
+        administratorMenuOptions();
     }
+
     private void buildAdministratorMenu() {
-        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
-        Table tableMenu = new Table("Adminstrator",columns,true);
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
+        Table tableMenu = new Table("Adminstrator", columns, true);
         tableMenu.addRow(new Row().addCell("1").addCell("Add new member"));
         tableMenu.addRow(new Row().addCell("2").addCell("Show list of members"));
         tableMenu.addRow(new Row().addCell("3").addCell("Edit member information"));
         tableMenu.addRow(new Row().addCell("4").addCell("Delete member"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
     }
+
     private void administratorMenuOptions() {
         int input = Input.scannerInt(scanner, 0, 4);
         switch (input) {
             case 1 -> addNewMember();
-            case 2 -> showListOfMembers(false);
+            case 2 -> showListOfAllMembers(false);
             case 3 -> editMemberInformation();
             case 4 -> deleteMember();
             case 0 -> signOutToMainProgram();
@@ -83,20 +89,22 @@ public class Userinterface {
 
 
     private void accountantProgram() {
-            buildAccountantMenu();
-            accountantMenuOptions();
+        buildAccountantMenu();
+        accountantMenuOptions();
     }
+
     private void buildAccountantMenu() {
-        ArrayList<String> columns = new ArrayList<>(List.of("#","Option"));
-        Table tableMenu = new Table("Accountant",columns,true);
+        ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
+        Table tableMenu = new Table("Accountant", columns, true);
         tableMenu.addRow(new Row().addCell("1").addCell("Show list of subscriptions"));
         tableMenu.addRow(new Row().addCell("2").addCell("Change payment status"));
         tableMenu.addRow(new Row().addCell("3").addCell("Show income forecast"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
 
     }
+
     private void accountantMenuOptions() {
         int input = Input.scannerInt(scanner, 0, 3);
         switch (input) {
@@ -109,19 +117,21 @@ public class Userinterface {
 
 
     private void coachProgram() {
-            buildCoachMenu();
-            coachMenuOptions();
+        buildCoachMenu();
+        coachMenuOptions();
     }
+
     private void buildCoachMenu() {
         ArrayList<String> columns = new ArrayList<>(List.of("#", "Option"));
-        Table tableMenu = new Table("Coach",columns,true);
+        Table tableMenu = new Table("Coach", columns, true);
         tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
         tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
         tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
-        System.out.print("> ");
+        System.out.print(promptSymbol);
     }
+
     private void coachMenuOptions() {
         int input = Input.scannerInt(scanner, 0, 3);
         switch (input) {
@@ -137,19 +147,19 @@ public class Userinterface {
         System.out.println("Signing out...");
         mainProgram();
     }
-    
-    private void editMemberInformation(){
-        showListOfMembers(true);
-        System.out.println("Choose member to edit:");
+
+    private void editMemberInformation() {
+        showListOfAllMembers(true);
         System.out.println("0. Cancel");
+        System.out.println("Choose member to edit:");
         int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
         if (input == 0) {
             System.out.println("Cancelling...");
             administratorProgram();
         } else {
-            Member chosenMember = controller.getClubMembers().get(input-1);
+            Member chosenMember = controller.getClubMembers().get(input - 1);
             System.out.print("""
-                    
+                                        
                     Chose the information that you wish to change:
                     1. Name
                     2. Birth Date
@@ -157,8 +167,8 @@ public class Userinterface {
                     4. Membership Type
                     0. Cancel
                     """);
-            int choice = Input.scannerInt(scanner,0,4);
-            switch (choice){
+            int choice = Input.scannerInt(scanner, 0, 4);
+            switch (choice) {
                 case 1 -> {
                     System.out.print("\nName: ");
                     chosenMember.setName(scanner.nextLine());
@@ -171,9 +181,9 @@ public class Userinterface {
                 case 3 -> {
                     System.out.print("Email: ");
                     String memberEmail = Input.scannerEmail(scanner);
-                    for (Member member: controller.getClubMembers()) {
+                    for (Member member : controller.getClubMembers()) {
                         //returns to menu if email already exists
-                        if (member.getEmail().equalsIgnoreCase(memberEmail)){
+                        if (member.getEmail().equalsIgnoreCase(memberEmail)) {
                             System.out.println(Color.red("Email already exists!\nNo changes made!"));
                             administratorProgram();
                         }
@@ -203,18 +213,18 @@ public class Userinterface {
                 }
             }
 
-            editMemberByIndex(input - 1,chosenMember);
+            editMemberByIndex(input - 1, chosenMember);
         }
     }
 
-    private void editMemberByIndex(int index, Member member){
-        controller.editMember(index,member);
+    private void editMemberByIndex(int index, Member member) {
+        controller.editMember(index, member);
     }
 
     private void deleteMember() {
-        showListOfMembers(true);
-        System.out.println("Choose member to delete:");
+        showListOfAllMembers(true);
         System.out.println("0. Cancel");
+        System.out.println("Choose member to delete:");
         int input = Input.scannerInt(scanner, 0, sizeOfMemberDatabase());
         if (input == 0) {
             System.out.println("Cancelling...");
@@ -224,16 +234,26 @@ public class Userinterface {
             deleteMemberByIndex(input - 1);
         }
     }
+
     private void deleteMemberByIndex(int memberIndex) {
         controller.deleteMember(memberIndex);
     }
 
-    private void showListOfMembers(boolean withNumbers) {
+    private void showListOfAllMembers(boolean withNumbers) {
+        ArrayList<Member> members = controller.getClubMembers();
         if (withNumbers) {
-            System.out.println(createMemberListWithNumbers());
+            System.out.println(createMemberListWithNumbers(members));
+        } else {
+            System.out.println(createMemberList(members));
         }
-        else {
-            System.out.println(createMemberList());
+    }
+
+    private void showListOfCompMembers(boolean withNumbers) {
+        ArrayList<Member> compMembers = new ArrayList<>(controller.getCompetitiveMembers());
+        if (withNumbers) {
+            System.out.println(createMemberListWithNumbers(compMembers));
+        } else {
+            System.out.println(createMemberList(compMembers));
         }
     }
 
@@ -248,15 +268,14 @@ public class Userinterface {
         String memberBirthDate = flipDateFormat(inputDate);
 
 
-
         String memberEmail = "";
         boolean uniqueEmail = false;
-        while(!uniqueEmail) {
+        while (!uniqueEmail) {
             System.out.print("Email: ");
             uniqueEmail = true;
             memberEmail = Input.scannerEmail(scanner);
-            for (Member member: controller.getClubMembers()) {
-                if (member.getEmail().equalsIgnoreCase(memberEmail)){
+            for (Member member : controller.getClubMembers()) {
+                if (member.getEmail().equalsIgnoreCase(memberEmail)) {
                     uniqueEmail = false;
                     System.out.println(Color.red("Email already exists!"));
                 }
@@ -312,13 +331,11 @@ public class Userinterface {
     }
 
 
-
-    
-
     private void showSubscriptionList() {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
     }
+
     private void changePaymentStatus() {
         showSubscriptionList();
         System.out.print("Cancel process by entering 0\nChange payment status for: ");
@@ -336,8 +353,6 @@ public class Userinterface {
         System.out.println(controller.showIncomeForecast());
     }
 
-
-    
 
     private void showJuniorTeam() {
         buildJuniorTeamList();
@@ -360,30 +375,44 @@ public class Userinterface {
     }
 
     private void addNewResult() {
-        System.out.print("\nAdding new result:\nEnter member email: ");
-        String email = Input.scannerEmail(scanner);
+        showListOfCompMembers(true);
+        System.out.println("0. Cancel");
+        System.out.println("Choose member: ");
+        System.out.print(promptSymbol);
+        int memberIndex = Input.scannerInt(scanner, 0, controller.getNumberOfCompMembers());
+        if (memberIndex == 0) coachProgram();
 
-        System.out.print("\nChoose discipline: ");
         System.out.print("""
-                                
                 1. Backstroke
                 2. Breaststroke
                 3. Butterfly
                 4. Crawl
+                0. Cancel
+                Choose discipline
                 """);
-        int disciplineChoice = Input.scannerInt(scanner, 1, 4);
-        String discipline = "";
-        switch (disciplineChoice) {
-            case 1 -> discipline = "Backstroke";
-            case 2 -> discipline = "Breaststroke";
-            case 3 -> discipline = "Butterfly";
-            case 4 -> discipline = "Crawl";
-        }
+        System.out.print(promptSymbol);
+        int disciplineIndex = Input.scannerInt(scanner, 0, 4);
+        if (disciplineIndex == 0) coachProgram();
+        Discipline discipline = switch (disciplineIndex) {
+            case 1 -> Discipline.BACKSTROKE;
+            case 2 -> Discipline.BREASTSTROKE;
+            case 3 -> Discipline.BUTTERFLY;
+            case 4 -> Discipline.CRAWL;
+            default -> throw new IllegalStateException("Unexpected value: " + disciplineIndex);
+        };
+        System.out.println("Enter time using the following format: 01:23.45\nmm:ss.SS ");
+        System.out.print(promptSymbol);
+        String timeInput = Input.scannerTime(scanner);
+        double time = convertTimeFormatStringToSeconds(timeInput);
 
-        System.out.print("\nEnter time in seconds: ");
-        double time = Input.scannerDouble(scanner);
-
-        controller.addResultToTeam(email, time, discipline);
+        System.out.println("Enter date in DD-MM-YYYY: ");
+        System.out.print(promptSymbol);
+        String timeDate = Input.scannerDate(scanner);
+        //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
+        timeDate = flipDateFormat(timeDate);
+        LocalDate date = LocalDate.parse(timeDate);
+        controller.addResultToMemberByIndex(memberIndex - 1, time, discipline, date);
+        System.out.println("Result added to "+ controller.getCompetitiveMembers().get(memberIndex - 1).getName());
     }
 
 
@@ -400,9 +429,9 @@ public class Userinterface {
                 "Last Payment",
                 "Next Payment"
         ));
-        Table subscriptionTable = new Table("Subscriptions",columns,true);
+        Table subscriptionTable = new Table("Subscriptions", columns, true);
         int count = 1;
-        for(Member member : members) {
+        for (Member member : members) {
             String name = member.getName();
             String email = member.getEmail();
             int age = member.getAge();
@@ -421,7 +450,7 @@ public class Userinterface {
                     .addCell(age)
                     .addCell(type)
                     .addCell(price)
-                    .addCell(paid,paidColor)
+                    .addCell(paid, paidColor)
                     .addCell(debt)
                     .addCell(lastPayment)
                     .addCell(nextPayment));
@@ -432,16 +461,16 @@ public class Userinterface {
         return subscriptionTable;
     }
 
-    private Table createMemberList() {
+    private Table createMemberList(ArrayList<Member> list) {
         ArrayList<String> columns = new ArrayList<>(List.of(
                 "Name",
                 "Type",
                 "Birthdate",
                 "Email"
         ));
-        Table memberTable = new Table("Members",columns,true);
-        ArrayList<Member> members = controller.getClubMembers();
-        for(Member member : members) {
+        Table memberTable = new Table("Members", columns, true);
+
+        for (Member member : list) {
             String name = member.getName();
             String type = member.getType().toString();
             String birthdate = member.getBirthDate().toString();
@@ -455,7 +484,7 @@ public class Userinterface {
         return memberTable;
     }
 
-    private Table createMemberListWithNumbers() {
+    private Table createMemberListWithNumbers(ArrayList<Member> list) {
         ArrayList<String> columns = new ArrayList<>(List.of(
                 "#",
                 "Name",
@@ -463,10 +492,10 @@ public class Userinterface {
                 "Birthdate",
                 "Email"
         ));
-        Table memberTable = new Table("Members",columns,true);
-        ArrayList<Member> members = controller.getClubMembers();
+        Table memberTable = new Table("Members", columns, true);
+
         int count = 1;
-        for(Member member : members) {
+        for (Member member : list) {
             String name = member.getName();
             String type = member.getType().toString();
             String birthdate = member.getBirthDate().toString();
@@ -482,7 +511,7 @@ public class Userinterface {
         return memberTable;
     }
 
-    private Table createCompMemberTable(String header,ArrayList<Member> members) {
+    private Table createCompMemberTable(String header, ArrayList<Member> members) {
         ArrayList<String> columns = new ArrayList<>(List.of(
                 "Name",
                 "Email",
@@ -491,8 +520,8 @@ public class Userinterface {
                 "Butterfly",
                 "Crawl"
         ));
-        Table compTable = new Table(header,columns,true);
-        for(Member member : members) {
+        Table compTable = new Table(header, columns, true);
+        for (Member member : members) {
             CompetitiveMember compMember = (CompetitiveMember) member;
             String name = member.getName();
             String email = member.getEmail();
@@ -510,6 +539,7 @@ public class Userinterface {
         }
         return compTable;
     }
+
     private static String flipDateFormat(String date) {
         //changes from DD-MM-YYYY to YYYY-MM-DD format for LocalDate
         String[] splitInputDate = date.split("-");
@@ -517,11 +547,20 @@ public class Userinterface {
     }
 
     private int sizeOfMemberDatabase() {
-        return controller.getSizeOfMemberDatabase();
+        return controller.getNumberOfAllMembers();
     }
 
     private String memberNameFromIndex(int memberIndex) {
         return controller.getMemberName(memberIndex);
+    }
+
+    private double convertTimeFormatStringToSeconds(String time) {
+        String[] timeSplitColon = time.split(":");//Minutes
+        String[] timeSplit = timeSplitColon[1].split("\\.");//Sek and mSek
+        double minutes = Double.parseDouble(timeSplitColon[0]);
+        double seconds = Double.parseDouble(timeSplit[0]);
+        double milliSeconds = Double.parseDouble(timeSplit[1]);
+        return (minutes * 60) + seconds + (milliSeconds / 1000);
     }
 
     private void shutDown() {

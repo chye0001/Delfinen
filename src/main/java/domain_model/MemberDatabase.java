@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class MemberDatabase {
@@ -89,26 +88,6 @@ public class MemberDatabase {
         }
     }
 
-    public String showListOfMembers(boolean withNumbers) {
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        for (Member member : clubMembers) {
-            if (member != null) {
-
-                if (withNumbers) {
-                    sb.append(count).append(". Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                    count++;
-                } else {
-                    sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                }
-            } else sb.append("Empty");
-        }
-        return sb.toString();
-    }
 
     public String showListOfSubscription() {
         StringBuilder sb = new StringBuilder();
@@ -125,10 +104,10 @@ public class MemberDatabase {
     }
 
     public void changePaymentStatus(int accountantChoise) {
-        Member member = getClubMembers().get(accountantChoise-1);
+        Member member = getClubMembers().get(accountantChoise - 1);
         member.pay();
         try {
-            FileHandler.saveAll(clubMembers,administratorFile,subscriptionFile,resultsFile);
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -175,7 +154,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -184,17 +163,22 @@ public class MemberDatabase {
     }
 
 
-    private ArrayList<CompetitiveMember> getCompetitiveMembers() {
+    public ArrayList<CompetitiveMember> getCompetitiveMembers() {
         ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
-        for (Member member: clubMembers) {
+        for (Member member : clubMembers) {
             if (member instanceof CompetitiveMember compMember) {
                 compMembers.add(compMember);
             }
         }
         return compMembers;
     }
-    public int getSizeOfClubMembers() {
+
+    public int getSizeOfAllMembers() {
         return clubMembers.size();
+    }
+
+    public int getSizeOfCompMembers() {
+        return getCompetitiveMembers().size();
     }
 
     public String getMemberName(int memberIndex) {
@@ -210,8 +194,8 @@ public class MemberDatabase {
         }
     }
 
-    public void editMember(int index, Member member){
-        clubMembers.set(index,member);
+    public void editMember(int index, Member member) {
+        clubMembers.set(index, member);
         try {
             FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {

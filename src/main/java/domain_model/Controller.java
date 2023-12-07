@@ -1,5 +1,6 @@
 package domain_model;
 
+import domain_model.members.CompetitiveMember;
 import domain_model.members.Member;
 
 import java.time.LocalDate;
@@ -22,13 +23,10 @@ public class Controller {
         memberDatabase.addMemberToList(type, name, birthDate, email);
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
-        //memberDatabase.addResultToTeam(email,time,discipline);
+    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
+        memberDatabase.addResultToMemberByIndex(memberIndex, time, discipline, date);
     }
 
-    public String showListOfMembers(boolean withNumbers) {
-        return memberDatabase.showListOfMembers(withNumbers);
-    }
 
     public String showListOfSubscriptions() {
         return memberDatabase.showListOfSubscription();
@@ -50,8 +48,16 @@ public class Controller {
         return memberDatabase.getClubMembers();
     }
 
-    public int getSizeOfMemberDatabase () {
-        return memberDatabase.getSizeOfClubMembers();
+    public ArrayList<CompetitiveMember> getCompetitiveMembers() {
+        return memberDatabase.getCompetitiveMembers();
+    }
+
+    public int getNumberOfAllMembers() {
+        return memberDatabase.getSizeOfAllMembers();
+    }
+
+    public int getNumberOfCompMembers() {
+        return memberDatabase.getSizeOfCompMembers();
     }
 
     public String getMemberName(int memberIndex) {
@@ -67,7 +73,7 @@ public class Controller {
 
     }
 
-    public void editMember(int index, Member member){
-        memberDatabase.editMember(index,member);
+    public void editMember(int index, Member member) {
+        memberDatabase.editMember(index, member);
     }
 }
