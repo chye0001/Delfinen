@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class MemberDatabase {
@@ -78,7 +77,11 @@ public class MemberDatabase {
             e.printStackTrace();
         }
 
-        //adds to competitive teams based on age
+        addsToTeamBasedOnAge(newMember);
+
+    }
+
+    private void addsToTeamBasedOnAge(Member newMember) {
         if (newMember.getType() == MemberType.COMPETITIVE) {
             int age = newMember.getAge();
             if (age < 18) {
@@ -132,20 +135,6 @@ public class MemberDatabase {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-//        int paid = 0;
-//        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
-//
-//        memberSubscription.setIsPaid();
-//        memberSubscription.setDebt(paid);
-//        memberSubscription.setLastPayment(LocalDate.now());
-//        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
-//
-//        try {
-//            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public String showIncomeForecast() {
@@ -221,22 +210,10 @@ public class MemberDatabase {
 
     public String showLeaderBoard(int chosenTeam, Discipline disciplinType) {
         if (chosenTeam == 1) {       //1 == Junior Team
-            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+            return buildsLeaderBoardForJuniorTeam(disciplinType);
 
         } else                       //2 == Senior Team
-            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
-    }
-
-    public String capsLeaderBoardForTopFiveAndBuildsIt(int chosenTeam, Discipline disciplinType) {
-        switch (chosenTeam) {
-            case 1 -> {
-                return buildsLeaderBoardForJuniorTeam(disciplinType);
-            }
-            case 2 -> {
-                return buildsLeaderBoardForSeniorTeam(disciplinType);
-            }
-        }
-        return null;
+            return buildsLeaderBoardForSeniorTeam(disciplinType);
     }
 
     public String buildsLeaderBoardForJuniorTeam(Discipline disciplinType) {
