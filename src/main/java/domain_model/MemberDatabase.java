@@ -220,13 +220,16 @@ public class MemberDatabase {
                                              int count,
                                              String leaderBoardTop5) {
 
+        ArrayList<String> isMemberAlreadyOnLeaderboard = new ArrayList<>();
+
         for (Result result : allResultsCombined) {
             for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
 
                 if (result.getDiscipline() == disciplinType &&
                         result.getMemberEmail().equals(competitiveMember.getEmail()) &&
-                        competitiveMember.getAge() < 18) {
+                        competitiveMember.getAge() < 18 && !isMemberAlreadyOnLeaderboard.contains(competitiveMember.getEmail())) {
 
+                    isMemberAlreadyOnLeaderboard.add(competitiveMember.getEmail());
                     leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
                     count++;
 
