@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MemberDatabase {
 
@@ -17,7 +18,6 @@ public class MemberDatabase {
 
     private Team juniorTeam;
     private Team seniorTeam;
-    File competitiveResultsFile = new File("CompetitiveResults.csv");
 
     public MemberDatabase() {
         clubMembers = new ArrayList<>();
@@ -76,7 +76,11 @@ public class MemberDatabase {
             e.printStackTrace();
         }
 
-        //adds to competitive teams based on age
+        addsToTeamBasedOnAge(newMember);
+
+    }
+
+    private void addsToTeamBasedOnAge(Member newMember) {
         if (newMember.getType() == MemberType.COMPETITIVE) {
             int age = newMember.getAge();
             if (age < 18) {
@@ -123,27 +127,13 @@ public class MemberDatabase {
     }
 
     public void changePaymentStatus(int accountantChoise) {
-        Member member = getClubMembers().get(accountantChoise-1);
+        Member member = getClubMembers().get(accountantChoise - 1);
         member.pay();
         try {
-            FileHandler.saveAll(clubMembers,administratorFile,subscriptionFile,resultsFile);
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-//        int paid = 0;
-//        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
-//
-//        memberSubscription.setIsPaid();
-//        memberSubscription.setDebt(paid);
-//        memberSubscription.setLastPayment(LocalDate.now());
-//        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
-//
-//        try {
-//            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public String showIncomeForecast() {
@@ -173,37 +163,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-//    public void loadCompetitiveResults() {
-//        ArrayList<Result> loadedResults = new ArrayList<>();
-//        try {
-//            loadedResults = FileHandler.competitiveResultsLoad(competitiveResultsFile);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        for (int i = 0; i < loadedResults.size(); i++) {
-//            //starts off by finding a member that has the same email as the result
-//            Member member = null;
-//            for (Member clubMember : clubMembers) {
-//                if (loadedResults.get(i).getMemberEmail().equals(clubMember.getEmail())) {
-//                    member = clubMember;
-//                }
-//            }
-//            if (member != null) {
-//                //takes birthdate of member with matching email and uses it to figure out which of the two teams
-//                //that the result should be added to
-//                //TODO make age comparison better, since it is currently just based on year comparison
-//                int age = member.getAge();
-//                if (age < 18) {
-//                    juniorTeam.addResultToLeaderboard(loadedResults.get(i));
-//                } else {
-//                    seniorTeam.addResultToLeaderboard(loadedResults.get(i));
-//                }
-//            }
-//        }
-//    }
-
-    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -214,13 +174,14 @@ public class MemberDatabase {
 
     private ArrayList<CompetitiveMember> getCompetitiveMembers() {
         ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
-        for (Member member: clubMembers) {
+        for (Member member : clubMembers) {
             if (member instanceof CompetitiveMember compMember) {
                 compMembers.add(compMember);
             }
         }
         return compMembers;
     }
+
     public int getSizeOfClubMembers() {
         return clubMembers.size();
     }
@@ -238,12 +199,160 @@ public class MemberDatabase {
         }
     }
 
-    public void editMember(int index, Member member){
-        clubMembers.set(index,member);
+    public void editMember(int index, Member member) {
+        clubMembers.set(index, member);
         try {
             FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public String showLeaderBoard(int chosenTeam, Discipline disciplinType) {
+        if (chosenTeam == 1) {       //1 == Junior Team
+            return buildsLeaderBoardForJuniorTeam(disciplinType);
+
+        } else                       //2 == Senior Team
+            return buildsLeaderBoardForSeniorTeam(disciplinType);
+    }
+
+    public String buildsLeaderBoardForJuniorTeam(Discipline disciplinType) {
+        String leaderBoardTop5 = "";
+        int count = 1;
+        ArrayList<Result> allResultsCombined = combineAllResults();
+
+        if (allResultsCombined.isEmpty()) {
+            return "\nNo results have been added to the leaderboard";
+
+        } else
+            Collections.sort(allResultsCombined, new ResultTimeComparator());
+
+        leaderBoardTop5 += findsTopFiveJuniorResults(allResultsCombined, disciplinType, count, leaderBoardTop5);
+        return leaderBoardTop5;
+    }
+
+    private String findsTopFiveJuniorResults(ArrayList<Result> allResultsCombined,
+                                             Discipline disciplinType,
+                                             int count,
+                                             String leaderBoardTop5) {
+
+        for (Result result : allResultsCombined) {
+            for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
+
+                if (result.getDiscipline() == disciplinType &&
+                        result.getMemberEmail().equals(competitiveMember.getEmail()) &&
+                        competitiveMember.getAge() < 18) {
+
+                    leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
+                    count++;
+
+                    if (count > 5) {
+                        return leaderBoardTop5;
+                    }
+                }
+            }
+        }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No junior competitive swimmers where found for the discipline";
+        }
+        return leaderBoardTop5;
+    }
+
+    public String buildsLeaderBoardForSeniorTeam(Discipline disciplinType) {
+        String leaderBoardTop5 = "";
+        int count = 1;
+
+        ArrayList<Result> allResultsCombined = combineAllResults();
+        if (allResultsCombined.isEmpty()) {
+            return "\nNo results have been added to the leaderboard";
+
+        } else
+            Collections.sort(allResultsCombined, new ResultTimeComparator());
+
+        leaderBoardTop5 += findsTopFiveSeniorResults(
+                allResultsCombined,
+                disciplinType,
+                leaderBoardTop5,
+                count);
+
+        return leaderBoardTop5;
+    }
+
+    private String findsTopFiveSeniorResults(ArrayList<Result> allResultsCombined,
+                                             Discipline disciplinType,
+                                             String leaderBoardTop5,
+                                             int count) {
+
+        for (Result result : allResultsCombined) {
+            for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
+
+                if (result.getDiscipline() == disciplinType) {
+                    if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
+                        leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
+
+                        count++;
+
+                        if (count > 5) {
+                            return leaderBoardTop5;
+                        }
+                    }
+                }
+            }
+        }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No senior competitive swimmers where found for the discipline";
+        }
+        return leaderBoardTop5;
+    }
+
+    private ArrayList<Result> combineAllResults() {
+        ArrayList<Result> allResultsCombined = new ArrayList<>();
+        for (CompetitiveMember member : getCompetitiveMembers()) {
+            allResultsCombined.addAll(member.getAllResults());
+
+        }
+        return allResultsCombined;
+    }
+
+    public String buildLeaderBoard(int count, Member competitiveMember, Result result) {
+
+        int convertsDecimalToWholeNumber = 100;
+        double competitiveResultInMillisecondsIsolated = (result.getTime() - (int) result.getTime()) * convertsDecimalToWholeNumber;
+        int competitiveResultInSecondsIsolated = (int) result.getTime() % 60;
+        int competitiveResultInMinutesIsolated = (int) result.getTime() / 60;
+
+        return isSecondsIsolatedLessThanTenSeconds(competitiveResultInMillisecondsIsolated,
+                competitiveResultInSecondsIsolated,
+                competitiveResultInMinutesIsolated,
+                count,
+                competitiveMember,
+                result);
+
+    }
+
+    private String isSecondsIsolatedLessThanTenSeconds(double milliseconds, int seconds, int minutes, int count, Member competitiveMember, Result result) {
+        StringBuilder sb = new StringBuilder();
+
+        if (seconds < 10) {
+            sb.append(count + ": " + competitiveMember.getName() + ": " +
+                    minutes + ":0" + seconds);
+            sb.append(isResultsInMillisecondsIsolatedLessThanTen(milliseconds));
+            sb.append(" - " + result.getDate() + "\n");
+
+        } else {
+            sb.append(count + ": " + competitiveMember.getName() + ": " +
+                    minutes + ":" + seconds);
+            sb.append(isResultsInMillisecondsIsolatedLessThanTen(milliseconds));
+            sb.append(" - " + result.getDate() + "\n");
+        }
+
+        return sb.toString();
+    }
+
+    public String isResultsInMillisecondsIsolatedLessThanTen(double competitiveResultInMilliseconds) {
+        if (competitiveResultInMilliseconds < 10) {
+            return (".0" + (int) competitiveResultInMilliseconds);
+        } else
+            return "." + (int) competitiveResultInMilliseconds;
     }
 }

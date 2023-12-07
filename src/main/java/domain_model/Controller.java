@@ -22,18 +22,6 @@ public class Controller {
         memberDatabase.addMemberToList(type, name, birthDate, email);
     }
 
-    public void addResultToTeam(String email, double time, String discipline) {
-        //memberDatabase.addResultToTeam(email,time,discipline);
-    }
-
-    public String showListOfMembers(boolean withNumbers) {
-        return memberDatabase.showListOfMembers(withNumbers);
-    }
-
-    public String showListOfSubscriptions() {
-        return memberDatabase.showListOfSubscription();
-    }
-
     public String showIncomeForecast() {
         return memberDatabase.showIncomeForecast();
     }
@@ -69,5 +57,9 @@ public class Controller {
 
     public void editMember(int index, Member member){
         memberDatabase.editMember(index,member);
+    }
+
+    public String showLeaderBoard(int chosenTeam, Discipline discipline){
+        return memberDatabase.showLeaderBoard(chosenTeam, discipline);
     }
 }
