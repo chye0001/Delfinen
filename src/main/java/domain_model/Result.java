@@ -35,10 +35,6 @@ public class Result implements Comparable<Result> {
         return time;
     }
 
-    public String getTimeInMSMFormat() {
-        return "";
-    }
-
     public Discipline getDiscipline() {
         return discipline;
     }

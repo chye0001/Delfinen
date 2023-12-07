@@ -18,7 +18,6 @@ public class MemberDatabase {
 
     private Team juniorTeam;
     private Team seniorTeam;
-    File competitiveResultsFile = new File("CompetitiveResults.csv");
 
     public MemberDatabase() {
         clubMembers = new ArrayList<>();
@@ -77,7 +76,11 @@ public class MemberDatabase {
             e.printStackTrace();
         }
 
-        //adds to competitive teams based on age
+        addsToTeamBasedOnAge(newMember);
+
+    }
+
+    private void addsToTeamBasedOnAge(Member newMember) {
         if (newMember.getType() == MemberType.COMPETITIVE) {
             int age = newMember.getAge();
             if (age < 18) {
@@ -111,20 +114,6 @@ public class MemberDatabase {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-//        int paid = 0;
-//        Subscription memberSubscription = clubMembers.get(accountantChoise-1).getSubscription();
-//
-//        memberSubscription.setIsPaid();
-//        memberSubscription.setDebt(paid);
-//        memberSubscription.setLastPayment(LocalDate.now());
-//        memberSubscription.setNextPayment(memberSubscription.getLastPayment().plusYears(1));
-//
-//        try {
-//            FileHandler.subscriptionSave(clubMembers, subscriptionFile);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public String showIncomeForecast() {
@@ -154,7 +143,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -205,31 +194,19 @@ public class MemberDatabase {
 
     public String showLeaderBoard(int chosenTeam, Discipline disciplinType) {
         if (chosenTeam == 1) {       //1 == Junior Team
-            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
+            return buildsLeaderBoardForJuniorTeam(disciplinType);
 
         } else                       //2 == Senior Team
-            return capsLeaderBoardForTopFiveAndBuildsIt(chosenTeam, disciplinType);
-    }
-
-    public String capsLeaderBoardForTopFiveAndBuildsIt(int chosenTeam, Discipline disciplinType) {
-        switch (chosenTeam) {
-            case 1 -> {
-                return buildsLeaderBoardForJuniorTeam(disciplinType);
-            }
-            case 2 -> {
-                return buildsLeaderBoardForSeniorTeam(disciplinType);
-            }
-        }
-        return null;
+            return buildsLeaderBoardForSeniorTeam(disciplinType);
     }
 
     public String buildsLeaderBoardForJuniorTeam(Discipline disciplinType) {
-        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        String leaderBoardTop5 = "";
         int count = 1;
         ArrayList<Result> allResultsCombined = combineAllResults();
 
         if (allResultsCombined.isEmpty()) {
-            return "\nNo results have been added to the leaderboard tracking junior competitive swimmers";
+            return "\nNo results have been added to the leaderboard";
 
         } else
             Collections.sort(allResultsCombined, new ResultTimeComparator());
@@ -259,16 +236,19 @@ public class MemberDatabase {
                 }
             }
         }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No junior competitive swimmers where found for the discipline";
+        }
         return leaderBoardTop5;
     }
 
     public String buildsLeaderBoardForSeniorTeam(Discipline disciplinType) {
-        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        String leaderBoardTop5 = "";
         int count = 1;
 
         ArrayList<Result> allResultsCombined = combineAllResults();
         if (allResultsCombined.isEmpty()) {
-            return "\nNo results have been added to the leaderboard tracking competitive senior swimmers";
+            return "\nNo results have been added to the leaderboard";
 
         } else
             Collections.sort(allResultsCombined, new ResultTimeComparator());
@@ -290,20 +270,21 @@ public class MemberDatabase {
         for (Result result : allResultsCombined) {
             for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
 
-                if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
-                    if (result.getDiscipline() == disciplinType) {
+                if (result.getDiscipline() == disciplinType) {
+                    if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
                         leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
 
-                    } else
-                        return "\nThe leaderboard is empty for " + disciplinType;
+                        count++;
 
-                    count++;
-
-                    if (count > 5) {
-                        return leaderBoardTop5;
+                        if (count > 5) {
+                            return leaderBoardTop5;
+                        }
                     }
                 }
             }
+        }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No senior competitive swimmers where found for the discipline";
         }
         return leaderBoardTop5;
     }

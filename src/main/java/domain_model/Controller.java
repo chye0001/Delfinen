@@ -76,4 +76,8 @@ public class Controller {
     public void editMember(int index, Member member) {
         memberDatabase.editMember(index, member);
     }
+
+    public String showLeaderBoard(int chosenTeam, Discipline discipline){
+        return memberDatabase.showLeaderBoard(chosenTeam, discipline);
+    }
 }

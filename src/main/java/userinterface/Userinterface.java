@@ -127,13 +127,14 @@ public class Userinterface {
         tableMenu.addRow(new Row().addCell("1").addCell("Show Junior Team"));
         tableMenu.addRow(new Row().addCell("2").addCell("Show Senior Team"));
         tableMenu.addRow(new Row().addCell("3").addCell("Add new result"));
+        tableMenu.addRow(new Row().addCell("4").addCell("Show leaderboard"));
         tableMenu.addRow(new Row().addCell("0").addCell("Sign out"));
         System.out.println(tableMenu);
         System.out.print(promptSymbol);
     }
 
     private void coachMenuOptions() {
-        int input = Input.scannerInt(scanner, 0, 3);
+        int input = Input.scannerInt(scanner, 0, 4);
         switch (input) {
             case 1 -> showJuniorTeam();
             case 2 -> showSeniorTeam();
@@ -334,6 +335,7 @@ public class Userinterface {
     private void showSubscriptionList() {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
+        Input.scannerPressEnterToContinue(scanner);
     }
 
     private void changePaymentStatus() {
@@ -372,6 +374,45 @@ public class Userinterface {
         ArrayList<Member> seniorTeam = controller.getSeniorTeam().getMembers();
         Table compTable = createCompMemberTable("Senior Team", seniorTeam);
         System.out.println(compTable);
+    }
+    private void showLeaderBoard() {
+        buildMenuForShowLeaderBoardTeam();
+        int chosenTeam = choiseFromMenuForShowLeaderBoardTeam();
+        buildMenuForShowLeaderBoardDisciplin();
+        Discipline disciplinType = choiseFromMenuForShowLeaderBoardDisciplin();
+
+        System.out.println("\n" + disciplinType + "\n" +
+                controller.showLeaderBoard(chosenTeam, disciplinType));
+    }
+
+    private void buildMenuForShowLeaderBoardTeam() {
+        System.out.print("\nChoice team to view:\n" +
+                "1. Junior team\n" +
+                "2. Senior team\n" +
+                "Choise: ");
+    }
+    private int choiseFromMenuForShowLeaderBoardTeam() {
+        return Input.scannerInt(scanner, 1, 2);
+    }
+    private void buildMenuForShowLeaderBoardDisciplin() {
+        System.out.print("\nDisciplines:\n" +
+                "1. Crawl\n" +
+                "2. Butterfly\n" +
+                "3. Backstroke\n" +
+                "4. Breaststroke\n" +
+                "Choise: ");
+    }
+    private Discipline choiseFromMenuForShowLeaderBoardDisciplin() {
+        int choise = Input.scannerInt(scanner, 1, 4);
+        Discipline disciplinType = null;
+        switch (choise) {
+            case 1 -> disciplinType = Discipline.CRAWL;
+            case 2 -> disciplinType = Discipline.BUTTERFLY;
+            case 3 -> disciplinType = Discipline.BACKSTROKE;
+            case 4 -> disciplinType = Discipline.BREASTSTROKE;
+        }
+
+        return disciplinType;
     }
 
     private void addNewResult() {
