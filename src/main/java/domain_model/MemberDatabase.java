@@ -128,10 +128,10 @@ public class MemberDatabase {
     }
 
     public void changePaymentStatus(int accountantChoise) {
-        Member member = getClubMembers().get(accountantChoise-1);
+        Member member = getClubMembers().get(accountantChoise - 1);
         member.pay();
         try {
-            FileHandler.saveAll(clubMembers,administratorFile,subscriptionFile,resultsFile);
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -164,7 +164,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -175,13 +175,14 @@ public class MemberDatabase {
 
     private ArrayList<CompetitiveMember> getCompetitiveMembers() {
         ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
-        for (Member member: clubMembers) {
+        for (Member member : clubMembers) {
             if (member instanceof CompetitiveMember compMember) {
                 compMembers.add(compMember);
             }
         }
         return compMembers;
     }
+
     public int getSizeOfClubMembers() {
         return clubMembers.size();
     }
@@ -199,8 +200,8 @@ public class MemberDatabase {
         }
     }
 
-    public void editMember(int index, Member member){
-        clubMembers.set(index,member);
+    public void editMember(int index, Member member) {
+        clubMembers.set(index, member);
         try {
             FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
         } catch (FileNotFoundException e) {
@@ -217,12 +218,12 @@ public class MemberDatabase {
     }
 
     public String buildsLeaderBoardForJuniorTeam(Discipline disciplinType) {
-        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        String leaderBoardTop5 = "";
         int count = 1;
         ArrayList<Result> allResultsCombined = combineAllResults();
 
         if (allResultsCombined.isEmpty()) {
-            return "\nNo results have been added to the leaderboard tracking junior competitive swimmers";
+            return "\nNo results have been added to the leaderboard";
 
         } else
             Collections.sort(allResultsCombined, new ResultTimeComparator());
@@ -252,16 +253,19 @@ public class MemberDatabase {
                 }
             }
         }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No junior competitive swimmers where found for the discipline";
+        }
         return leaderBoardTop5;
     }
 
     public String buildsLeaderBoardForSeniorTeam(Discipline disciplinType) {
-        String leaderBoardTop5 = "\n" + disciplinType + "\n";
+        String leaderBoardTop5 = "";
         int count = 1;
 
         ArrayList<Result> allResultsCombined = combineAllResults();
         if (allResultsCombined.isEmpty()) {
-            return "\nNo results have been added to the leaderboard tracking competitive senior swimmers";
+            return "\nNo results have been added to the leaderboard";
 
         } else
             Collections.sort(allResultsCombined, new ResultTimeComparator());
@@ -283,20 +287,21 @@ public class MemberDatabase {
         for (Result result : allResultsCombined) {
             for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
 
-                if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
-                    if (result.getDiscipline() == disciplinType) {
+                if (result.getDiscipline() == disciplinType) {
+                    if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
                         leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
 
-                    } else
-                        return "\nThe leaderboard is empty for " + disciplinType;
+                        count++;
 
-                    count++;
-
-                    if (count > 5) {
-                        return leaderBoardTop5;
+                        if (count > 5) {
+                            return leaderBoardTop5;
+                        }
                     }
                 }
             }
+        }
+        if (leaderBoardTop5.equalsIgnoreCase("")){
+            return "No senior competitive swimmers where found for the discipline";
         }
         return leaderBoardTop5;
     }
