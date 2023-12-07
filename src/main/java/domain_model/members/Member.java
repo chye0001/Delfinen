@@ -52,7 +52,7 @@ public abstract class Member {
     }
 
 
-    //used for setting the subscription cost within the constructor of the sub-classes
+    //used for setting the subscription cost within the constructor of the subclasses
     public void setSubscriptionByTypeAndAge() {
         if (getType() == MemberType.PASSIVE) {
             this.subscription = new Subscription(getType().getCost());
