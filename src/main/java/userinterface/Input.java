@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Input {
 
-    private static String promptSymbol = "> ";
+    private static final String promptSymbol = "> ";
 
     public static int scannerInt(Scanner scanner) { // Input skal være en integer
         while (true) {
@@ -148,6 +148,20 @@ public class Input {
             }
         }
     }
+
+public static String scannerTime (Scanner scanner) { // Regex stjålet fra nettet
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.matches("^(([0-9][0-9]):?[0-5][0-9]\\.?[0-9][0-9]$)"))
+                return input;
+            else {
+                System.out.println(Color.red("Input must be a time using the following format: mm:ss.SS"));
+                System.out.print(promptSymbol);
+            }
+        }
+    }
+
+
 
     public static String scannerEmail (Scanner scanner) { // Regex stjålet fra nettet
         while (true) {

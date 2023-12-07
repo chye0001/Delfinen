@@ -91,26 +91,6 @@ public class MemberDatabase {
         }
     }
 
-    public String showListOfMembers(boolean withNumbers) {
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        for (Member member : clubMembers) {
-            if (member != null) {
-
-                if (withNumbers) {
-                    sb.append(count).append(". Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                    count++;
-                } else {
-                    sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                }
-            } else sb.append("Empty");
-        }
-        return sb.toString();
-    }
 
     public String showListOfSubscription() {
         StringBuilder sb = new StringBuilder();
@@ -163,7 +143,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -172,7 +152,7 @@ public class MemberDatabase {
     }
 
 
-    private ArrayList<CompetitiveMember> getCompetitiveMembers() {
+    public ArrayList<CompetitiveMember> getCompetitiveMembers() {
         ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
         for (Member member : clubMembers) {
             if (member instanceof CompetitiveMember compMember) {
@@ -182,8 +162,12 @@ public class MemberDatabase {
         return compMembers;
     }
 
-    public int getSizeOfClubMembers() {
+    public int getSizeOfAllMembers() {
         return clubMembers.size();
+    }
+
+    public int getSizeOfCompMembers() {
+        return getCompetitiveMembers().size();
     }
 
     public String getMemberName(int memberIndex) {
