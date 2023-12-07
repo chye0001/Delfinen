@@ -132,6 +132,11 @@ public class Input {
         }
     }
 
+    public static void scannerPressEnterToContinue(Scanner scanner) {
+        System.out.print("Press ENTER to go BACK"+promptSymbol);
+        scanner.nextLine();
+    }
+
     public static String scannerDate (Scanner scanner) { // Regex stjålet fra nettet
         while (true) {
             String input = scanner.nextLine().toLowerCase().trim();
