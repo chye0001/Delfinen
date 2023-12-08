@@ -599,11 +599,10 @@ public class Userinterface {
     }
 
     private double convertTimeFormatStringToSeconds(String time) {
-        String[] timeSplitColon = time.split(":");//Minutes
-        String[] timeSplit = timeSplitColon[1].split("\\.");//Sek and mSek
-        double minutes = Double.parseDouble(timeSplitColon[0]);
-        double seconds = Double.parseDouble(timeSplit[0]);
-        double milliSeconds = Double.parseDouble(timeSplit[1]);
+        String[] timeSplit = time.split(":|\\."); //mm:ss.SS
+        double minutes = Double.parseDouble(timeSplit[0]);
+        double seconds = Double.parseDouble(timeSplit[1]);
+        double milliSeconds = Double.parseDouble(timeSplit[2]);
         return (minutes * 60) + seconds + (milliSeconds / 1000);
     }
 
