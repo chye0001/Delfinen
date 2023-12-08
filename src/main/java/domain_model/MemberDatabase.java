@@ -91,26 +91,6 @@ public class MemberDatabase {
         }
     }
 
-    public String showListOfMembers(boolean withNumbers) {
-        StringBuilder sb = new StringBuilder();
-        int count = 1;
-        for (Member member : clubMembers) {
-            if (member != null) {
-
-                if (withNumbers) {
-                    sb.append(count).append(". Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                    count++;
-                } else {
-                    sb.append("Name: ").append(member.getName()).append(" - Membership type: ").
-                            append(member.getType()).append(" - Date of birth: ").append(member.getBirthDate()).
-                            append(" - Email address: ").append(member.getEmail()).append("\n");
-                }
-            } else sb.append("Empty");
-        }
-        return sb.toString();
-    }
 
     public String showListOfSubscription() {
         StringBuilder sb = new StringBuilder();
@@ -164,7 +144,7 @@ public class MemberDatabase {
         return seniorTeam;
     }
 
-    public void addResultToMemberByIndex(int memberIndex, double time, Discipline discipline, LocalDate date) {
+    public void addResultToMemberByIndex (int memberIndex, double time, Discipline discipline, LocalDate date) {
         ArrayList<CompetitiveMember> compMembers = getCompetitiveMembers();
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
@@ -173,7 +153,7 @@ public class MemberDatabase {
     }
 
 
-    private ArrayList<CompetitiveMember> getCompetitiveMembers() {
+    public ArrayList<CompetitiveMember> getCompetitiveMembers() {
         ArrayList<CompetitiveMember> compMembers = new ArrayList<>();
         for (Member member : clubMembers) {
             if (member instanceof CompetitiveMember compMember) {
@@ -183,8 +163,12 @@ public class MemberDatabase {
         return compMembers;
     }
 
-    public int getSizeOfClubMembers() {
+    public int getSizeOfAllMembers() {
         return clubMembers.size();
+    }
+
+    public int getSizeOfCompMembers() {
+        return getCompetitiveMembers().size();
     }
 
     public String getMemberName(int memberIndex) {
@@ -237,13 +221,16 @@ public class MemberDatabase {
                                              int count,
                                              String leaderBoardTop5) {
 
+        ArrayList<String> isMemberAlreadyOnLeaderboard = new ArrayList<>();
+
         for (Result result : allResultsCombined) {
             for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
 
                 if (result.getDiscipline() == disciplinType &&
                         result.getMemberEmail().equals(competitiveMember.getEmail()) &&
-                        competitiveMember.getAge() < 18) {
+                        competitiveMember.getAge() < 18 && !isMemberAlreadyOnLeaderboard.contains(competitiveMember.getEmail())) {
 
+                    isMemberAlreadyOnLeaderboard.add(competitiveMember.getEmail());
                     leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
                     count++;
 
@@ -284,11 +271,14 @@ public class MemberDatabase {
                                              String leaderBoardTop5,
                                              int count) {
 
+        ArrayList<String> isMemberAlreadyOnLeaderboard = new ArrayList<>();
+
         for (Result result : allResultsCombined) {
             for (CompetitiveMember competitiveMember : getCompetitiveMembers()) {
 
                 if (result.getDiscipline() == disciplinType) {
-                    if (result.getMemberEmail().equals(competitiveMember.getEmail())) {
+                    if (result.getMemberEmail().equals(competitiveMember.getEmail()) && !isMemberAlreadyOnLeaderboard.contains(competitiveMember.getEmail())) {
+                        isMemberAlreadyOnLeaderboard.add(competitiveMember.getEmail());
                         leaderBoardTop5 += buildLeaderBoard(count, competitiveMember, result);
 
                         count++;

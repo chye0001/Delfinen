@@ -176,27 +176,4 @@ public class FileHandler {
         }
         return null;
     }
-
-    public static ArrayList<Result> competitiveResultsLoad(File fileToLoadFrom) throws FileNotFoundException {
-        Scanner fileReader = new Scanner(fileToLoadFrom);
-        ArrayList<Result> loadedList = new ArrayList<>();
-
-        while (fileReader.hasNext()) {
-            String[] attributes = fileReader.nextLine().split(";");
-
-            Result loadedResult = new Result(
-                    attributes[0],
-                    Double.parseDouble(attributes[1]),
-                    Discipline.valueOf(attributes[2].toUpperCase()),
-                    LocalDate.parse(attributes[3])
-            );
-
-            if (!loadedList.contains(loadedResult)) {
-                loadedList.add(loadedResult);
-            }
-        }
-
-        fileReader.close();
-        return loadedList;
-    }
 }
