@@ -27,9 +27,6 @@ public class FileHandler {
                             member.getName() + ";" +
                             member.getBirthDate() + ";" +
                             member.getEmail());
-            if (member instanceof CompetitiveMember compMember) {
-                resultsSave(compMember,resultsFile);
-            }
         }
     }
 
@@ -39,10 +36,11 @@ public class FileHandler {
                                File resultsFile) throws FileNotFoundException {
         clubMembersSave(members, memberFile,resultsFile);
         subscriptionSave(members, subscriptionFile);
+        resultsSave(members,resultsFile);
 
     }
 
-    private static void resultsSave(CompetitiveMember member,
+    private static void resultsSave(ArrayList<Member> members,
                                     File resultsFile) {
         PrintStream printStream = null;
         try {
@@ -50,14 +48,18 @@ public class FileHandler {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        String email = member.getEmail();
-        ArrayList<Result> results = member.getAllResults();
-        for (Result result : results) {
-            printStream.println(
-                    member.getEmail() + ";" +
-                    result.getTime() + ";" +
-                    result.getDiscipline() + ";" +
-                    result.getDate());
+        for (Member member : members) {
+            if (member instanceof  CompetitiveMember compMember) {
+                String email = compMember.getEmail();
+                ArrayList<Result> results = compMember.getAllResults();
+                for (Result result : results) {
+                    printStream.println(
+                            member.getEmail() + ";" +
+                                    result.getTime() + ";" +
+                                    result.getDiscipline() + ";" +
+                                    result.getDate());
+                }
+            }
         }
 
 
