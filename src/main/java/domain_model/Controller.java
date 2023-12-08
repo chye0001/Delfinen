@@ -68,8 +68,8 @@ public class Controller {
         memberDatabase.deleteMember(memberIndex);
     }
 
-    public void changePaymentStatus(int accountantChoise) {
-        memberDatabase.changePaymentStatus(accountantChoise);
+    public void changePaymentStatus(int accountantChoice) {
+        memberDatabase.changePaymentStatus(accountantChoice);
 
     }
 

@@ -342,12 +342,12 @@ public class Userinterface {
     private void changePaymentStatus() {
         showSubscriptionList();
         System.out.print("Cancel process by entering 0\nChange payment status for: ");
-        int accountantChoise = Input.scannerInt(scanner, 0, controller.getClubMembers().size());
+        int accountantChoice = Input.scannerInt(scanner, 0, controller.getClubMembers().size());
 
-        if (accountantChoise == 0) {
+        if (accountantChoice == 0) {
             System.out.println("canceling process...");
         } else {
-            controller.changePaymentStatus(accountantChoise);
+            controller.changePaymentStatus(accountantChoice);
             System.out.println("Payment status updated");
         }
     }
@@ -378,9 +378,9 @@ public class Userinterface {
     }
     private void showLeaderBoard() {
         buildMenuForShowLeaderBoardTeam();
-        int chosenTeam = choiseFromMenuForShowLeaderBoardTeam();
+        int chosenTeam = choiceFromMenuForShowLeaderBoardTeam();
         buildMenuForShowLeaderBoardDisciplin();
-        Discipline disciplinType = choiseFromMenuForShowLeaderBoardDisciplin();
+        Discipline disciplinType = choiceFromMenuForShowLeaderBoardDisciplin();
 
         System.out.println("\n" + disciplinType + "\n" +
                 controller.showLeaderBoard(chosenTeam, disciplinType));
@@ -390,27 +390,27 @@ public class Userinterface {
         System.out.print("\nChoice team to view:\n" +
                 "1. Junior team\n" +
                 "2. Senior team\n" +
-                "Choise: ");
+                "Choice: ");
     }
-    private int choiseFromMenuForShowLeaderBoardTeam() {
+    private int choiceFromMenuForShowLeaderBoardTeam() {
         return Input.scannerInt(scanner, 1, 2);
     }
     private void buildMenuForShowLeaderBoardDisciplin() {
         System.out.print("\nDisciplines:\n" +
-                "1. Crawl\n" +
-                "2. Butterfly\n" +
-                "3. Backstroke\n" +
-                "4. Breaststroke\n" +
-                "Choise: ");
+                "1. Backstroke\n" +
+                "2. Breaststroke\n" +
+                "3. Butterfly\n" +
+                "4. Crawl\n" +
+                "Choice: ");
     }
-    private Discipline choiseFromMenuForShowLeaderBoardDisciplin() {
-        int choise = Input.scannerInt(scanner, 1, 4);
+    private Discipline choiceFromMenuForShowLeaderBoardDisciplin() {
+        int choice = Input.scannerInt(scanner, 1, 4);
         Discipline disciplinType = null;
-        switch (choise) {
-            case 1 -> disciplinType = Discipline.CRAWL;
-            case 2 -> disciplinType = Discipline.BUTTERFLY;
-            case 3 -> disciplinType = Discipline.BACKSTROKE;
-            case 4 -> disciplinType = Discipline.BREASTSTROKE;
+        switch (choice) {
+            case 1 -> disciplinType = Discipline.BACKSTROKE;
+            case 2 -> disciplinType = Discipline.BREASTSTROKE;
+            case 3 -> disciplinType = Discipline.BUTTERFLY;
+            case 4 -> disciplinType = Discipline.CRAWL;
         }
 
         return disciplinType;

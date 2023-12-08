@@ -70,11 +70,7 @@ public class MemberDatabase {
             default -> newMember = null;
         }
         clubMembers.add(newMember);
-        try {
-            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        saveAll();
 
         addsToTeamBasedOnAge(newMember);
 
@@ -106,14 +102,10 @@ public class MemberDatabase {
         return sb.toString();
     }
 
-    public void changePaymentStatus(int accountantChoise) {
-        Member member = getClubMembers().get(accountantChoise - 1);
+    public void changePaymentStatus(int accountantChoice) {
+        Member member = getClubMembers().get(accountantChoice - 1);
         member.pay();
-        try {
-            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        saveAll();
     }
 
     public String showIncomeForecast() {
@@ -148,7 +140,7 @@ public class MemberDatabase {
         CompetitiveMember compMember = compMembers.get(memberIndex);
         compMember.addResult(
                 new Result(compMember.getEmail(), time, discipline, date));
-
+        saveAll();
     }
 
 
@@ -176,20 +168,12 @@ public class MemberDatabase {
 
     public void deleteMember(int memberIndex) {
         clubMembers.remove(memberIndex);
-        try {
-            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        saveAll();
     }
 
     public void editMember(int index, Member member) {
         clubMembers.set(index, member);
-        try {
-            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        saveAll();
     }
 
     public String showLeaderBoard(int chosenTeam, Discipline disciplinType) {
@@ -345,4 +329,13 @@ public class MemberDatabase {
         } else
             return "." + (int) competitiveResultInMilliseconds;
     }
+
+    private void saveAll () {
+        try {
+            FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
