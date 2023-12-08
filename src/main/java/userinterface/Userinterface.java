@@ -20,6 +20,9 @@ public class Userinterface {
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
     private boolean run = true;
+    private boolean administratorRun = true;
+    private boolean accountantRun = true;
+    private boolean coachRun = true;
     private final String promptSymbol = "> ";
 
     public void startProgram() {
@@ -28,6 +31,7 @@ public class Userinterface {
 
     private void mainProgram() {
         while (run) {
+
             buildMainMenu();
             mainMenuOptions();
         }
@@ -60,8 +64,12 @@ public class Userinterface {
 
 
     private void administratorProgram() {
-        buildAdministratorMenu();
-        administratorMenuOptions();
+        administratorRun = true;
+
+        while (administratorRun) {
+            buildAdministratorMenu();
+            administratorMenuOptions();
+        }
     }
 
     private void buildAdministratorMenu() {
@@ -83,14 +91,22 @@ public class Userinterface {
             case 2 -> showListOfAllMembers(false);
             case 3 -> editMemberInformation();
             case 4 -> deleteMember();
-            case 0 -> signOutToMainProgram();
+            case 0 -> {
+                administratorRun = false;
+                signOutToMainProgram();
+            }
         }
     }
 
 
     private void accountantProgram() {
-        buildAccountantMenu();
-        accountantMenuOptions();
+
+        accountantRun = true;
+
+        while (accountantRun) {
+            buildAccountantMenu();
+            accountantMenuOptions();
+        }
     }
 
     private void buildAccountantMenu() {
@@ -111,14 +127,21 @@ public class Userinterface {
             case 1 -> showSubscriptionList();
             case 2 -> changePaymentStatus();
             case 3 -> showIncomeForecast();
-            case 0 -> signOutToMainProgram();
+            case 0 -> {
+                accountantRun = false;
+                signOutToMainProgram();
+            }
         }
     }
 
 
     private void coachProgram() {
-        buildCoachMenu();
-        coachMenuOptions();
+
+        coachRun = true;
+        while (coachRun) {
+            buildCoachMenu();
+            coachMenuOptions();
+        }
     }
 
     private void buildCoachMenu() {
@@ -140,7 +163,10 @@ public class Userinterface {
             case 2 -> showSeniorTeam();
             case 3 -> addNewResult();
             case 4 -> showLeaderBoard();
-            case 0 -> signOutToMainProgram();
+            case 0 -> {
+                coachRun = false;
+                signOutToMainProgram();
+            }
         }
     }
 
