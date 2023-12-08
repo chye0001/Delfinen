@@ -108,7 +108,6 @@ public class MemberDatabase {
 
     public void changePaymentStatus(int accountantChoise) {
         Member member = getClubMembers().get(accountantChoise - 1);
-        System.out.println(member.getName());
         member.pay();
         try {
             FileHandler.saveAll(clubMembers, administratorFile, subscriptionFile, resultsFile);
