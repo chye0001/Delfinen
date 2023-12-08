@@ -19,7 +19,7 @@ public class Userinterface {
 
     Controller controller = new Controller();
     Scanner scanner = new Scanner(System.in);
-    private boolean run = true;
+
     private final String promptSymbol = "> ";
 
     public void startProgram() {
@@ -27,9 +27,10 @@ public class Userinterface {
     }
 
     private void mainProgram() {
+        boolean run = true;
         while (run) {
             buildMainMenu();
-            mainMenuOptions();
+            run = mainMenuOptions();
         }
     }
 
@@ -45,7 +46,8 @@ public class Userinterface {
 
     }
 
-    private void mainMenuOptions() {
+    private boolean mainMenuOptions() {
+        boolean run = true;
 
         int choice = Input.scannerInt(scanner, 0, 3);
 
@@ -53,15 +55,19 @@ public class Userinterface {
             case 1 -> administratorProgram();
             case 2 -> accountantProgram();
             case 3 -> coachProgram();
-            case 0 -> shutDown();
+            case 0 -> run = shutDown();
 
         }
+        return run;
     }
 
 
     private void administratorProgram() {
-        buildAdministratorMenu();
-        administratorMenuOptions();
+        boolean run = true;
+        while (run) {
+            buildAdministratorMenu();
+            run = administratorMenuOptions();
+        }
     }
 
     private void buildAdministratorMenu() {
@@ -76,21 +82,28 @@ public class Userinterface {
         System.out.print(promptSymbol);
     }
 
-    private void administratorMenuOptions() {
-        int input = Input.scannerInt(scanner, 0, 4);
-        switch (input) {
-            case 1 -> addNewMember();
-            case 2 -> showListOfAllMembers(false);
-            case 3 -> editMemberInformation();
-            case 4 -> deleteMember();
-            case 0 -> signOutToMainProgram();
-        }
+    private boolean administratorMenuOptions() {
+        boolean run = true;
+
+            int input = Input.scannerInt(scanner, 0, 4);
+            switch (input) {
+                case 1 -> addNewMember();
+                case 2 -> showListOfAllMembers(false);
+                case 3 -> editMemberInformation();
+                case 4 -> deleteMember();
+                case 0 -> run = signOutToMainProgram();
+            }
+
+        return run;
     }
 
 
     private void accountantProgram() {
-        buildAccountantMenu();
-        accountantMenuOptions();
+        boolean run = true;
+        while (run) {
+            buildAccountantMenu();
+            run = accountantMenuOptions();
+        }
     }
 
     private void buildAccountantMenu() {
@@ -105,20 +118,27 @@ public class Userinterface {
 
     }
 
-    private void accountantMenuOptions() {
-        int input = Input.scannerInt(scanner, 0, 3);
-        switch (input) {
-            case 1 -> showSubscriptionList();
-            case 2 -> changePaymentStatus();
-            case 3 -> showIncomeForecast();
-            case 0 -> signOutToMainProgram();
-        }
+    private boolean accountantMenuOptions() {
+        boolean run = true;
+
+            int input = Input.scannerInt(scanner, 0, 3);
+            switch (input) {
+                case 1 -> showSubscriptionList();
+                case 2 -> changePaymentStatus();
+                case 3 -> showIncomeForecast();
+                case 0 -> run = signOutToMainProgram();
+            }
+
+        return run;
     }
 
 
     private void coachProgram() {
-        buildCoachMenu();
-        coachMenuOptions();
+        boolean run = true;
+        while (run) {
+            buildCoachMenu();
+            run = coachMenuOptions();
+        }
     }
 
     private void buildCoachMenu() {
@@ -133,21 +153,25 @@ public class Userinterface {
         System.out.print(promptSymbol);
     }
 
-    private void coachMenuOptions() {
-        int input = Input.scannerInt(scanner, 0, 4);
-        switch (input) {
-            case 1 -> showJuniorTeam();
-            case 2 -> showSeniorTeam();
-            case 3 -> addNewResult();
-            case 4 -> showLeaderBoard();
-            case 0 -> signOutToMainProgram();
-        }
+    private boolean coachMenuOptions() {
+        boolean run = true;
+
+            int input = Input.scannerInt(scanner, 0, 4);
+            switch (input) {
+                case 1 -> showJuniorTeam();
+                case 2 -> showSeniorTeam();
+                case 3 -> addNewResult();
+                case 4 -> showLeaderBoard();
+                case 0 -> run = signOutToMainProgram();
+            }
+
+        return run;
     }
 
 
-    private void signOutToMainProgram() {
+    private boolean signOutToMainProgram() {
         System.out.println("Signing out...");
-        mainProgram();
+        return false;
     }
 
     private void editMemberInformation() {
@@ -377,6 +401,7 @@ public class Userinterface {
         Table compTable = createCompMemberTable("Senior Team", seniorTeam);
         System.out.println(compTable);
     }
+
     private void showLeaderBoard() {
         buildMenuForShowLeaderBoardTeam();
         int chosenTeam = choiceFromMenuForShowLeaderBoardTeam();
@@ -393,9 +418,11 @@ public class Userinterface {
                 "2. Senior team\n" +
                 "Choice: ");
     }
+
     private int choiceFromMenuForShowLeaderBoardTeam() {
         return Input.scannerInt(scanner, 1, 2);
     }
+
     private void buildMenuForShowLeaderBoardDisciplin() {
         System.out.print("\nDisciplines:\n" +
                 "1. Backstroke\n" +
@@ -404,6 +431,7 @@ public class Userinterface {
                 "4. Crawl\n" +
                 "Choice: ");
     }
+
     private Discipline choiceFromMenuForShowLeaderBoardDisciplin() {
         int choice = Input.scannerInt(scanner, 1, 4);
         Discipline disciplinType = null;
@@ -455,7 +483,7 @@ public class Userinterface {
         timeDate = flipDateFormat(timeDate);
         LocalDate date = LocalDate.parse(timeDate);
         controller.addResultToMemberByIndex(memberIndex - 1, time, discipline, date);
-        System.out.println("Result added to "+ controller.getCompetitiveMembers().get(memberIndex - 1).getName());
+        System.out.println("Result added to " + controller.getCompetitiveMembers().get(memberIndex - 1).getName());
     }
 
 
@@ -606,8 +634,8 @@ public class Userinterface {
         return (minutes * 60) + seconds + (milliSeconds / 1000);
     }
 
-    private void shutDown() {
+    private boolean shutDown() {
         System.out.println("Shutting down...");
-        run = false;
+        return false;
     }
 }
