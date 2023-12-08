@@ -336,7 +336,8 @@ public class Userinterface {
     private void showSubscriptionList() {
         //System.out.println(controller.showListOfSubscriptions());
         System.out.println(createSubscriptionTable());
-        Input.scannerPressEnterToContinue(scanner);
+        //Input.scannerPressEnterToContinue(scanner);
+        //accountantProgram();
     }
 
     private void changePaymentStatus() {
@@ -481,6 +482,7 @@ public class Userinterface {
             double price = member.getSubscriptionCost();
             //ternary operators------------------------------------------------------------
             String paid = member.getSubscription().isPaid() ? "Yes" : "No";
+            System.out.println(member.getSubscription());
             String paidColor = member.getSubscription().isPaid() ? Color.GREEN : Color.RED;
             //-----------------------------------------------------------------------------
             double debt = member.getSubscriptDebt();

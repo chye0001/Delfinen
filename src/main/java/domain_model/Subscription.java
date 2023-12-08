@@ -33,6 +33,7 @@ public class Subscription {
         LocalDate now = LocalDate.now();
         lastPayment = now;
         nextPayment = now.plusYears(1);
+        debt =  Math.max(debt-price,0);
     }
 
     public LocalDate getLastPayment() {
